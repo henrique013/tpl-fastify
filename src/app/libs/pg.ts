@@ -2,11 +2,11 @@ import env from '@app/env.js'
 import pg, { Pool } from 'pg'
 
 export async function connectToPgPool(): Promise<Pool> {
-  const host = env.POSTGRES_HOST
-  const port = env.POSTGRES_PORT
-  const user = env.POSTGRES_USER
-  const password = env.POSTGRES_PASSWORD
-  const database = env.POSTGRES_DB
+  const host = env.PG_HOST
+  const port = env.PG_PORT
+  const user = env.PG_USER
+  const password = env.PG_PASS
+  const database = env.PG_DB
 
   const pool = new Pool({
     host,

@@ -1,11 +1,11 @@
 {
-  "name": "tpl-express",
+  "name": "tpl-fastify",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
-  "author": "Express API bootstrap template.",
+  "author": "Fastify API bootstrap template.",
   "type": "module",
-  "main": "dist/express/server.js",
+  "main": "dist/fastify/server.js",
   "engines": {
     "node": ">=22.0.0"
   },
@@ -14,19 +14,19 @@
     "format": "prettier --write --cache .",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "dev": "tsx watch --inspect=0.0.0.0:9229 ./src/express/server.ts",
-    "start": "npm run build && node dist/express/server.js",
+    "dev": "tsx watch --inspect=0.0.0.0:9229 --env-file=.env ./src/fastify/server.ts",
+    "start": "npm run build && node --env-file=.env dist/fastify/server.js",
     "prepare": "husky"
   },
   "dependencies": {
-    "express": "^5.1.0",
+    "fastify": "^5.3.0",
     "ioredis": "^5.6.1",
     "pg": "^8.15.6",
+    "pino-pretty": "^13.0.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.1",
-    "@types/express": "^5.0.1",
     "@types/node": "^22.13.17",
     "@types/pg": "^8.11.14",
     "eslint": "^9.25.1",

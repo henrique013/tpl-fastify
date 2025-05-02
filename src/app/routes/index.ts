@@ -1,11 +1,7 @@
-export interface Output {
+export function route(): {
   message: string
-}
-
-export default function (): Output {
-  const json: Output = {
+} {
+  return {
     message: 'Hello, world!',
   }
-
-  return json
 }
