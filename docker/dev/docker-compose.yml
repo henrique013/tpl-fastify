@@ -1,0 +1,53 @@
+# *** DEV ***
+
+services:
+  app:
+    build:
+      context: ../../
+      dockerfile: docker/dev/app/Dockerfile
+    container_name: app
+    volumes:
+      - ../../:/home/node/app
+    ports:
+      - 9229:9229
+    env_file:
+      - ../../.env
+    depends_on:
+      - redis
+      - postgres
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - ${NGINX_PORT}:80
+    depends_on:
+      - app
+
+  redis:
+    build:
+      context: ./redis
+      dockerfile: Dockerfile
+    container_name: redis
+    ports:
+      - ${REDIS_PORT}:6379
+    env_file:
+      - ../../.env
+    command: ['redis-server', '--protected-mode', 'no', '--requirepass', '${REDIS_PASS}']
+
+  postgres:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    container_name: postgres
+    env_file:
+      - ../../.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+
+volumes:
+  postgres_data:
