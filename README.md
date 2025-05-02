@@ -37,6 +37,7 @@ cd docker/dev
 5. Execute the development server:
 
 ```bash
+cd ../..
 npm run dev
 ```
 
