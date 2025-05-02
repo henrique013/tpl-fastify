@@ -49,4 +49,13 @@ npm run dev
 
 ## 🌐 Endpoints
 
-- `GET /`: Returns a "Hello World!" message
+- `GET /`: Root endpoint
+  - Response:
+    - `message`: string
+- `GET /system/health`: Health check endpoint
+  - Query Parameters:
+    - `uptime` (optional): boolean - Include uptime in response
+  - Response:
+    - `message`: string
+    - `timestamp`: string
+    - `uptime`: number (optional)
