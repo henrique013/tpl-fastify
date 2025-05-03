@@ -4,4 +4,4 @@
 
 ./down.sh
 
-docker compose --env-file ../../.env up --build
+docker compose -p tpl-fastify-dev --env-file ../../.env up --build

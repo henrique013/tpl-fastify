@@ -2,4 +2,4 @@
 
 # *** DEV ***
 
-docker compose --env-file ../../.env down --remove-orphans --rmi all
+docker compose -p tpl-fastify-dev --env-file ../../.env down --remove-orphans --rmi all
