@@ -9,5 +9,6 @@ export async function connectToPgPool(): Promise<Pool> {
     password: env.PG_PASS,
     database: env.PG_DB,
   })
+
   return pool
 }

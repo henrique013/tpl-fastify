@@ -17,6 +17,7 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (_request, reply) {
     const json = route()
+
     reply.send(json)
   },
 }

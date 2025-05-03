@@ -6,5 +6,6 @@ export const hook: onRequestAsyncHookHandler = async function (request: FastifyR
   const { method, url } = request
   const repo = new RedisRequestCountersRepo(request.redis)
   const count = await middleware(repo, method, url)
+
   request.log.info(`${method} ${url} | ${count}`)
 }

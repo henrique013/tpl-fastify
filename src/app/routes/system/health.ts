@@ -5,8 +5,10 @@ export function route(uptime: boolean): {
 } {
   const message = 'OK'
   const timestamp = new Date().toISOString()
+
   if (uptime) {
     return { message, timestamp, uptime: process.uptime() }
   }
+
   return { message, timestamp }
 }

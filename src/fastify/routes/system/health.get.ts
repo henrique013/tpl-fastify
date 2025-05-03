@@ -27,6 +27,7 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const { uptime } = request.query as { uptime?: boolean }
     const json = route(uptime ?? false)
+
     reply.send(json)
   },
 }

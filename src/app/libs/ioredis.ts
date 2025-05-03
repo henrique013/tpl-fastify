@@ -7,5 +7,6 @@ export async function connectToRedis() {
     port: env.REDIS_PORT,
     password: env.REDIS_PASS,
   })
+
   return redis
 }
