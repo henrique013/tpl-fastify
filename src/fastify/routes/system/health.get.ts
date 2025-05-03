@@ -1,5 +1,5 @@
 import { route } from '@app/routes/system/health.js'
-import { type RouteOptions } from 'fastify'
+import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'GET',
@@ -25,8 +25,8 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
-    const { uptime } = request.query as { uptime: boolean }
-    const json = route(uptime)
+    const { uptime } = request.query as { uptime?: boolean }
+    const json = route(uptime ?? false)
     reply.send(json)
   },
 }
