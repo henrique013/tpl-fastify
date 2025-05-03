@@ -14,8 +14,8 @@
     "format": "prettier --write --cache .",
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
-    "dev": "tsx watch --inspect=0.0.0.0:9229 --env-file=.env ./src/fastify/server.ts",
-    "start": "npm run build && node --env-file=.env dist/fastify/server.js",
+    "dev": "tsx watch --inspect=0.0.0.0:9229 --env-file=docker/dev/.env src/fastify/server.ts",
+    "start": "npm run build && node --env-file=docker/prod/.env dist/fastify/server.js",
     "prepare": "husky"
   },
   "dependencies": {
