@@ -8,13 +8,7 @@ USER node
 
 WORKDIR /home/node/api
 
-COPY --chown=node:node package*.json ./
-
-RUN npm install
-
-COPY --chown=node:node . .
-
 EXPOSE 3000
 EXPOSE 9229
 
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npm install && npm run dev"]
