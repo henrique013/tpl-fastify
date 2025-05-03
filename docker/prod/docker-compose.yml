@@ -5,9 +5,12 @@ services:
     build:
       context: ./redis
       dockerfile: Dockerfile
+      args:
+        - REDIS_PASS=${REDIS_PASS}
+    volumes:
+      - redis_data:/data
     ports:
       - ${REDIS_PUB_PORT}:6379
-    command: ['redis-server', '--protected-mode', 'no', '--requirepass', '${REDIS_PASS}']
 
   postgres:
     build:
@@ -41,4 +44,5 @@ services:
       - api
 
 volumes:
+  redis_data:
   postgres_data:
