@@ -53,7 +53,7 @@ fastify.route((await import('@fastify/routes/system/health.get.js')).routeOpt)
 // Start the server
 
 try {
-  await fastify.listen({ port: env.API_PORT })
+  await fastify.listen({ port: env.API_PORT, host: '0.0.0.0' })
 } catch (err) {
   fastify.log.error(err)
   process.exit(1)

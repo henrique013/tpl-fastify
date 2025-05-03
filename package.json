@@ -5,17 +5,14 @@
   "license": "ISC",
   "author": "Fastify API bootstrap template.",
   "type": "module",
-  "main": "dist/fastify/server.js",
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
     "lint": "tsc --noEmit && eslint .",
     "format": "prettier --write --cache .",
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
     "dev": "tsx watch --inspect=0.0.0.0:9229 --env-file=docker/dev/.env src/fastify/server.ts",
-    "start": "npm run build && node --env-file=docker/prod/.env dist/fastify/server.js",
+    "start": "tsx --env-file=docker/prod/.env src/fastify/server.ts",
     "prepare": "husky"
   },
   "dependencies": {

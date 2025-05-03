@@ -1,4 +1,4 @@
-# *** DEV ***
+# *** PROD ***
 
 services:
   redis:
@@ -25,15 +25,20 @@ services:
   api:
     build:
       context: ../..
-      dockerfile: docker/dev/api/Dockerfile
-    volumes:
-      - ../../:/home/node/api
-    ports:
-      - ${API_PUB_PORT}:3000
-      - ${API_PUB_DEBUG_PORT}:9229
+      dockerfile: docker/prod/api/Dockerfile
     depends_on:
       - redis
       - postgres
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - ${NGINX_PUB_HTTP_PORT}:80
+      - ${NGINX_PUB_HTTPS_PORT}:443
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
