@@ -14,9 +14,11 @@ export async function up() {
 }
 
 function createFastifyInstance(): FastifyInstance {
+  const level = env.NODE_ENV === 'development' ? 'debug' : 'info'
+
   const fastify: FastifyInstance = Fastify({
     logger: {
-      level: 'debug',
+      level,
       transport: {
         target: 'pino-pretty',
         options: {
