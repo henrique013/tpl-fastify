@@ -11,8 +11,8 @@
   "scripts": {
     "lint": "tsc --noEmit && eslint .",
     "format": "prettier --write --cache .",
-    "dev": "tsx watch --inspect=0.0.0.0:9229 --env-file=docker/dev/.env src/fastify/main.ts",
-    "start": "tsx --env-file=docker/prod/.env src/fastify/main.ts",
+    "dev": "tsx watch --inspect=0.0.0.0:9229 src/fastify/main.ts",
+    "start": "tsx src/fastify/main.ts",
     "prepare": "husky"
   },
   "dependencies": {

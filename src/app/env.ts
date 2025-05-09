@@ -2,12 +2,13 @@ import { z } from 'zod'
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production']),
-  API_PORT: z.coerce.number().min(1).default(3000),
+  API_PORT: z.coerce.number().min(1),
   REDIS_HOST: z.string().min(1),
-  REDIS_PORT: z.coerce.number().min(1).default(6379),
+  REDIS_PORT: z.coerce.number().min(1),
   REDIS_PASS: z.string().min(1),
+  REDIS_DB: z.coerce.number().min(0),
   PG_HOST: z.string().min(1),
-  PG_PORT: z.coerce.number().min(1).default(5432),
+  PG_PORT: z.coerce.number().min(1),
   PG_USER: z.string().min(1),
   PG_PASS: z.string().min(1),
   PG_DB: z.string().min(1),
