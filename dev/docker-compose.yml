@@ -2,11 +2,12 @@ services:
   api:
     build:
       context: ../
-      dockerfile: ./dev/api/Dockerfile
+      dockerfile: ./Dockerfile
     volumes:
       - ../:/home/node/api
     env_file:
       - ../.env
+    command: ['sh', '-c', 'npm install && npm run dev']
     ports:
       - ${API_PORT}:${API_PORT}
       - ${API_DEBUG_PORT}:${API_DEBUG_PORT}
