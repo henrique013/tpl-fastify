@@ -8,40 +8,36 @@ This is a basic template for an Fastify API with TypeScript, configured for deve
 
 ## ⚙️ Installation and Execution
 
-1. Clone the repository:
+1. Clone the repository and navigate to the project directory:
 
    ```bash
    git clone git@github.com:henrique013/tpl-fastify.git
    cd tpl-fastify
    ```
 
-2. Navigate to the docker directory:
+2. Set up environment variables:
 
    ```bash
-   cd dev
-   ```
-
-3. Copy the environment variables example files:
-
-   API environment variables:
-
-   ```bash
-   cp ../.env.example ../.env
-   ```
-
-   Docker Compose environment variables:
-
-   ```bash
+   # Copy API environment variables
    cp .env.example .env
+
+   # Copy Docker Compose environment variables
+   cp dev/.env.example dev/.env
    ```
 
-4. Run the startup script:
+3. Start the application:
 
    ```bash
+   # Navigate to the docker directory
+   cd dev
+
+   # Start all containers
    ./up.sh
    ```
 
-5. The application will be available at `http://localhost:8080`
+4. Access the application:
+   - The API will be available at `http://localhost:8080`
+   - You can test the endpoints using the documentation below
 
 ## 🔑 Important Commands
 
