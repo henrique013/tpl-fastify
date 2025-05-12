@@ -1,0 +1,17 @@
+.git
+.husky
+.vscode
+dev
+node_modules
+types
+.dockerignore
+.editorconfig
+.env
+.env.example
+.gitignore
+.prettierignore
+.prettierrc
+Dockerfile
+eslint.config.js
+README.md
+tsconfig.json
