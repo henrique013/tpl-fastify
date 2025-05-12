@@ -1,5 +1,4 @@
 # Stage 1: Build
-
 FROM node:22.14.0-alpine3.21 AS builder
 RUN apk add --no-cache git
 USER node
