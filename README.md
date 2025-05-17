@@ -1,58 +1,53 @@
-# 🚀 Fastify API Template
+# 🚀 Template de API Fastify
 
-This is a basic template for an Fastify API with TypeScript, configured for development using Docker.
+Este é um template básico para uma API Fastify com TypeScript, configurado para desenvolvimento usando Docker.
 
-## 📋 Prerequisites
+## 📋 Pré-requisitos
 
-- Docker and Docker Compose
+- Docker e Docker Compose
 
-## ⚙️ Installation and Execution
+## ⚙️ Instalação e Execução
 
-1. Clone the repository and navigate to the project directory:
+1. Clone o repositório e navegue até o diretório do projeto:
 
    ```bash
    git clone git@github.com:henrique013/tpl-fastify.git
    cd tpl-fastify
    ```
 
-2. Set up environment variables:
+2. Configure as variáveis de ambiente:
 
    ```bash
-   # Copy API environment variables
+   cd dev
    cp .env.example .env
-
-   # Copy Docker Compose environment variables
-   cp dev/.env.example dev/.env
+   cp .api.env.example .api.env
    ```
 
-3. Start the application:
+3. Inicie a aplicação:
 
    ```bash
-   # Navigate to the docker directory
-   cd dev
-
-   # Start all containers
    ./up.sh
    ```
 
-4. Access the application:
-   - The API will be available at `http://localhost:8080`
-   - You can test the endpoints using the documentation below
+4. Acesse a aplicação:
+   - A API estará disponível em `http://localhost:${API_PORT}`
+   - Você pode testar os endpoints usando a documentação abaixo
 
-## 🔑 Important Commands
+## 🔑 Comandos Importantes
 
-- `./up.sh`: Starts all containers needed for development
-- `./down.sh`: Stops and removes all containers
+- `./up.sh`: Inicia todos os containers necessários para desenvolvimento
+- `./down.sh`: Para e remove todos os containers
+- `./tag.sh`: Cria uma tag para o projeto
 
 ## 🌐 Endpoints
 
-- `GET /`: Root endpoint
-  - Response:
+- `GET /`: Endpoint raiz
+  - Resposta:
     - `message`: string
-- `GET /system/health`: Health check endpoint
-  - Query Parameters:
-    - `uptime` (optional): boolean - Include uptime in response
-  - Response:
+- `GET /system/health`: Endpoint de verificação de saúde
+  - Parâmetros de Consulta:
+    - `uptime` (opcional): boolean - Inclui tempo de atividade na resposta
+  - Resposta:
     - `message`: string
     - `timestamp`: string
-    - `uptime`: number (optional)
+    - `uptime`: number (opcional)
