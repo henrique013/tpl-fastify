@@ -3,25 +3,12 @@ services:
     build:
       context: ../
       dockerfile: ./Dockerfile
+    container_name: api
     volumes:
       - ../:/home/node/api
     env_file:
-      - ../.env
-    command: ['sh', '-c', 'npm install && npm run dev']
+      - .api.env
+    command: ['/home/node/api/dev/command.sh']
     ports:
       - ${API_PORT}:${API_PORT}
       - ${API_DEBUG_PORT}:${API_DEBUG_PORT}
-    depends_on:
-      - redis
-
-  redis:
-    image: redis:7.2.8-alpine3.21
-    volumes:
-      - redis_data:/data
-      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf:ro
-    ports:
-      - ${REDIS_PORT}:6379
-    command: ['redis-server', '/usr/local/etc/redis/redis.conf', '--requirepass', '${REDIS_PASS}']
-
-volumes:
-  redis_data:
