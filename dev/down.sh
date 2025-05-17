@@ -1,3 +1,3 @@
 #!/usr/bin/bash
 
-docker compose down --remove-orphans --rmi all "$@"
+docker compose down --remove-orphans "$@"
