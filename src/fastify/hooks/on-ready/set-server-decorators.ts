@@ -4,7 +4,7 @@ import type { onReadyAsyncHookHandler } from 'fastify'
 
 export const hook: onReadyAsyncHookHandler = async function () {
   const pg_pool = await connectToPgPool()
-  const redis = await connectToRedis()
+  const redis = connectToRedis()
 
   this.pgPool = pg_pool
   this.redis = redis
