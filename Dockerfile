@@ -9,6 +9,10 @@ COPY --chown=node:node . .
 
 # Stage 2: Production
 FROM node:22.14.0-alpine3.21
+
+# TODO: Remove after testing
+RUN apk add --no-cache redis postgresql-client
+
 USER node
 WORKDIR /home/node/api
 COPY --from=builder /home/node/api .
