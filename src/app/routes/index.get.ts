@@ -1,6 +1,4 @@
-export function route(): {
-  message: string
-} {
+export function route() {
   return {
     message: 'Hello, world!',
   }
