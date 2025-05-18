@@ -58,7 +58,7 @@ async function setupHooks(fastify: FastifyInstance) {
 
 async function setupRoutes(fastify: FastifyInstance) {
   fastify.route((await import('@fastify/routes/index.get.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/health/index.get.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/health.get.js')).routeOpt)
 }
 
 async function listen(fastify: FastifyInstance) {
