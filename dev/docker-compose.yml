@@ -10,5 +10,5 @@ services:
       - .api.env
     command: ['/home/node/api/dev/command.sh']
     ports:
-      - ${API_PORT}:${API_PORT}
-      - ${API_DEBUG_PORT}:${API_DEBUG_PORT}
+      - ${PUBLIC_PORT}:${PUBLIC_PORT}
+      - ${PUBLIC_DEBUG_PORT}:${PUBLIC_DEBUG_PORT}

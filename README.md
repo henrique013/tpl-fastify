@@ -30,7 +30,7 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
    ```
 
 4. Acesse a aplicação:
-   - A API estará disponível em `http://localhost:${API_PORT}`
+   - A API estará disponível em `http://localhost:${PUBLIC_PORT}`
    - Você pode testar os endpoints usando a documentação abaixo
 
 ## 🔑 Comandos Importantes
