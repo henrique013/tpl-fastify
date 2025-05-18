@@ -3,7 +3,6 @@ services:
     build:
       context: ../
       dockerfile: ./Dockerfile
-    container_name: api
     volumes:
       - ../:/home/node/api
     env_file:
