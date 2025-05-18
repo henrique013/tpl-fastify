@@ -1,4 +1,4 @@
-import { route } from '@app/routes/index.js'
+import { route } from '@app/routes/index.get.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
