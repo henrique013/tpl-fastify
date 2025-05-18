@@ -1,14 +1,20 @@
-export function route(uptime: boolean): {
-  message: string
+export type HealthResponse = {
+  message: 'OK'
   timestamp: string
   uptime?: number
-} {
-  const message = 'OK'
+}
+
+export function route(uptime: boolean): HealthResponse {
   const timestamp = new Date().toISOString()
 
-  if (uptime) {
-    return { message, timestamp, uptime: process.uptime() }
+  const json: HealthResponse = {
+    message: 'OK',
+    timestamp,
   }
 
-  return { message, timestamp }
+  if (uptime) {
+    json.uptime = process.uptime()
+  }
+
+  return json
 }
