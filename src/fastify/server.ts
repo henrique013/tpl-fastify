@@ -63,6 +63,11 @@ async function setupRoutes(fastify: FastifyInstance) {
 
 async function listen(fastify: FastifyInstance) {
   try {
+    if (env.API_DEBUG) {
+      fastify.log.info('Starting in debug mode')
+      fastify.log.debug(env)
+    }
+
     await fastify.listen({ port: env.API_PORT, host: '0.0.0.0' })
   } catch (err) {
     fastify.log.error(err)
