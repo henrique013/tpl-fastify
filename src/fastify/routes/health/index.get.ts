@@ -1,9 +1,9 @@
-import { route } from '@app/routes/system/health.js'
+import { route } from '@app/routes/health/index.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'GET',
-  url: '/system/health',
+  url: '/health',
   schema: {
     querystring: {
       type: 'object',

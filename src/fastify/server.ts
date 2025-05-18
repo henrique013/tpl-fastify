@@ -50,7 +50,7 @@ async function setupHooks(fastify: FastifyInstance) {
 
   // on request
   fastify.addHook('onRequest', (await import('@fastify/hooks/on-request/set-request-decorators.js')).hook)
-  fastify.addHook('onRequest', (await import('@fastify/hooks/on-request/req-counter.js')).hook)
+  fastify.addHook('onRequest', (await import('@fastify/hooks/on-request/request-counter.js')).hook)
 
   // on response
   fastify.addHook('onResponse', (await import('@fastify/hooks/on-response/release-pg-connection.js')).hook)
@@ -58,7 +58,7 @@ async function setupHooks(fastify: FastifyInstance) {
 
 async function setupRoutes(fastify: FastifyInstance) {
   fastify.route((await import('@fastify/routes/index.get.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/system/health.get.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/health/index.get.js')).routeOpt)
 }
 
 async function listen(fastify: FastifyInstance) {

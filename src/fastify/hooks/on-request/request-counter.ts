@@ -1,4 +1,4 @@
-import { middleware } from '@app/middlewares/req-counter.js'
+import { middleware } from '@app/middlewares/request-counter.js'
 import { RedisRequestCountersRepo } from '@app/repos/request-counters.js'
 import type { FastifyRequest, onRequestAsyncHookHandler } from 'fastify'
 

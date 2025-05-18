@@ -44,7 +44,7 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 - `GET /`: Endpoint raiz
   - Resposta:
     - `message`: string
-- `GET /system/health`: Endpoint de verificação de saúde
+- `GET /health`: Endpoint de verificação de saúde
   - Parâmetros de Consulta:
     - `uptime` (opcional): boolean - Inclui tempo de atividade na resposta
   - Resposta:
