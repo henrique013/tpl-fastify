@@ -50,7 +50,7 @@ export class PgUsersRepo implements IUsersRepo {
   async findById(id: Id): Promise<User | null> {
     const userRaw = await this.db.select().from(usersTable).where(eq(usersTable.id, id.toNumber()))
 
-    const user = userRaw ? User.fromRaw(userRaw[0]!) : null
+    const user = userRaw.length ? User.fromRaw(userRaw[0]!) : null
 
     return user
   }
