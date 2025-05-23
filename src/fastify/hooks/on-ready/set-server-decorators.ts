@@ -10,7 +10,7 @@ export const hook: onReadyAsyncHookHandler = async function () {
     connectionString: env.PG_API_URL,
   })
 
-  this.drizzle = drizzle(this.pgPool, { schema })
+  this.pg = drizzle(this.pgPool, { schema })
 
   //TODO: use url like pgPool
   this.redis = new Redis({

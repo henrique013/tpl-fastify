@@ -6,7 +6,7 @@ import { Pg } from '@db/postgres.js'
 declare module 'fastify' {
   interface FastifyInstance {
     pgPool: Pool
-    drizzle: Pg
+    pg: Pg
     redis: Redis
   }
 }
