@@ -12,6 +12,8 @@ export interface IUsersRepo {
   delete(id: Id): Promise<void>
 
   findById(id: Id): Promise<User | null>
+
+  findAll(): Promise<User[]>
 }
 
 export class PgUsersRepo implements IUsersRepo {
@@ -41,5 +43,11 @@ export class PgUsersRepo implements IUsersRepo {
     const userRaw = await this.db.select().from(usersTable).where(eq(usersTable.id, id.toNumber()))
     const user = userRaw ? User.fromRaw(userRaw[0]!) : null
     return user
+  }
+
+  async findAll(): Promise<User[]> {
+    const userRaws = await this.db.select().from(usersTable)
+    const users = userRaws.map(User.fromRaw)
+    return users
   }
 }
