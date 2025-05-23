@@ -16,6 +16,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "drizzle-orm": "^0.43.1",
     "fastify": "^5.3.0",
     "ioredis": "^5.6.1",
     "pg": "^8.15.6",
@@ -26,6 +27,7 @@
     "@eslint/js": "^9.25.1",
     "@types/node": "^22.13.17",
     "@types/pg": "^8.11.14",
+    "drizzle-kit": "^0.31.1",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "globals": "^16.0.0",
