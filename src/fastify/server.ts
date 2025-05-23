@@ -58,6 +58,7 @@ async function setupRoutes(fastify: FastifyInstance) {
 
   // users
   fastify.route((await import('@fastify/routes/users.get.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/user.get.js')).routeOpt)
   fastify.route((await import('@fastify/routes/user.post.js')).routeOpt)
   fastify.route((await import('@fastify/routes/user.put.js')).routeOpt)
 }

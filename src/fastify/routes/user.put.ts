@@ -4,7 +4,7 @@ import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'PUT',
-  url: '/users/:id',
+  url: '/user/:id',
   schema: {
     params: {
       type: 'object',
