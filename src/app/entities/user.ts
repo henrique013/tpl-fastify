@@ -4,19 +4,19 @@ import { Email } from '@app/values/email.js'
 import { BadArgumentError } from '@app/errors.js'
 
 export type UserPayload = {
-  id: Id | null
+  id?: Id
   name: Name
   email: Email
 }
 
 export type UserRaw = {
-  id: number | null
+  id?: number
   name: string
   email: string
 }
 
 export class User {
-  private readonly _id: Id | null
+  private readonly _id: Id | undefined
   private readonly _name: Name
   private readonly _email: Email
 
@@ -28,14 +28,14 @@ export class User {
 
   static fromRaw(raw: UserRaw): User {
     const payload: UserPayload = {
-      id: raw.id ? Id.from(raw.id) : null,
+      ...(raw.id ? { id: Id.from(raw.id) } : {}),
       name: Name.from(raw.name),
       email: Email.from(raw.email),
     }
     return new User(payload)
   }
 
-  get id(): Id | null {
+  get id(): Id | undefined {
     return this._id
   }
 
@@ -56,7 +56,7 @@ export class User {
 
   toRaw(): UserRaw {
     return {
-      id: this._id?.toNumber() ?? null,
+      ...(this._id ? { id: this._id.toNumber() } : {}),
       name: this._name.toString(),
       email: this._email.toString(),
     }
