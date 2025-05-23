@@ -35,13 +35,10 @@ function createFastifyInstance(): FastifyInstance {
 }
 
 function setupDecorators(fastify: FastifyInstance) {
-  // server decorators
+  // fastify instance decorators
   fastify.decorate('pgPool')
+  fastify.decorate('drizzle')
   fastify.decorate('redis')
-
-  // request decorators
-  fastify.decorateRequest('pgPoolClient')
-  fastify.decorateRequest('redis')
 }
 
 async function setupHooks(fastify: FastifyInstance) {
@@ -49,11 +46,7 @@ async function setupHooks(fastify: FastifyInstance) {
   fastify.addHook('onReady', (await import('@fastify/hooks/on-ready/set-server-decorators.js')).hook)
 
   // on request
-  fastify.addHook('onRequest', (await import('@fastify/hooks/on-request/set-request-decorators.js')).hook)
   fastify.addHook('onRequest', (await import('@fastify/hooks/on-request/request-counter.js')).hook)
-
-  // on response
-  fastify.addHook('onResponse', (await import('@fastify/hooks/on-response/release-pg-connection.js')).hook)
 }
 
 async function setupRoutes(fastify: FastifyInstance) {
