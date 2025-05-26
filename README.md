@@ -1,3 +1,5 @@
+<!-- TODO: Update endpoints -->
+
 # 🚀 Template de API Fastify
 
 Este é um template básico para uma API Fastify com TypeScript, configurado para desenvolvimento usando Docker.
