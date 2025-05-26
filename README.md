@@ -44,12 +44,47 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 ## 🌐 Endpoints
 
 - `GET /`: Endpoint raiz
-  - Resposta:
-    - `message`: string
+
+  ```bash
+  curl http://localhost:3000/
+  ```
+
 - `GET /health`: Endpoint de verificação de saúde
-  - Parâmetros de Consulta:
-    - `uptime` (opcional): boolean - Inclui tempo de atividade na resposta
-  - Resposta:
-    - `message`: string
-    - `timestamp`: string
-    - `uptime`: number (opcional)
+
+  ```bash
+  curl http://localhost:3000/health
+  curl http://localhost:3000/health?uptime=true
+  ```
+
+- `GET /users`: Lista todos os usuários
+
+  ```bash
+  curl http://localhost:3000/users
+  ```
+
+- `GET /users/:id`: Obtém um usuário específico
+
+  ```bash
+  curl http://localhost:3000/users/123
+  ```
+
+- `POST /users`: Cria um novo usuário
+
+  ```bash
+  curl -X POST http://localhost:3000/users \
+    -H "Content-Type: application/json" \
+    -d '{"name": "John Doe", "email": "john@example.com"}'
+  ```
+
+- `PUT /users/:id`: Atualiza um usuário existente
+
+  ```bash
+  curl -X PUT http://localhost:3000/users/123 \
+    -H "Content-Type: application/json" \
+    -d '{"name": "John Doe Updated", "email": "john.updated@example.com"}'
+  ```
+
+- `DELETE /users/:id`: Remove um usuário
+  ```bash
+  curl -X DELETE http://localhost:3000/users/123
+  ```
