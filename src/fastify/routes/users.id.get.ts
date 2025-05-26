@@ -1,10 +1,10 @@
-import { route } from '@app/routes/user.delete.js'
+import { route } from '@app/routes/users.id.get.js'
 import { PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
-  method: 'DELETE',
-  url: '/user/:id',
+  method: 'GET',
+  url: '/users/:id',
   schema: {
     params: {
       type: 'object',

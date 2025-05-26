@@ -1,10 +1,10 @@
-import { route, CreateUserRequest } from '@app/routes/user.post.js'
+import { route, CreateUserRequest } from '@app/routes/users.post.js'
 import { PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'POST',
-  url: '/user',
+  url: '/users',
   schema: {
     body: {
       type: 'object',

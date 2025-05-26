@@ -9,10 +9,16 @@ export type UpdateUserRequest = {
   email: string
 }
 
-export async function route(repo: IUsersRepo, id: number, data: UpdateUserRequest): Promise<UserRaw> {
+export async function route(repo: IUsersRepo, id: number, data: UpdateUserRequest): Promise<UserRaw | null> {
   const userId = Id.from(id)
   const name = Name.from(data.name)
   const email = Email.from(data.email)
+
+  const exists = await repo.exists(userId)
+
+  if (!exists) {
+    return null
+  }
 
   const payload: UserPayload = {
     id: userId,

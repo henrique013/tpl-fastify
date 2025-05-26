@@ -58,10 +58,10 @@ async function setupRoutes(fastify: FastifyInstance) {
 
   // users
   fastify.route((await import('@fastify/routes/users.get.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/user.get.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/user.post.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/user.put.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/user.delete.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/users.id.delete.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/users.id.get.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/users.id.put.js')).routeOpt)
+  fastify.route((await import('@fastify/routes/users.post.js')).routeOpt)
 }
 
 async function listen(fastify: FastifyInstance) {
