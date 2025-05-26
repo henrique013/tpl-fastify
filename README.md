@@ -37,9 +37,14 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 ## 🔑 Comandos Importantes
 
+Dentro do diretório `dev` você encontra os seguintes scripts:
+
 - `./up.sh`: Inicia todos os containers necessários para desenvolvimento
 - `./down.sh`: Para e remove todos os containers
 - `./tag.sh`: Cria uma tag para o projeto
+- `./migrate-gen.sh <nome>`: Gera um novo arquivo de migração do banco de dados
+  - Exemplo: `./migrate-gen.sh add-users-table`
+- `./migrate-run.sh`: Executa todas as migrações pendentes do banco de dados
 
 ## 🌐 Endpoints
 
