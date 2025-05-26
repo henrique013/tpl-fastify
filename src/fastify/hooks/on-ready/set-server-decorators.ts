@@ -12,11 +12,5 @@ export const hook: onReadyAsyncHookHandler = async function () {
 
   this.pg = drizzle(this.pgPool, { schema })
 
-  //TODO: use url like pgPool
-  this.redis = new Redis({
-    host: env.REDIS_HOST,
-    port: env.REDIS_PORT,
-    password: env.REDIS_PASS,
-    db: env.REDIS_DB,
-  })
+  this.redis = new Redis(env.REDIS_URL)
 }
