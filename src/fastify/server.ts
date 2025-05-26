@@ -65,7 +65,6 @@ async function setupRoutes(fastify: FastifyInstance) {
 }
 
 async function listen(fastify: FastifyInstance) {
-  //TODO: add graceful shutdown
   try {
     await fastify.listen({ port: env.API_PORT, host: '0.0.0.0' })
   } catch (err) {
