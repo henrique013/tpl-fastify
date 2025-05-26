@@ -14,15 +14,17 @@ export interface IUsersRepo {
   findById(id: Id): Promise<User | null>
 
   findAll(): Promise<User[]>
+
+  exists(id: Id): Promise<boolean>
 }
 
 export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: Pg) {}
 
   async create(user: User): Promise<User> {
-    const newUserRaw = await this.db.insert(usersTable).values(user.toRaw()).returning()
+    const result = await this.db.insert(usersTable).values(user.toRaw()).returning()
 
-    const newUser = User.fromRaw(newUserRaw[0]!)
+    const newUser = User.fromRaw(result[0]!)
 
     return newUser
   }
@@ -32,13 +34,13 @@ export class PgUsersRepo implements IUsersRepo {
 
     delete userRaw.id
 
-    const updatedUserRaw = await this.db
+    const result = await this.db
       .update(usersTable)
       .set(userRaw)
       .where(eq(usersTable.id, user.idOrFail().toNumber()))
       .returning()
 
-    const updatedUser = User.fromRaw(updatedUserRaw[0]!)
+    const updatedUser = User.fromRaw(result[0]!)
 
     return updatedUser
   }
@@ -48,18 +50,24 @@ export class PgUsersRepo implements IUsersRepo {
   }
 
   async findById(id: Id): Promise<User | null> {
-    const userRaw = await this.db.select().from(usersTable).where(eq(usersTable.id, id.toNumber()))
+    const result = await this.db.select().from(usersTable).where(eq(usersTable.id, id.toNumber()))
 
-    const user = userRaw.length ? User.fromRaw(userRaw[0]!) : null
+    const user = result.length ? User.fromRaw(result[0]!) : null
 
     return user
   }
 
   async findAll(): Promise<User[]> {
-    const userRaws = await this.db.select().from(usersTable)
+    const result = await this.db.select().from(usersTable)
 
-    const users = userRaws.map(User.fromRaw)
+    const users = result.map(User.fromRaw)
 
     return users
+  }
+
+  async exists(id: Id): Promise<boolean> {
+    const result = await this.db.select({ id: usersTable.id }).from(usersTable).where(eq(usersTable.id, id.toNumber()))
+
+    return result.length > 0
   }
 }
