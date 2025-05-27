@@ -67,9 +67,6 @@ function setupDecorators(fastify: FastifyInstance) {
 async function setupHooks(fastify: FastifyInstance) {
   // on ready
   fastify.addHook('onReady', (await import('@fastify/hooks/on-ready/set-server-decorators.js')).hook)
-
-  // on request
-  fastify.addHook('onRequest', (await import('@fastify/hooks/on-request/request-counter.js')).hook)
 }
 
 async function setupRoutes(fastify: FastifyInstance) {
