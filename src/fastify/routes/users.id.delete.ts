@@ -1,6 +1,7 @@
-import { route } from '@app/routes/users.id.delete.js'
 import { PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
+import { Id } from '@app/values/id.js'
+import { NotFoundError } from '@app/errors.js'
 
 export const routeOpt: RouteOptions = {
   method: 'DELETE',
@@ -23,24 +24,21 @@ export const routeOpt: RouteOptions = {
         },
         required: ['id', 'name', 'email'],
       },
-      404: {
-        type: 'object',
-        properties: {
-          message: { type: 'string' },
-        },
-        required: ['message'],
-      },
     },
   },
   handler: async function (request, reply) {
+    const params = request.params as { id: number }
     const repo = new PgUsersRepo(this.pg)
-    const id = (request.params as { id: number }).id
-    const user = await route(repo, id)
+
+    const id = Id.from(params.id)
+    const user = await repo.findById(id)
 
     if (!user) {
-      return reply.status(404).send({ message: 'User not found' })
+      throw new NotFoundError('User not found')
     }
 
-    reply.send(user)
+    await repo.delete(id)
+
+    reply.send(user.toRaw())
   },
 }

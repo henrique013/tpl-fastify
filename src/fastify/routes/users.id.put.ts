@@ -1,6 +1,10 @@
-import { route, UpdateUserRequest } from '@app/routes/users.id.put.js'
 import { PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
+import { NotFoundError } from '@app/errors.js'
+import { Id } from '@app/values/id.js'
+import { Name } from '@app/values/name.js'
+import { Email } from '@app/values/email.js'
+import { User } from '@app/entities/user.js'
 
 export const routeOpt: RouteOptions = {
   method: 'PUT',
@@ -34,14 +38,27 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
+    const params = request.params as { id: number }
+    const body = request.body as { name: string; email: string }
     const repo = new PgUsersRepo(this.pg)
-    const id = (request.params as { id: number }).id
-    const user = await route(repo, id, request.body as UpdateUserRequest)
 
-    if (!user) {
-      return reply.status(404).send({ message: 'User not found' })
+    const id = Id.from(params.id)
+    const name = Name.from(body.name)
+    const email = Email.from(body.email)
+
+    const exists = await repo.exists(id)
+
+    if (!exists) {
+      throw new NotFoundError('User not found')
     }
 
-    reply.send(user)
+    const user = new User({
+      id,
+      name,
+      email,
+    })
+    const updatedUser = await repo.update(user)
+
+    reply.send(updatedUser.toRaw())
   },
 }

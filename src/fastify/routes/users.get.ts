@@ -1,4 +1,3 @@
-import { route } from '@app/routes/users.get.js'
 import { PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 
@@ -23,8 +22,9 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (_request, reply) {
     const repo = new PgUsersRepo(this.pg)
-    const users = await route(repo)
+    const users = await repo.findAll()
+    const usersRaw = users.map((user) => user.toRaw())
 
-    reply.send(users)
+    reply.send(usersRaw)
   },
 }

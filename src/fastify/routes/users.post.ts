@@ -1,6 +1,8 @@
-import { route, CreateUserRequest } from '@app/routes/users.post.js'
 import { PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
+import { Email } from '@app/values/email.js'
+import { Name } from '@app/values/name.js'
+import { User } from '@app/entities/user.js'
 
 export const routeOpt: RouteOptions = {
   method: 'POST',
@@ -27,9 +29,19 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
+    const body = request.body as { name: string; email: string }
     const repo = new PgUsersRepo(this.pg)
-    const user = await route(repo, request.body as CreateUserRequest)
 
-    reply.code(201).send(user)
+    const name = Name.from(body.name)
+    const email = Email.from(body.email)
+
+    const user = new User({
+      name,
+      email,
+    })
+
+    const newUser = await repo.create(user)
+
+    reply.code(201).send(newUser.toRaw())
   },
 }

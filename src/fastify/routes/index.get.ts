@@ -1,4 +1,3 @@
-import { route } from '@app/routes/index.get.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
@@ -16,8 +15,8 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const json = route()
-
-    reply.send(json)
+    reply.send({
+      message: 'Hello, world!',
+    })
   },
 }
