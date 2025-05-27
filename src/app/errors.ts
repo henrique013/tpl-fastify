@@ -22,7 +22,7 @@ export class BaseError extends Error {
   /**
    * @returns The HTTP status code and name for the error
    */
-  public get toHttpStatus(): HttpStatus {
+  public toHttpStatus(): HttpStatus {
     return {
       code: 500,
       name: 'Internal Server Error',
@@ -43,10 +43,19 @@ export class BaseError extends Error {
 }
 
 export class BadArgumentError extends BaseError {
-  public override get toHttpStatus(): HttpStatus {
+  public override toHttpStatus(): HttpStatus {
     return {
       code: 400,
       name: 'Bad Request',
+    }
+  }
+}
+
+export class NotFoundError extends BaseError {
+  public override toHttpStatus(): HttpStatus {
+    return {
+      code: 404,
+      name: 'Not Found',
     }
   }
 }
