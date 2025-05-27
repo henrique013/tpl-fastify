@@ -1,8 +1,11 @@
 import Fastify, { FastifyInstance } from 'fastify'
 import env from '@app/env.js'
+import { BaseError } from '@app/errors.js'
 
-export async function up() {
+export async function server(up = true): Promise<FastifyInstance> {
   const fastify = createFastifyInstance()
+
+  setupErrorHandler(fastify)
 
   setupDecorators(fastify)
 
@@ -10,7 +13,11 @@ export async function up() {
 
   await setupRoutes(fastify)
 
-  await listen(fastify)
+  if (up) {
+    await listen(fastify)
+  }
+
+  return fastify
 }
 
 function createFastifyInstance(): FastifyInstance {
@@ -32,6 +39,22 @@ function createFastifyInstance(): FastifyInstance {
   })
 
   return fastify
+}
+
+function setupErrorHandler(fastify: FastifyInstance) {
+  fastify.setErrorHandler(function (error, _request, reply) {
+    if (error instanceof BaseError) {
+      const status = error.toHttpStatus()
+
+      const json = {
+        message: error.message,
+        error: status.name,
+        statusCode: status.code,
+      }
+
+      reply.status(status.code).send(json)
+    }
+  })
 }
 
 function setupDecorators(fastify: FastifyInstance) {
