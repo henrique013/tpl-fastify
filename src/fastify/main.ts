@@ -1,3 +1,3 @@
-import { up } from '@fastify/server.js'
+import { server } from '@fastify/server.js'
 
-await up()
+await server()
