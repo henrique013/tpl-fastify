@@ -1,7 +1,5 @@
 import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
-import { Email } from '@app/values/email.js'
-import { Name } from '@app/values/name.js'
 import { User } from '@app/entities/user.js'
 
 export const routeOpt: RouteOptions = {
@@ -34,12 +32,9 @@ export const routeOpt: RouteOptions = {
     let repo: IUsersRepo = new PgUsersRepo(this.pg)
     repo = new CachedUsersRepo(repo, this.redis)
 
-    const name = Name.from(body.name)
-    const email = Email.from(body.email)
-
-    const user = new User({
-      name,
-      email,
+    const user = User.fromRaw({
+      name: body.name,
+      email: body.email,
     })
 
     const newUser = await repo.create(user)
