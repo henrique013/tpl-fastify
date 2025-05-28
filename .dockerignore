@@ -1,6 +1,5 @@
 .git
 .github
-.husky
 .vscode
 dev
 node_modules
