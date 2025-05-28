@@ -3,12 +3,6 @@ import { Name } from '@app/values/name.js'
 import { Email } from '@app/values/email.js'
 import { BadArgumentError } from '@app/errors.js'
 
-export type UserPayload = {
-  id?: Id
-  name: Name
-  email: Email
-}
-
 export type UserRaw = {
   id?: number
   name: string
@@ -16,23 +10,18 @@ export type UserRaw = {
 }
 
 export class User {
-  private readonly _id: Id | undefined
-  private readonly _name: Name
-  private readonly _email: Email
-
-  private constructor(payload: UserPayload) {
-    this._id = payload.id
-    this._name = payload.name
-    this._email = payload.email
-  }
+  private constructor(
+    private readonly _id: Id | undefined,
+    private readonly _name: Name,
+    private readonly _email: Email
+  ) {}
 
   static fromRaw(raw: UserRaw): User {
-    const payload: UserPayload = {
-      ...(raw.id ? { id: Id.from(raw.id) } : {}),
-      name: Name.from(raw.name),
-      email: Email.from(raw.email),
-    }
-    return new User(payload)
+    const id = raw.id ? Id.from(raw.id) : undefined
+    const name = Name.from(raw.name)
+    const email = Email.from(raw.email)
+
+    return new User(id, name, email)
   }
 
   get id(): Id | undefined {
