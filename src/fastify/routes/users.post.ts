@@ -30,6 +30,7 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
+
     let repo: IUsersRepo = new PgUsersRepo(this.pg)
     repo = new CachedUsersRepo(repo, this.redis)
 
