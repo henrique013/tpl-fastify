@@ -15,8 +15,6 @@ export interface IUsersRepo {
   findById(id: Id): Promise<User | null>
 
   findAll(): Promise<User[]>
-
-  exists(id: Id): Promise<boolean>
 }
 
 export class PgUsersRepo implements IUsersRepo {
@@ -64,12 +62,6 @@ export class PgUsersRepo implements IUsersRepo {
     const users = result.map(User.fromRaw)
 
     return users
-  }
-
-  async exists(id: Id): Promise<boolean> {
-    const result = await this.db.select({ id: usersTable.id }).from(usersTable).where(eq(usersTable.id, id.toNumber()))
-
-    return result.length > 0
   }
 }
 
@@ -149,26 +141,6 @@ export class CachedUsersRepo implements IUsersRepo {
     await pipeline.exec()
 
     return dbUsers
-  }
-
-  async exists(id: Id): Promise<boolean> {
-    const cacheKey = this.getCacheKey(id)
-    const cachedUser = await this.cache.get(cacheKey)
-
-    if (cachedUser) {
-      return true
-    }
-
-    const exists = await this.repo.exists(id)
-
-    if (exists) {
-      const user = await this.repo.findById(id)
-      if (user) {
-        await this.cache.set(cacheKey, JSON.stringify(user.toRaw()), 'EX', this.CACHE_TTL)
-      }
-    }
-
-    return exists
   }
 
   private getCacheKey(id: Id): string {
