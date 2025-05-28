@@ -14,7 +14,7 @@ export class User {
     private readonly _id: Id | undefined,
     private _name: Name,
     private _email: Email
-  ) { }
+  ) {}
 
   static fromRaw(raw: UserRaw): User {
     const id = raw.id ? Id.from(raw.id) : undefined
