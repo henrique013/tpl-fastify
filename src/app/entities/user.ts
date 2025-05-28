@@ -12,9 +12,9 @@ export type UserRaw = {
 export class User {
   private constructor(
     private readonly _id: Id | undefined,
-    private readonly _name: Name,
-    private readonly _email: Email
-  ) {}
+    private _name: Name,
+    private _email: Email
+  ) { }
 
   static fromRaw(raw: UserRaw): User {
     const id = raw.id ? Id.from(raw.id) : undefined
@@ -32,8 +32,16 @@ export class User {
     return this._name
   }
 
+  set name(name: Name) {
+    this._name = name
+  }
+
   get email(): Email {
     return this._email
+  }
+
+  set email(email: Email) {
+    this._email = email
   }
 
   idOrFail(): Id {
