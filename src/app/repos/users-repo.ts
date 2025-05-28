@@ -65,7 +65,7 @@ export class PgUsersRepo implements IUsersRepo {
   }
 }
 
-export class CachedUsers Repo implements IUsersRepo {
+export class CachedUsersRepo implements IUsersRepo {
   private readonly CACHE_PREFIX = 'users'
   private readonly CACHE_TTL = 60 * 60
 
