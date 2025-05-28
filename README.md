@@ -25,13 +25,19 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
    cp .api.env.example .api.env
    ```
 
-3. Inicie a aplicação:
+3. Execute as migrações do banco de dados:
+
+   ```bash
+   ./migrate-run.sh
+   ```
+
+4. Inicie a aplicação:
 
    ```bash
    ./up.sh
    ```
 
-4. Acesse a aplicação:
+5. Acesse a aplicação:
    - A API estará disponível em `http://localhost:${PUBLIC_PORT}`
    - Você pode testar os endpoints usando a documentação abaixo
 
