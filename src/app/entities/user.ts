@@ -20,7 +20,7 @@ export class User {
   private readonly _name: Name
   private readonly _email: Email
 
-  constructor(payload: UserPayload) {
+  private constructor(payload: UserPayload) {
     this._id = payload.id
     this._name = payload.name
     this._email = payload.email
