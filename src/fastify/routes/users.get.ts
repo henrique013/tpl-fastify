@@ -1,4 +1,4 @@
-import { PgUsersRepo } from '@app/repos/users-repo.js'
+import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
@@ -21,7 +21,9 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const repo = new PgUsersRepo(this.pg)
+    let repo: IUsersRepo = new PgUsersRepo(this.pg)
+    repo = new CachedUsersRepo(repo, this.redis)
+
     const users = await repo.findAll()
     const usersRaw = users.map((user) => user.toRaw())
 

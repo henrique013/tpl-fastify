@@ -1,4 +1,4 @@
-import { PgUsersRepo } from '@app/repos/users-repo.js'
+import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 import { Email } from '@app/values/email.js'
 import { Name } from '@app/values/name.js'
@@ -30,7 +30,8 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
-    const repo = new PgUsersRepo(this.pg)
+    let repo: IUsersRepo = new PgUsersRepo(this.pg)
+    repo = new CachedUsersRepo(repo, this.redis)
 
     const name = Name.from(body.name)
     const email = Email.from(body.email)

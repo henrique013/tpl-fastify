@@ -1,4 +1,4 @@
-import { PgUsersRepo } from '@app/repos/users-repo.js'
+import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 import { Id } from '@app/values/id.js'
 import { NotFoundError } from '@app/errors.js'
@@ -28,7 +28,9 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const params = request.params as { id: number }
-    const repo = new PgUsersRepo(this.pg)
+
+    let repo: IUsersRepo = new PgUsersRepo(this.pg)
+    repo = new CachedUsersRepo(repo, this.redis)
 
     const id = Id.from(params.id)
     const user = await repo.findById(id)

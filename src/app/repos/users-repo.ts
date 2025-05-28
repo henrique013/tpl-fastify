@@ -147,6 +147,7 @@ export class CachedUsersRepo implements IUsersRepo {
     }
 
     await pipeline.exec()
+
     return dbUsers
   }
 
@@ -186,6 +187,7 @@ export class CachedUsersRepo implements IUsersRepo {
         pipeline.del(...keys)
       }
     }
+
     await pipeline.exec()
   }
 }
