@@ -11,4 +11,5 @@ types
 .prettierrc
 Dockerfile
 eslint.config.js
+lefthook.yml
 README.md

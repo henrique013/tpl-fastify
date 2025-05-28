@@ -9,8 +9,6 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "lint": "tsc --noEmit && eslint .",
-    "format": "prettier --write --cache .",
     "dev": "tsx watch --inspect=0.0.0.0:9229 src/fastify/main.ts",
     "start": "tsx src/fastify/main.ts"
   },
@@ -30,6 +28,7 @@
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "globals": "^16.0.0",
+    "lefthook": "^1.11.13",
     "prettier": "^3.5.3",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",

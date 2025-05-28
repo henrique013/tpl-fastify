@@ -1,0 +1,16 @@
+pre-commit:
+  jobs:
+    - name: format
+      run: npx prettier --write --cache .
+
+    - name: compile
+      glob:
+        - '**/*.ts'
+        - 'tsconfig.json'
+      run: npx tsc --noEmit
+
+    - name: lint
+      glob:
+        - '**/*.ts'
+        - 'eslint.config.js'
+      run: npx eslint .
