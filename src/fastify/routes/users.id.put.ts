@@ -2,8 +2,6 @@ import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.
 import { RouteOptions } from 'fastify'
 import { NotFoundError } from '@app/errors.js'
 import { Id } from '@app/values/id.js'
-import { Name } from '@app/values/name.js'
-import { Email } from '@app/values/email.js'
 import { User } from '@app/entities/user.js'
 
 export const routeOpt: RouteOptions = {
@@ -45,20 +43,18 @@ export const routeOpt: RouteOptions = {
     repo = new CachedUsersRepo(repo, this.redis)
 
     const id = Id.from(params.id)
-    const name = Name.from(body.name)
-    const email = Email.from(body.email)
-
     const exists = await repo.exists(id)
 
     if (!exists) {
       throw new NotFoundError('User not found')
     }
 
-    const user = new User({
-      id,
-      name,
-      email,
+    const user = User.fromRaw({
+      id: params.id,
+      name: body.name,
+      email: body.email,
     })
+
     const updatedUser = await repo.update(user)
 
     reply.send(updatedUser.toRaw())
