@@ -6,7 +6,7 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 ## 📋 Pré-requisitos
 
-- Docker e Docker Compose
+- Node 22+
 
 ## ⚙️ Instalação e Execução
 
@@ -22,7 +22,6 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
    ```bash
    cd dev
    cp .env.example .env
-   cp .api.env.example .api.env
    ```
 
 3. Execute as migrações do banco de dados:
@@ -34,19 +33,19 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 4. Inicie a aplicação:
 
    ```bash
-   ./up.sh
+   cd ..
+   npm install
+   npm run dev
    ```
 
 5. Acesse a aplicação:
-   - A API estará disponível em `http://localhost:${PUBLIC_PORT}`
+   - A API estará disponível em `http://localhost:${API_PORT}`
    - Você pode testar os endpoints usando a documentação abaixo
 
 ## 🔑 Comandos Importantes
 
 Dentro do diretório `dev` você encontra os seguintes scripts:
 
-- `./up.sh`: Inicia todos os containers necessários para desenvolvimento
-- `./down.sh`: Para e remove todos os containers
 - `./tag.sh`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
   - Exemplo: `./tag.sh 1.0.0`
 - `./migrate-gen.sh <nome>`: Gera um novo arquivo de migração do banco de dados
@@ -54,6 +53,8 @@ Dentro do diretório `dev` você encontra os seguintes scripts:
 - `./migrate-run.sh`: Executa todas as migrações pendentes do banco de dados
 
 ## 🌐 Endpoints
+
+Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo `dev/.env`.
 
 - `GET /`: Endpoint raiz
 

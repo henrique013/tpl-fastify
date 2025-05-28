@@ -9,4 +9,4 @@ if ! [[ $migration_name =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
 fi
 
 # generate the migration
-docker compose run --rm api ash -c "npx drizzle-kit generate --name $migration_name"
+npx drizzle-kit generate --name $migration_name
