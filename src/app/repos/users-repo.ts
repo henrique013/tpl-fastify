@@ -76,19 +76,20 @@ export class CachedUsersRepo implements IUsersRepo {
 
   async create(user: User): Promise<User> {
     const newUser = await this.repo.create(user)
-    await this.invalidateCache()
+    await this.saveUserInCache(newUser)
     return newUser
   }
 
   async update(user: User): Promise<User> {
     const updatedUser = await this.repo.update(user)
-    await this.invalidateCache()
+    await this.saveUserInCache(updatedUser)
     return updatedUser
   }
 
   async delete(id: Id): Promise<void> {
     await this.repo.delete(id)
-    await this.invalidateCache()
+    const cacheKey = this.getCacheKey(id)
+    await this.cache.del(cacheKey)
   }
 
   async findById(id: Id): Promise<User | null> {
@@ -102,64 +103,22 @@ export class CachedUsersRepo implements IUsersRepo {
     const user = await this.repo.findById(id)
 
     if (user) {
-      await this.cache.set(cacheKey, JSON.stringify(user.toRaw()), 'EX', this.CACHE_TTL)
+      await this.saveUserInCache(user)
     }
 
     return user
   }
 
   async findAll(): Promise<User[]> {
-    const users: User[] = []
-    const stream = this.cache.scanStream({
-      match: `${this.CACHE_PREFIX}:*`,
-      count: 100,
-    })
-
-    for await (const keys of stream) {
-      if (keys.length) {
-        const cachedUsers = await this.cache.mget(keys)
-        for (const cachedUser of cachedUsers) {
-          if (cachedUser) {
-            users.push(User.fromRaw(JSON.parse(cachedUser)))
-          }
-        }
-      }
-    }
-
-    if (users.length > 0) {
-      return users
-    }
-
-    const dbUsers = await this.repo.findAll()
-    const pipeline = this.cache.pipeline()
-
-    for (const user of dbUsers) {
-      const cacheKey = this.getCacheKey(user.idOrFail())
-      pipeline.set(cacheKey, JSON.stringify(user.toRaw()), 'EX', this.CACHE_TTL)
-    }
-
-    await pipeline.exec()
-
-    return dbUsers
+    return this.repo.findAll()
   }
 
   private getCacheKey(id: Id): string {
     return `${this.CACHE_PREFIX}:${id.toString()}`
   }
 
-  private async invalidateCache(): Promise<void> {
-    const stream = this.cache.scanStream({
-      match: `${this.CACHE_PREFIX}:*`,
-      count: 100,
-    })
-
-    const pipeline = this.cache.pipeline()
-    for await (const keys of stream) {
-      if (keys.length) {
-        pipeline.del(...keys)
-      }
-    }
-
-    await pipeline.exec()
+  private async saveUserInCache(user: User): Promise<void> {
+    const cacheKey = this.getCacheKey(user.idOrFail())
+    await this.cache.set(cacheKey, JSON.stringify(user.toRaw()), 'EX', this.CACHE_TTL)
   }
 }
