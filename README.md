@@ -47,7 +47,10 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 Dentro do diretório `dev` você encontra os seguintes scripts:
 
 - `./tag.sh`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
-  - Exemplo: `./tag.sh 1.0.0`
+  - Exemplo: `./tag.sh patch` (para incrementar a versão de patch)
+  - Exemplo: `./tag.sh minor` (para incrementar a versão minor)
+  - Exemplo: `./tag.sh major` (para incrementar a versão major)
+  - Dica: Se quiser resetar a versão para 1.0.0, você pode editar manualmente o campo "version" no package.json
 - `./migrate-gen.sh <nome>`: Gera um novo arquivo de migração do banco de dados
   - Exemplo: `./migrate-gen.sh add-users-table`
 - `./migrate-run.sh`: Executa todas as migrações pendentes do banco de dados
