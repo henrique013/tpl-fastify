@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "tsx watch --env-file=dev/.env --inspect=0.0.0.0:9229 src/fastify/main.ts",
     "start": "tsx src/fastify/main.ts",
-    "prepare": "lefthook install"
+    "postinstall": "lefthook install"
   },
   "dependencies": {
     "drizzle-orm": "^0.43.1",
