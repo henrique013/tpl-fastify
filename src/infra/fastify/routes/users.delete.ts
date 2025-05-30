@@ -1,4 +1,4 @@
-import { DeleteUserReq, DeleteUserRoute } from '@app/routes/users.delete.js'
+import { DeleteUserRoute } from '@app/routes/users.delete.js'
 import { container } from '@infra/tsyringe/container.js'
 import { t } from '@infra/tsyringe/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -27,9 +27,11 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
+    const params = request.params as { id: number }
+
     const route = container.resolve<DeleteUserRoute>(t.routes['users.delete'])
 
-    const json = await route.execute(request.params as DeleteUserReq)
+    const json = await route.execute(params)
 
     reply.send(json)
   },
