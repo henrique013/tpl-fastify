@@ -2,7 +2,7 @@ import Fastify, { FastifyInstance } from 'fastify'
 import env from '@app/env.js'
 import { BaseError } from '@app/errors.js'
 
-export async function server(up = true): Promise<FastifyInstance> {
+async function server(up = true): Promise<FastifyInstance> {
   const fastify = createFastifyInstance()
 
   setupErrorHandler(fastify)
@@ -92,3 +92,5 @@ async function listen(fastify: FastifyInstance) {
     process.exit(1)
   }
 }
+
+export { server }
