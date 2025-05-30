@@ -11,6 +11,7 @@ const TOKENS = {
     'hello-world': Symbol.for('hello-world'),
     health: Symbol.for('health'),
     'users.find-all': Symbol.for('users.find-all'),
+    'users.find-one': Symbol.for('users.find-one'),
   },
 }
 
