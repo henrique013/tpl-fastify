@@ -7,7 +7,7 @@ import * as schema from '@db/schema.js'
 import { env } from '@app/env.js'
 import { DrizzlePg } from '@db/types.js'
 
-function registerLibs(container: DependencyContainer) {
+export function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({
     connectionString: env.PG_API_URL,
   })
@@ -28,5 +28,3 @@ function registerLibs(container: DependencyContainer) {
     useValue: drizzlePg,
   })
 }
-
-export { registerLibs }

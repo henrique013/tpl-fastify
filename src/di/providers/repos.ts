@@ -5,7 +5,7 @@ import { CachedUsersRepo } from '@app/repos/users.cache.js'
 import { DrizzlePg } from '@db/types.js'
 import { Redis } from 'ioredis'
 
-function registerRepos(container: DependencyContainer) {
+export function registerRepos(container: DependencyContainer) {
   container.register(t.repos.IUsersRepo, {
     useFactory: (container) => {
       const db = container.resolve<DrizzlePg>(t.libs.DrizzlePg)
@@ -15,5 +15,3 @@ function registerRepos(container: DependencyContainer) {
     },
   })
 }
-
-export { registerRepos }
