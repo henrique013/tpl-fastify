@@ -9,6 +9,4 @@ const envSchema = z.object({
   PG_MIGRATIONS_URL: z.string().url(),
 })
 
-const env = envSchema.parse(process.env)
-
-export { env }
+export const env = envSchema.parse(process.env)
