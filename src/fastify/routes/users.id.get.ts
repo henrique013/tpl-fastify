@@ -5,7 +5,7 @@ import { NotFoundError } from '@app/errors.js'
 import { container } from '@di/container.js'
 import { t } from '@di/tokens.js'
 
-export const routeOpt: RouteOptions = {
+const routeOpt: RouteOptions = {
   method: 'GET',
   url: '/users/:id',
   schema: {
@@ -43,3 +43,5 @@ export const routeOpt: RouteOptions = {
     reply.send(user.toRaw())
   },
 }
+
+export { routeOpt }

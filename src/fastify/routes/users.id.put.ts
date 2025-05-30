@@ -7,7 +7,7 @@ import { Name } from '@app/values/name.js'
 import { container } from '@di/container.js'
 import { t } from '@di/tokens.js'
 
-export const routeOpt: RouteOptions = {
+const routeOpt: RouteOptions = {
   method: 'PUT',
   url: '/users/:id',
   schema: {
@@ -59,3 +59,5 @@ export const routeOpt: RouteOptions = {
     reply.send(updatedUser.toRaw())
   },
 }
+
+export { routeOpt }

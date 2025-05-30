@@ -3,7 +3,7 @@ import { container } from '@di/container.js'
 import { t } from '@di/tokens.js'
 import { RouteOptions } from 'fastify'
 
-export const routeOpt: RouteOptions = {
+const routeOpt: RouteOptions = {
   method: 'GET',
   url: '/users',
   schema: {
@@ -31,3 +31,5 @@ export const routeOpt: RouteOptions = {
     reply.send(usersRaw)
   },
 }
+
+export { routeOpt }
