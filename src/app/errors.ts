@@ -3,7 +3,7 @@ export type HttpStatus = {
   name: string
 }
 
-export class BaseError extends Error {
+export abstract class BaseError extends Error {
   public readonly extra: Record<string, unknown> | undefined
 
   /**
