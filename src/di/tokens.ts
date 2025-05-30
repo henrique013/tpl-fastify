@@ -1,4 +1,4 @@
-export const t = {
+const TOKENS = {
   libs: {
     Redis: Symbol.for('Redis'),
     PgPool: Symbol.for('PgPool'),
@@ -8,3 +8,5 @@ export const t = {
     IUsersRepo: Symbol.for('IUsersRepo'),
   },
 }
+
+export { TOKENS as t }
