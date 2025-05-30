@@ -1,23 +1,23 @@
 import { IUsersRepo } from '@app/repos/users.js'
 import { RouteOptions } from 'fastify'
-import { Id } from '@app/values/id.js'
-import { container } from '@di/container.js'
-import { NotFoundError } from '@app/errors.js'
-import { t } from '@di/tokens.js'
+import { User } from '@app/entities/user.js'
+import { container } from '@tsyringe/container.js'
+import { t } from '@tsyringe/tokens.js'
 
 export const routeOpt: RouteOptions = {
-  method: 'DELETE',
-  url: '/users/:id',
+  method: 'POST',
+  url: '/users',
   schema: {
-    params: {
+    body: {
       type: 'object',
       properties: {
-        id: { type: 'number' },
+        name: { type: 'string' },
+        email: { type: 'string' },
       },
-      required: ['id'],
+      required: ['name', 'email'],
     },
     response: {
-      200: {
+      201: {
         type: 'object',
         properties: {
           id: { type: 'number' },
@@ -29,19 +29,17 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
-    const params = request.params as { id: number }
+    const body = request.body as { name: string; email: string }
 
     const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
 
-    const id = Id.from(params.id)
-    const user = await repo.findById(id)
+    const user = User.fromRaw({
+      name: body.name,
+      email: body.email,
+    })
 
-    if (!user) {
-      throw new NotFoundError('User not found')
-    }
+    const newUser = await repo.create(user)
 
-    await repo.delete(id)
-
-    reply.send(user.toRaw())
+    reply.code(201).send(newUser.toRaw())
   },
 }

@@ -1,6 +1,6 @@
 import { IUsersRepo } from '@app/repos/users.js'
-import { container } from '@di/container.js'
-import { t } from '@di/tokens.js'
+import { container } from '@tsyringe/container.js'
+import { t } from '@tsyringe/tokens.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {

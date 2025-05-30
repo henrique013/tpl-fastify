@@ -1,11 +1,11 @@
-import { t } from '@di/tokens.js'
+import { t } from '@tsyringe/tokens.js'
 import { DependencyContainer } from 'tsyringe'
 import { Pool } from 'pg'
 import { Redis } from 'ioredis'
 import { drizzle } from 'drizzle-orm/node-postgres'
-import * as schema from '@db/schema.js'
+import * as schema from '@drizzle/schema.js'
 import { env } from '@app/env.js'
-import { DrizzlePg } from '@db/types.js'
+import { DrizzlePg } from '@drizzle/types.js'
 
 export function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({

@@ -4,8 +4,8 @@ import { NotFoundError } from '@app/errors.js'
 import { Id } from '@app/values/id.js'
 import { Email } from '@app/values/email.js'
 import { Name } from '@app/values/name.js'
-import { container } from '@di/container.js'
-import { t } from '@di/tokens.js'
+import { container } from '@tsyringe/container.js'
+import { t } from '@tsyringe/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'PUT',
