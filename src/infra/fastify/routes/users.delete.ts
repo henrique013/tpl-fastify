@@ -1,9 +1,7 @@
-import { IUsersRepo } from '@app/repos/users.js'
-import { RouteOptions } from 'fastify'
-import { Id } from '@app/values/id.js'
+import { DeleteUserReq, DeleteUserRoute } from '@app/routes/users.delete.js'
 import { container } from '@infra/tsyringe/container.js'
-import { NotFoundError } from '@app/errors.js'
 import { t } from '@infra/tsyringe/tokens.js'
+import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'DELETE',
@@ -29,19 +27,10 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
-    const params = request.params as { id: number }
+    const route = container.resolve<DeleteUserRoute>(t.routes['users.delete'])
 
-    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
+    const json = await route.execute(request.params as DeleteUserReq)
 
-    const id = Id.from(params.id)
-    const user = await repo.findById(id)
-
-    if (!user) {
-      throw new NotFoundError('User not found')
-    }
-
-    await repo.delete(id)
-
-    reply.send(user.toRaw())
+    reply.send(json)
   },
 }
