@@ -58,7 +58,7 @@ async function setupRoutes(fastify: FastifyInstance) {
   fastify.route((await import('@infra/fastify/routes/hello-world.js')).routeOpt)
 
   // health
-  fastify.route((await import('@infra/fastify/routes/health.get.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/health.js')).routeOpt)
 
   // users
   fastify.route((await import('@infra/fastify/routes/users.get.js')).routeOpt)

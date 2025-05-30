@@ -9,6 +9,7 @@ const TOKENS = {
   },
   routes: {
     'hello-world': Symbol.for('hello-world'),
+    health: Symbol.for('health'),
   },
 }
 
