@@ -1,8 +1,8 @@
 import { IUsersRepo } from '@app/repos/users.js'
 import { RouteOptions } from 'fastify'
 import { User } from '@app/entities/user.js'
-import { container } from '@tsyringe/container.js'
-import { t } from '@tsyringe/tokens.js'
+import { container } from '@infra/tsyringe/container.js'
+import { t } from '@infra/tsyringe/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'POST',

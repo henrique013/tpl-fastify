@@ -1,7 +1,7 @@
 import { User } from '@app/entities/user.js'
 import { Id } from '@app/values/id.js'
-import { DrizzlePg } from '@drizzle/types.js'
-import { usersTable } from '@drizzle/schema.js'
+import { DrizzlePg } from '@infra/drizzle/types.js'
+import { usersTable } from '@infra/drizzle/schema.js'
 import { eq } from 'drizzle-orm'
 import { IUsersRepo } from '@app/repos/users.js'
 

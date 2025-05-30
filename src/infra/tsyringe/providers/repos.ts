@@ -1,8 +1,8 @@
 import { DependencyContainer } from 'tsyringe'
-import { t } from '@tsyringe/tokens.js'
+import { t } from '@infra/tsyringe/tokens.js'
 import { PgUsersRepo } from '@app/repos/users.pg.js'
 import { CachedUsersRepo } from '@app/repos/users.cache.js'
-import { DrizzlePg } from '@drizzle/types.js'
+import { DrizzlePg } from '@infra/drizzle/types.js'
 import { Redis } from 'ioredis'
 
 export function registerRepos(container: DependencyContainer) {

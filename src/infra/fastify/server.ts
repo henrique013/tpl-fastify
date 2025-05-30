@@ -55,17 +55,17 @@ function setupErrorHandler(fastify: FastifyInstance) {
 
 async function setupRoutes(fastify: FastifyInstance) {
   // index
-  fastify.route((await import('@fastify/routes/index.get.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/index.get.js')).routeOpt)
 
   // health
-  fastify.route((await import('@fastify/routes/health.get.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/health.get.js')).routeOpt)
 
   // users
-  fastify.route((await import('@fastify/routes/users.get.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/users.id.delete.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/users.id.get.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/users.id.put.js')).routeOpt)
-  fastify.route((await import('@fastify/routes/users.post.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/users.get.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/users.id.delete.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/users.id.get.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/users.id.put.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/users.post.js')).routeOpt)
 }
 
 async function listen(fastify: FastifyInstance) {

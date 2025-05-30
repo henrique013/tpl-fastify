@@ -2,8 +2,8 @@ import { IUsersRepo } from '@app/repos/users.js'
 import { RouteOptions } from 'fastify'
 import { Id } from '@app/values/id.js'
 import { NotFoundError } from '@app/errors.js'
-import { container } from '@tsyringe/container.js'
-import { t } from '@tsyringe/tokens.js'
+import { container } from '@infra/tsyringe/container.js'
+import { t } from '@infra/tsyringe/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'GET',

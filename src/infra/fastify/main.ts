@@ -1,4 +1,4 @@
 import 'reflect-metadata'
-import { server } from '@fastify/server.js'
+import { server } from '@infra/fastify/server.js'
 
 await server()
