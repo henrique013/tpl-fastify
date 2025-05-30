@@ -55,7 +55,7 @@ function setupErrorHandler(fastify: FastifyInstance) {
 
 async function setupRoutes(fastify: FastifyInstance) {
   // index
-  fastify.route((await import('@infra/fastify/routes/index.get.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/hello-world.js')).routeOpt)
 
   // health
   fastify.route((await import('@infra/fastify/routes/health.get.js')).routeOpt)

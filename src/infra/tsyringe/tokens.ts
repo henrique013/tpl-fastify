@@ -7,6 +7,9 @@ const TOKENS = {
   repos: {
     IUsersRepo: Symbol.for('IUsersRepo'),
   },
+  routes: {
+    'hello-world': Symbol.for('hello-world'),
+  },
 }
 
 export { TOKENS as t }
