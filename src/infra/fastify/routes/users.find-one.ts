@@ -1,4 +1,4 @@
-import { FindOneUserReq, FindOneUserRoute } from '@app/routes/users.find-one.js'
+import { FindOneUserRoute } from '@app/routes/users.find-one.js'
 import { container } from '@infra/tsyringe/container.js'
 import { t } from '@infra/tsyringe/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -27,9 +27,11 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
+    const params = request.params as { id: number }
+
     const route = container.resolve<FindOneUserRoute>(t.routes['users.find-one'])
 
-    const json = await route.execute(request.params as FindOneUserReq)
+    const json = await route.execute(params)
 
     reply.send(json)
   },
