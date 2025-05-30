@@ -9,8 +9,8 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "tsx watch --env-file=dev/.env --inspect=0.0.0.0:9229 src/infra/fastify/main.ts",
-    "start": "tsx src/fastify/main.ts",
+    "dev": "tsx watch --env-file=dev/.env --inspect=0.0.0.0:9229 src/infra/main.ts",
+    "start": "tsx src/infra/main.ts",
     "postinstall": "lefthook install"
   },
   "dependencies": {
