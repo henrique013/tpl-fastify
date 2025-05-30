@@ -1,4 +1,4 @@
-import { IUsersRepo } from '@app/repos/users.js'
+import { FindAllUsersRoute } from '@app/routes/users.find-all.js'
 import { container } from '@infra/tsyringe/container.js'
 import { t } from '@infra/tsyringe/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -23,11 +23,10 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
+    const route = container.resolve<FindAllUsersRoute>(t.routes['users.find-all'])
 
-    const users = await repo.findAll()
-    const usersRaw = users.map((user) => user.toRaw())
+    const json = await route.execute()
 
-    reply.send(usersRaw)
+    reply.send(json)
   },
 }

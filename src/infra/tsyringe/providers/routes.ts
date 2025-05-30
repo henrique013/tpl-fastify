@@ -2,6 +2,8 @@ import { DependencyContainer } from 'tsyringe'
 import { t } from '@infra/tsyringe/tokens.js'
 import { HelloWorldRoute } from '@app/routes/hello-world.js'
 import { HealthRoute } from '@app/routes/health.js'
+import { IUsersRepo } from '@app/repos/users.js'
+import { FindAllUsersRoute } from '@app/routes/users.find-all.js'
 
 export function registerRoutes(container: DependencyContainer) {
   container.register(t.routes['hello-world'], {
@@ -10,5 +12,9 @@ export function registerRoutes(container: DependencyContainer) {
 
   container.register(t.routes['health'], {
     useClass: HealthRoute,
+  })
+
+  container.register(t.routes['users.find-all'], {
+    useFactory: (container) => new FindAllUsersRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 }
