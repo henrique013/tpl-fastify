@@ -1,5 +1,5 @@
 import Fastify, { FastifyInstance } from 'fastify'
-import { env } from '@app/env.js'
+import { env } from '@infra/env.js'
 import { BaseError } from '@app/errors.js'
 
 export async function server(up = true): Promise<FastifyInstance> {
