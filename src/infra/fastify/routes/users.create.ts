@@ -1,8 +1,7 @@
-import { IUsersRepo } from '@app/repos/users.js'
-import { RouteOptions } from 'fastify'
-import { User } from '@app/entities/user.js'
+import { CreateUserRoute } from '@app/routes/users.create.js'
 import { container } from '@infra/tsyringe/container.js'
 import { t } from '@infra/tsyringe/tokens.js'
+import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'POST',
@@ -31,15 +30,13 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
 
-    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
+    const route = container.resolve<CreateUserRoute>(t.routes['users.create'])
 
-    const user = User.fromRaw({
+    const json = await route.execute({
       name: body.name,
       email: body.email,
     })
 
-    const newUser = await repo.create(user)
-
-    reply.code(201).send(newUser.toRaw())
+    reply.code(201).send(json)
   },
 }

@@ -14,6 +14,7 @@ const TOKENS = {
     'users.find-one': Symbol.for('users.find-one'),
     'users.delete': Symbol.for('users.delete'),
     'users.update': Symbol.for('users.update'),
+    'users.create': Symbol.for('users.create'),
   },
 }
 
