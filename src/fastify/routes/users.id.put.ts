@@ -1,4 +1,4 @@
-import { IUsersRepo } from '@app/repos/users-repo.js'
+import { IUsersRepo } from '@app/repos/users.js'
 import { RouteOptions } from 'fastify'
 import { NotFoundError } from '@app/errors.js'
 import { Id } from '@app/values/id.js'

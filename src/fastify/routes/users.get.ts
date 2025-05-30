@@ -1,4 +1,4 @@
-import { IUsersRepo } from '@app/repos/users-repo.js'
+import { IUsersRepo } from '@app/repos/users.js'
 import { container } from '@di/container.js'
 import { t } from '@di/tokens.js'
 import { RouteOptions } from 'fastify'

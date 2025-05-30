@@ -1,4 +1,4 @@
-import { IUsersRepo } from '@app/repos/users-repo.js'
+import { IUsersRepo } from '@app/repos/users.js'
 import { RouteOptions } from 'fastify'
 import { User } from '@app/entities/user.js'
 import { container } from '@di/container.js'
