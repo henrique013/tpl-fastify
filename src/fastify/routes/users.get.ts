@@ -1,4 +1,6 @@
-import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
+import { IUsersRepo } from '@app/repos/users-repo.js'
+import { container } from '@di/container.js'
+import { t } from '@di/tokens.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
@@ -21,8 +23,7 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    let repo: IUsersRepo = new PgUsersRepo(this.pg)
-    repo = new CachedUsersRepo(repo, this.redis)
+    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
 
     const users = await repo.findAll()
     const usersRaw = users.map((user) => user.toRaw())

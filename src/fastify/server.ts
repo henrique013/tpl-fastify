@@ -7,10 +7,6 @@ async function server(up = true): Promise<FastifyInstance> {
 
   setupErrorHandler(fastify)
 
-  setupDecorators(fastify)
-
-  await setupHooks(fastify)
-
   await setupRoutes(fastify)
 
   if (up) {
@@ -55,18 +51,6 @@ function setupErrorHandler(fastify: FastifyInstance) {
       reply.status(status.code).send(json)
     }
   })
-}
-
-function setupDecorators(fastify: FastifyInstance) {
-  // fastify instance decorators
-  fastify.decorate('pgPool')
-  fastify.decorate('drizzle')
-  fastify.decorate('redis')
-}
-
-async function setupHooks(fastify: FastifyInstance) {
-  // on ready
-  fastify.addHook('onReady', (await import('@fastify/hooks/on-ready/set-server-decorators.js')).hook)
 }
 
 async function setupRoutes(fastify: FastifyInstance) {

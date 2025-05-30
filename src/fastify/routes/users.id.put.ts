@@ -1,9 +1,11 @@
-import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
+import { IUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 import { NotFoundError } from '@app/errors.js'
 import { Id } from '@app/values/id.js'
 import { Email } from '@app/values/email.js'
 import { Name } from '@app/values/name.js'
+import { container } from '@di/container.js'
+import { t } from '@di/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'PUT',
@@ -40,8 +42,7 @@ export const routeOpt: RouteOptions = {
     const params = request.params as { id: number }
     const body = request.body as { name: string; email: string }
 
-    let repo: IUsersRepo = new PgUsersRepo(this.pg)
-    repo = new CachedUsersRepo(repo, this.redis)
+    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
 
     const id = Id.from(params.id)
     const user = await repo.findById(id)

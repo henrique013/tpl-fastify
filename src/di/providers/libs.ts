@@ -5,6 +5,7 @@ import { Redis } from 'ioredis'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import * as schema from '@db/schema.js'
 import env from '@app/env.js'
+import { DrizzlePg } from '@db/types.js'
 
 function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({
@@ -13,7 +14,7 @@ function registerLibs(container: DependencyContainer) {
 
   const redis = new Redis(env.REDIS_URL)
 
-  const drizzlePg = drizzle(pgPool, { schema })
+  const drizzlePg: DrizzlePg = drizzle(pgPool, { schema })
 
   container.register(t.libs.PgPool, {
     useValue: pgPool,
@@ -23,7 +24,7 @@ function registerLibs(container: DependencyContainer) {
     useValue: redis,
   })
 
-  container.register(t.libs.Pg, {
+  container.register(t.libs.DrizzlePg, {
     useValue: drizzlePg,
   })
 }

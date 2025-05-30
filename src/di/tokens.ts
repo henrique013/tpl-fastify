@@ -2,7 +2,7 @@ export const t = {
   libs: {
     Redis: Symbol.for('Redis'),
     PgPool: Symbol.for('PgPool'),
-    Pg: Symbol.for('Pg'),
+    DrizzlePg: Symbol.for('DrizzlePg'),
   },
   repos: {
     IUsersRepo: Symbol.for('IUsersRepo'),

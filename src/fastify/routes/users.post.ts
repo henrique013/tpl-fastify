@@ -1,6 +1,8 @@
-import { CachedUsersRepo, IUsersRepo, PgUsersRepo } from '@app/repos/users-repo.js'
+import { IUsersRepo } from '@app/repos/users-repo.js'
 import { RouteOptions } from 'fastify'
 import { User } from '@app/entities/user.js'
+import { container } from '@di/container.js'
+import { t } from '@di/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'POST',
@@ -29,8 +31,7 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
 
-    let repo: IUsersRepo = new PgUsersRepo(this.pg)
-    repo = new CachedUsersRepo(repo, this.redis)
+    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
 
     const user = User.fromRaw({
       name: body.name,
