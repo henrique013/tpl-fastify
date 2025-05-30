@@ -6,6 +6,7 @@ import { IUsersRepo } from '@app/repos/users.js'
 import { FindAllUsersRoute } from '@app/routes/users.find-all.js'
 import { FindOneUserRoute } from '@app/routes/users.find-one.js'
 import { DeleteUserRoute } from '@app/routes/users.delete.js'
+import { UpdateUserRoute } from '@app/routes/users.update.js'
 
 export function registerRoutes(container: DependencyContainer) {
   container.register(t.routes['hello-world'], {
@@ -26,5 +27,9 @@ export function registerRoutes(container: DependencyContainer) {
 
   container.register(t.routes['users.delete'], {
     useFactory: (container) => new DeleteUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
+  })
+
+  container.register(t.routes['users.update'], {
+    useFactory: (container) => new UpdateUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 }

@@ -1,11 +1,7 @@
-import { IUsersRepo } from '@app/repos/users.js'
-import { RouteOptions } from 'fastify'
-import { NotFoundError } from '@app/errors.js'
-import { Id } from '@app/values/id.js'
-import { Email } from '@app/values/email.js'
-import { Name } from '@app/values/name.js'
+import { UpdateUserRoute } from '@app/routes/users.update.js'
 import { container } from '@infra/tsyringe/container.js'
 import { t } from '@infra/tsyringe/tokens.js'
+import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {
   method: 'PUT',
@@ -42,20 +38,14 @@ export const routeOpt: RouteOptions = {
     const params = request.params as { id: number }
     const body = request.body as { name: string; email: string }
 
-    const repo = container.resolve<IUsersRepo>(t.repos.IUsersRepo)
+    const route = container.resolve<UpdateUserRoute>(t.routes['users.update'])
 
-    const id = Id.from(params.id)
-    const user = await repo.findById(id)
+    const json = await route.execute({
+      id: params.id,
+      name: body.name,
+      email: body.email,
+    })
 
-    if (!user) {
-      throw new NotFoundError('User not found')
-    }
-
-    user.name = Name.from(body.name)
-    user.email = Email.from(body.email)
-
-    const updatedUser = await repo.update(user)
-
-    reply.send(updatedUser.toRaw())
+    reply.send(json)
   },
 }

@@ -13,6 +13,7 @@ const TOKENS = {
     'users.find-all': Symbol.for('users.find-all'),
     'users.find-one': Symbol.for('users.find-one'),
     'users.delete': Symbol.for('users.delete'),
+    'users.update': Symbol.for('users.update'),
   },
 }
 

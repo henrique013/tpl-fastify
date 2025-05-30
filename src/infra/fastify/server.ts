@@ -64,7 +64,7 @@ async function setupRoutes(fastify: FastifyInstance) {
   fastify.route((await import('@infra/fastify/routes/users.find-all.js')).routeOpt)
   fastify.route((await import('@infra/fastify/routes/users.find-one.js')).routeOpt)
   fastify.route((await import('@infra/fastify/routes/users.delete.js')).routeOpt)
-  // fastify.route((await import('@infra/fastify/routes/users.id.put.js')).routeOpt)
+  fastify.route((await import('@infra/fastify/routes/users.update.js')).routeOpt)
   // fastify.route((await import('@infra/fastify/routes/users.post.js')).routeOpt)
 }
 
