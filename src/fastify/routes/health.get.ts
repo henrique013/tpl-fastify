@@ -6,7 +6,7 @@ type Response = {
   uptime?: number
 }
 
-const routeOpt: RouteOptions = {
+export const routeOpt: RouteOptions = {
   method: 'GET',
   url: '/health',
   schema: {
@@ -45,5 +45,3 @@ const routeOpt: RouteOptions = {
     reply.send(json)
   },
 }
-
-export { routeOpt }

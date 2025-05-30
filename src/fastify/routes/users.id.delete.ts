@@ -5,7 +5,7 @@ import { container } from '@di/container.js'
 import { NotFoundError } from '@app/errors.js'
 import { t } from '@di/tokens.js'
 
-const routeOpt: RouteOptions = {
+export const routeOpt: RouteOptions = {
   method: 'DELETE',
   url: '/users/:id',
   schema: {
@@ -45,5 +45,3 @@ const routeOpt: RouteOptions = {
     reply.send(user.toRaw())
   },
 }
-
-export { routeOpt }

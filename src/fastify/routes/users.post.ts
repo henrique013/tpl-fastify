@@ -4,7 +4,7 @@ import { User } from '@app/entities/user.js'
 import { container } from '@di/container.js'
 import { t } from '@di/tokens.js'
 
-const routeOpt: RouteOptions = {
+export const routeOpt: RouteOptions = {
   method: 'POST',
   url: '/users',
   schema: {
@@ -43,5 +43,3 @@ const routeOpt: RouteOptions = {
     reply.code(201).send(newUser.toRaw())
   },
 }
-
-export { routeOpt }

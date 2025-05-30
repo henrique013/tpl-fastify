@@ -1,6 +1,6 @@
 import { RouteOptions } from 'fastify'
 
-const routeOpt: RouteOptions = {
+export const routeOpt: RouteOptions = {
   method: 'GET',
   url: '/',
   schema: {
@@ -20,5 +20,3 @@ const routeOpt: RouteOptions = {
     })
   },
 }
-
-export { routeOpt }
