@@ -1,4 +1,4 @@
-import { IndexGetRoute } from '@app/routes/hello-world.js'
+import { HelloWorldRoute } from '@app/routes/hello-world.js'
 import { RouteOptions } from 'fastify'
 import { container } from 'tsyringe'
 import { t } from '@infra/tsyringe/tokens.js'
@@ -18,7 +18,7 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const route = container.resolve<IndexGetRoute>(t.routes['hello-world'])
+    const route = container.resolve<HelloWorldRoute>(t.routes['hello-world'])
 
     const json = await route.execute()
 
