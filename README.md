@@ -47,6 +47,7 @@ Dentro do `package.json` você encontra os seguintes comandos:
 
 - `npm run dev`: Inicia a aplicação em modo de desenvolvimento
 - `npm start`: Inicia a aplicação em modo de produção
+  - Importante: Em produção, a aplicação espera que as variáveis de ambiente já existam no sistema operacional, portanto, não é necessário configurar o arquivo `.env`
 - `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
   - Exemplo: `npm run tag -- patch` (para incrementar a versão de patch)
   - Exemplo: `npm run tag -- minor` (para incrementar a versão minor)
