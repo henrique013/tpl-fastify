@@ -30,7 +30,7 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
 
-    const route = container.resolve<CreateUserRoute>(t.routes['users.create'])
+    const route = container.resolve<CreateUserRoute>(t.routes.CreateUserRoute)
 
     const json = await route.execute({
       name: body.name,

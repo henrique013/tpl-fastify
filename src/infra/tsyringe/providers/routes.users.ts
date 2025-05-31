@@ -24,7 +24,7 @@ export function registerUsersRoutes(container: DependencyContainer) {
     useFactory: (container) => new UpdateUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 
-  container.register(t.routes['users.create'], {
+  container.register(t.routes.CreateUserRoute, {
     useFactory: (container) => new CreateUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 }
