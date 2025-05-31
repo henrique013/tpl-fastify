@@ -18,7 +18,7 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const route = container.resolve<HelloWorldRoute>(t.routes['hello-world'])
+    const route = container.resolve<HelloWorldRoute>(t.routes.HelloWorldRoute)
 
     const json = await route.execute()
 
