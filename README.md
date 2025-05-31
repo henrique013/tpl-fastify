@@ -1,5 +1,3 @@
-<!-- TODO: Update endpoints -->
-
 # 🚀 Template de API Fastify
 
 Este é um template básico para uma API Fastify com TypeScript, configurado para desenvolvimento usando Docker.
@@ -40,24 +38,6 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 5. Acesse a aplicação:
    - A API estará disponível em `http://localhost:${API_PORT}`
    - Você pode testar os endpoints usando a documentação abaixo
-
-## 🔑 Comandos Importantes
-
-Dentro do `package.json` você encontra os seguintes comandos:
-
-- `npm run dev`: Inicia a aplicação em modo de desenvolvimento
-- `npm start`: Inicia a aplicação em modo de produção
-  - Importante: Em produção, a aplicação espera que as variáveis de ambiente já existam no sistema operacional, portanto, não é necessário configurar o arquivo `.env`
-- `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
-  - Exemplo: `npm run tag -- patch` (para incrementar a versão de patch)
-  - Exemplo: `npm run tag -- minor` (para incrementar a versão minor)
-  - Exemplo: `npm run tag -- major` (para incrementar a versão major)
-  - Dica: Se quiser resetar a versão para 1.0.0, você pode editar manualmente o campo "version" no package.json
-- `npm run migrate:gen -- <nome>`: Gera um novo arquivo de migração do banco de dados
-  - Exemplo: `npm run migrate:gen -- create-users-table`
-- `npm run migrate`: Executa todas as migrações pendentes do banco de dados
-- `npm postinstall`: Configura o lefthook para executar os hooks de commit e push
-  - Este comando é executado automaticamente após a instalação das dependências do projeto
 
 ## 🌐 Endpoints
 
@@ -108,3 +88,21 @@ Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo
   ```bash
   curl -X DELETE http://localhost:3000/users/123
   ```
+
+## 🔑 Comandos Importantes
+
+Dentro do `package.json` você encontra os seguintes comandos:
+
+- `npm run dev`: Inicia a aplicação em modo de desenvolvimento
+- `npm start`: Inicia a aplicação em modo de produção
+  - Importante: Em produção, a aplicação espera que as variáveis de ambiente já existam no sistema operacional, portanto, não é necessário configurar o arquivo `.env`
+- `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
+  - Exemplo: `npm run tag -- patch` (para incrementar a versão de patch)
+  - Exemplo: `npm run tag -- minor` (para incrementar a versão minor)
+  - Exemplo: `npm run tag -- major` (para incrementar a versão major)
+  - Dica: Se quiser resetar a versão para 1.0.0, você pode editar manualmente o campo "version" no package.json
+- `npm run migrate:gen -- <nome>`: Gera um novo arquivo de migração do banco de dados
+  - Exemplo: `npm run migrate:gen -- create-users-table`
+- `npm run migrate`: Executa todas as migrações pendentes do banco de dados
+- `npm postinstall`: Configura o lefthook para executar os hooks de commit e push
+  - Este comando é executado automaticamente após a instalação das dependências do projeto
