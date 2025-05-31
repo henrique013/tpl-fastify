@@ -1,6 +1,6 @@
 import { CreateUserRoute } from '@app/routes/users.create.js'
-import { container } from '@infra/tsyringe/container.js'
-import { t } from '@infra/tsyringe/tokens.js'
+import { container } from '@infra/container/container.js'
+import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
 
 export const routeOpt: RouteOptions = {

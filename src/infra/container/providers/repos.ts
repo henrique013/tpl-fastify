@@ -1,5 +1,5 @@
 import { DependencyContainer } from 'tsyringe'
-import { t } from '@infra/tsyringe/tokens.js'
+import { t } from '@infra/container/tokens.js'
 import { PgUsersRepo } from '@infra/repos/users.pg.js'
 import { CachedUsersRepo } from '@infra/repos/users.cache.js'
 import { DrizzlePg } from '@infra/orm/types.js'

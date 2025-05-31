@@ -1,5 +1,5 @@
 import { DependencyContainer } from 'tsyringe'
-import { t } from '@infra/tsyringe/tokens.js'
+import { t } from '@infra/container/tokens.js'
 import { HelloWorldRoute } from '@app/routes/hello-world.js'
 import { HealthRoute } from '@app/routes/health.js'
 

@@ -1,5 +1,5 @@
 import { DependencyContainer } from 'tsyringe'
-import { t } from '@infra/tsyringe/tokens.js'
+import { t } from '@infra/container/tokens.js'
 import { IUsersRepo } from '@app/repos/users.js'
 import { FindAllUsersRoute } from '@app/routes/users.find-all.js'
 import { FindOneUserRoute } from '@app/routes/users.find-one.js'

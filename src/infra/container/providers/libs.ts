@@ -1,4 +1,4 @@
-import { t } from '@infra/tsyringe/tokens.js'
+import { t } from '@infra/container/tokens.js'
 import { DependencyContainer } from 'tsyringe'
 import { Pool } from 'pg'
 import { Redis } from 'ioredis'

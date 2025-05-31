@@ -1,7 +1,7 @@
 import { HelloWorldRoute } from '@app/routes/hello-world.js'
 import { RouteOptions } from 'fastify'
-import { container } from 'tsyringe'
-import { t } from '@infra/tsyringe/tokens.js'
+import { container } from '@infra/container/container.js'
+import { t } from '@infra/container/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'GET',
