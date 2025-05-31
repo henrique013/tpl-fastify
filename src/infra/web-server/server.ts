@@ -1,10 +1,11 @@
 import Fastify, { FastifyInstance } from 'fastify'
 import { BaseError } from '@app/errors.js'
+import * as Sentry from '@sentry/node'
 
 export type ServerOptions = {
   port: number
-  host?: string
-  debug?: boolean
+  debug: boolean
+  sentry_dsn: string | undefined
 }
 
 export class Server {
@@ -14,9 +15,12 @@ export class Server {
   ) {}
 
   static async create(options: ServerOptions): Promise<Server> {
-    const fastify = this.createFastifyInstance(options.debug ?? false)
-    this.setupErrorHandler(fastify)
+    const fastify = this.createFastifyInstance(options.debug)
+
+    this.setupCustomErrorHandler(fastify, options.sentry_dsn)
+
     await this.setupRoutes(fastify)
+
     return new Server(fastify, options)
   }
 
@@ -41,7 +45,14 @@ export class Server {
     return fastify
   }
 
-  private static setupErrorHandler(fastify: FastifyInstance) {
+  private static setupCustomErrorHandler(fastify: FastifyInstance, sentry_dsn?: string) {
+    if (sentry_dsn) {
+      Sentry.init({
+        dsn: sentry_dsn,
+        sendDefaultPii: true,
+      })
+    }
+
     fastify.setErrorHandler(function (error, _request, reply) {
       const json = {
         message: error.message,
@@ -54,6 +65,10 @@ export class Server {
 
         json.error = status.name
         json.statusCode = status.code
+      }
+
+      if (sentry_dsn && json.statusCode >= 500) {
+        Sentry.captureException(error)
       }
 
       reply.status(json.statusCode).send(json)
@@ -77,10 +92,10 @@ export class Server {
 
   public async listen(): Promise<void> {
     try {
+      const host = '0.0.0.0'
       const port = this.options.port
-      const host = this.options.host ?? '0.0.0.0'
 
-      await this.fastify.listen({ port, host })
+      await this.fastify.listen({ host, port })
     } catch (err) {
       this.fastify.log.error(err)
       process.exit(1)

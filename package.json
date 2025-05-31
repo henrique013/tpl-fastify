@@ -17,6 +17,7 @@
     "postinstall": "lefthook install"
   },
   "dependencies": {
+    "@sentry/node": "^9.24.0",
     "drizzle-orm": "^0.43.1",
     "fastify": "^5.3.0",
     "ioredis": "^5.6.1",

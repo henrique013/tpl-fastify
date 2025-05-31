@@ -7,6 +7,7 @@ const envSchema = z.object({
   REDIS_URL: z.string().url(),
   PG_API_URL: z.string().url(),
   PG_MIGRATIONS_URL: z.string().url(),
+  SENTRY_DSN: z.string().url().optional(),
 })
 
 export const env = envSchema.parse(process.env)
