@@ -38,7 +38,7 @@ export const routeOpt: RouteOptions = {
     const params = request.params as { id: number }
     const body = request.body as { name: string; email: string }
 
-    const route = container.resolve<UpdateUserRoute>(t.routes['users.update'])
+    const route = container.resolve<UpdateUserRoute>(t.routes.UpdateUserRoute)
 
     const json = await route.execute({
       id: params.id,
