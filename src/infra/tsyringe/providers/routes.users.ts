@@ -16,7 +16,7 @@ export function registerUsersRoutes(container: DependencyContainer) {
     useFactory: (container) => new FindOneUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 
-  container.register(t.routes['users.delete'], {
+  container.register(t.routes.DeleteUserRoute, {
     useFactory: (container) => new DeleteUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 

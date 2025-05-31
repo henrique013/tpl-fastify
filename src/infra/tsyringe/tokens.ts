@@ -12,7 +12,7 @@ const TOKENS = {
     HealthRoute: Symbol.for('HealthRoute'),
     FindAllUsersRoute: Symbol.for('FindAllUsersRoute'),
     FindOneUserRoute: Symbol.for('FindOneUserRoute'),
-    'users.delete': Symbol.for('users.delete'),
+    DeleteUserRoute: Symbol.for('DeleteUserRoute'),
     'users.update': Symbol.for('users.update'),
     'users.create': Symbol.for('users.create'),
   },
