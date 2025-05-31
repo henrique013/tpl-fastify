@@ -8,7 +8,7 @@ export function registerRoutes(container: DependencyContainer) {
     useClass: HelloWorldRoute,
   })
 
-  container.register(t.routes['health'], {
+  container.register(t.routes.HealthRoute, {
     useClass: HealthRoute,
   })
 }

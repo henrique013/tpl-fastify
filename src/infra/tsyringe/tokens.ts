@@ -9,7 +9,7 @@ const TOKENS = {
   },
   routes: {
     'hello-world': Symbol.for('hello-world'),
-    health: Symbol.for('health'),
+    HealthRoute: Symbol.for('HealthRoute'),
     'users.find-all': Symbol.for('users.find-all'),
     'users.find-one': Symbol.for('users.find-one'),
     'users.delete': Symbol.for('users.delete'),

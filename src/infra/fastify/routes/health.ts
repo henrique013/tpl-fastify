@@ -27,7 +27,7 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
-    const route = container.resolve<HealthRoute>(t.routes['health'])
+    const route = container.resolve<HealthRoute>(t.routes.HealthRoute)
 
     const json = await route.execute(request.query as HealthReq)
 
