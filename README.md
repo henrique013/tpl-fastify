@@ -20,20 +20,19 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 2. Configure as variáveis de ambiente:
 
    ```bash
-   cd dev
-   cp .env.example .env
+   cp dev/.env.example dev/.env
+   nano dev/.env
    ```
 
 3. Execute as migrações do banco de dados:
 
    ```bash
-   ./migrate-run.sh
+   npm run migrate
    ```
 
 4. Inicie a aplicação:
 
    ```bash
-   cd ..
    npm install
    npm run dev
    ```
@@ -46,14 +45,14 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 Dentro do diretório `dev` você encontra os seguintes scripts:
 
-- `./tag.sh`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
-  - Exemplo: `./tag.sh patch` (para incrementar a versão de patch)
-  - Exemplo: `./tag.sh minor` (para incrementar a versão minor)
-  - Exemplo: `./tag.sh major` (para incrementar a versão major)
+- `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
+  - Exemplo: `npm run tag -- patch` (para incrementar a versão de patch)
+  - Exemplo: `npm run tag -- minor` (para incrementar a versão minor)
+  - Exemplo: `npm run tag -- major` (para incrementar a versão major)
   - Dica: Se quiser resetar a versão para 1.0.0, você pode editar manualmente o campo "version" no package.json
-- `./migrate-gen.sh <nome>`: Gera um novo arquivo de migração do banco de dados
-  - Exemplo: `./migrate-gen.sh add-users-table`
-- `./migrate-run.sh`: Executa todas as migrações pendentes do banco de dados
+- `npm run migrate:gen -- <nome>`: Gera um novo arquivo de migração do banco de dados
+  - Exemplo: `npm run migrate:gen -- create-users-table`
+- `npm run migrate`: Executa todas as migrações pendentes do banco de dados
 
 ## 🌐 Endpoints
 
