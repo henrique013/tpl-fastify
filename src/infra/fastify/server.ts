@@ -52,7 +52,6 @@ export class Server {
       if (error instanceof BaseError) {
         const status = error.toHttpStatus()
 
-        json.message = error.message
         json.error = status.name
         json.statusCode = status.code
       }
