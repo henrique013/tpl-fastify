@@ -43,8 +43,10 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 ## 🔑 Comandos Importantes
 
-Dentro do diretório `dev` você encontra os seguintes scripts:
+Dentro do `package.json` você encontra os seguintes comandos:
 
+- `npm run dev`: Inicia a aplicação em modo de desenvolvimento
+- `npm start`: Inicia a aplicação em modo de produção
 - `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
   - Exemplo: `npm run tag -- patch` (para incrementar a versão de patch)
   - Exemplo: `npm run tag -- minor` (para incrementar a versão minor)
@@ -53,6 +55,8 @@ Dentro do diretório `dev` você encontra os seguintes scripts:
 - `npm run migrate:gen -- <nome>`: Gera um novo arquivo de migração do banco de dados
   - Exemplo: `npm run migrate:gen -- create-users-table`
 - `npm run migrate`: Executa todas as migrações pendentes do banco de dados
+- `npm postinstall`: Configura o lefthook para executar os hooks de commit e push
+  - Este comando é executado automaticamente após a instalação das dependências do projeto
 
 ## 🌐 Endpoints
 
