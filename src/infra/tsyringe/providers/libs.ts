@@ -3,9 +3,9 @@ import { DependencyContainer } from 'tsyringe'
 import { Pool } from 'pg'
 import { Redis } from 'ioredis'
 import { drizzle } from 'drizzle-orm/node-postgres'
-import * as schema from '@infra/drizzle/schema.js'
+import * as schema from '@infra/orm/schema.js'
 import { env } from '@infra/env.js'
-import { DrizzlePg } from '@infra/drizzle/types.js'
+import { DrizzlePg } from '@infra/orm/types.js'
 
 export function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({
