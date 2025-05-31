@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { Server } from '@infra/fastify/server.js'
+import { Server } from '@infra/web-server/server.js'
 import { env } from '@infra/env.js'
 
 const server = await Server.create({

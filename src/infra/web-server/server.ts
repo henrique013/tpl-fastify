@@ -62,17 +62,17 @@ export class Server {
 
   private static async setupRoutes(fastify: FastifyInstance) {
     // index
-    fastify.route((await import('@infra/fastify/routes/hello-world.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/hello-world.js')).routeOpt)
 
     // health
-    fastify.route((await import('@infra/fastify/routes/health.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/health.js')).routeOpt)
 
     // users
-    fastify.route((await import('@infra/fastify/routes/users.find-all.js')).routeOpt)
-    fastify.route((await import('@infra/fastify/routes/users.find-one.js')).routeOpt)
-    fastify.route((await import('@infra/fastify/routes/users.delete.js')).routeOpt)
-    fastify.route((await import('@infra/fastify/routes/users.update.js')).routeOpt)
-    fastify.route((await import('@infra/fastify/routes/users.create.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/users.find-all.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/users.find-one.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/users.delete.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/users.update.js')).routeOpt)
+    fastify.route((await import('@infra/web-server/routes/users.create.js')).routeOpt)
   }
 
   public async listen(): Promise<void> {
