@@ -1,82 +1,90 @@
 import Fastify, { FastifyInstance } from 'fastify'
-import { env } from '@infra/env.js'
 import { BaseError } from '@app/errors.js'
 
-export async function server(up = true): Promise<FastifyInstance> {
-  const fastify = createFastifyInstance()
+export type ServerOptions = {
+  port: number
+  host?: string
+  debug?: boolean
+}
 
-  setupErrorHandler(fastify)
+export class Server {
+  private constructor(
+    private readonly fastify: FastifyInstance,
+    private readonly options: ServerOptions
+  ) {}
 
-  await setupRoutes(fastify)
-
-  if (up) {
-    await listen(fastify)
+  static async create(options: ServerOptions): Promise<Server> {
+    const fastify = this.createFastifyInstance(options.debug ?? false)
+    this.setupErrorHandler(fastify)
+    await this.setupRoutes(fastify)
+    return new Server(fastify, options)
   }
 
-  return fastify
-}
+  private static createFastifyInstance(debug: boolean): FastifyInstance {
+    const level = debug ? 'debug' : 'info'
 
-function createFastifyInstance(): FastifyInstance {
-  const level = env.API_DEBUG ? 'debug' : 'info'
-
-  const fastify: FastifyInstance = Fastify({
-    logger: {
-      level,
-      transport: {
-        target: 'pino-pretty',
-        options: {
-          levelFirst: true,
-          ignore: 'pid,hostname',
-          colorize: true,
-          singleLine: true,
+    const fastify: FastifyInstance = Fastify({
+      logger: {
+        level,
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            levelFirst: true,
+            ignore: 'pid,hostname',
+            colorize: true,
+            singleLine: true,
+          },
         },
       },
-    },
-  })
+    })
 
-  return fastify
-}
+    return fastify
+  }
 
-function setupErrorHandler(fastify: FastifyInstance) {
-  fastify.setErrorHandler(function (error, _request, reply) {
-    const json = {
-      message: error.message,
-      error: 'Internal Server Error',
-      statusCode: 500,
+  private static setupErrorHandler(fastify: FastifyInstance) {
+    fastify.setErrorHandler(function (error, _request, reply) {
+      const json = {
+        message: error.message,
+        error: 'Internal Server Error',
+        statusCode: 500,
+      }
+
+      if (error instanceof BaseError) {
+        const status = error.toHttpStatus()
+
+        json.message = error.message
+        json.error = status.name
+        json.statusCode = status.code
+      }
+
+      reply.status(json.statusCode).send(json)
+    })
+  }
+
+  private static async setupRoutes(fastify: FastifyInstance) {
+    // index
+    fastify.route((await import('@infra/fastify/routes/hello-world.js')).routeOpt)
+
+    // health
+    fastify.route((await import('@infra/fastify/routes/health.js')).routeOpt)
+
+    // users
+    fastify.route((await import('@infra/fastify/routes/users.find-all.js')).routeOpt)
+    fastify.route((await import('@infra/fastify/routes/users.find-one.js')).routeOpt)
+    fastify.route((await import('@infra/fastify/routes/users.delete.js')).routeOpt)
+    fastify.route((await import('@infra/fastify/routes/users.update.js')).routeOpt)
+    fastify.route((await import('@infra/fastify/routes/users.create.js')).routeOpt)
+  }
+
+  public async listen(): Promise<void> {
+    try {
+      const port = this.options.port
+      const host = this.options.host ?? '0.0.0.0'
+
+      await this.fastify.listen({ port, host })
+    } catch (err) {
+      this.fastify.log.error(err)
+      process.exit(1)
     }
-
-    if (error instanceof BaseError) {
-      const status = error.toHttpStatus()
-
-      json.message = error.message
-      json.error = status.name
-      json.statusCode = status.code
-    }
-
-    reply.status(json.statusCode).send(json)
-  })
-}
-
-async function setupRoutes(fastify: FastifyInstance) {
-  // index
-  fastify.route((await import('@infra/fastify/routes/hello-world.js')).routeOpt)
-
-  // health
-  fastify.route((await import('@infra/fastify/routes/health.js')).routeOpt)
-
-  // users
-  fastify.route((await import('@infra/fastify/routes/users.find-all.js')).routeOpt)
-  fastify.route((await import('@infra/fastify/routes/users.find-one.js')).routeOpt)
-  fastify.route((await import('@infra/fastify/routes/users.delete.js')).routeOpt)
-  fastify.route((await import('@infra/fastify/routes/users.update.js')).routeOpt)
-  fastify.route((await import('@infra/fastify/routes/users.create.js')).routeOpt)
-}
-
-async function listen(fastify: FastifyInstance) {
-  try {
-    await fastify.listen({ port: env.API_PORT, host: '0.0.0.0' })
-  } catch (err) {
-    fastify.log.error(err)
-    process.exit(1)
   }
 }

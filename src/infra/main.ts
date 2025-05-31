@@ -1,4 +1,10 @@
 import 'reflect-metadata'
-import { server } from '@infra/fastify/server.js'
+import { Server } from '@infra/fastify/server.js'
+import { env } from '@infra/env.js'
 
-await server()
+const server = await Server.create({
+  port: env.API_PORT,
+  debug: env.API_DEBUG,
+})
+
+await server.listen()
