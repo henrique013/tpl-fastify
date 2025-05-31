@@ -29,7 +29,7 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const params = request.params as { id: number }
 
-    const route = container.resolve<FindOneUserRoute>(t.routes['users.find-one'])
+    const route = container.resolve<FindOneUserRoute>(t.routes.FindOneUserRoute)
 
     const json = await route.execute(params)
 

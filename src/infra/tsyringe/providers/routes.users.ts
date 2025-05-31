@@ -12,7 +12,7 @@ export function registerUsersRoutes(container: DependencyContainer) {
     useFactory: (container) => new FindAllUsersRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 
-  container.register(t.routes['users.find-one'], {
+  container.register(t.routes.FindOneUserRoute, {
     useFactory: (container) => new FindOneUserRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 
