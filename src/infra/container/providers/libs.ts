@@ -10,9 +10,13 @@ import { DrizzlePg } from '@infra/orm/types.js'
 export function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({
     connectionString: env.PG_API_URL,
+    connectionTimeoutMillis: 10000,
   })
 
-  const redis = new Redis(env.REDIS_URL)
+  const redis = new Redis(env.REDIS_URL, {
+    connectTimeout: 10000,
+    commandTimeout: 10000,
+  })
 
   const drizzlePg: DrizzlePg = drizzle(pgPool, { schema })
 
