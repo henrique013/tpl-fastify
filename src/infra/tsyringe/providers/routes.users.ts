@@ -8,7 +8,7 @@ import { UpdateUserRoute } from '@app/routes/users.update.js'
 import { CreateUserRoute } from '@app/routes/users.create.js'
 
 export function registerUsersRoutes(container: DependencyContainer) {
-  container.register(t.routes['users.find-all'], {
+  container.register(t.routes.FindAllUsersRoute, {
     useFactory: (container) => new FindAllUsersRoute(container.resolve<IUsersRepo>(t.repos.IUsersRepo)),
   })
 

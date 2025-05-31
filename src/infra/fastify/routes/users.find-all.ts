@@ -23,7 +23,7 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const route = container.resolve<FindAllUsersRoute>(t.routes['users.find-all'])
+    const route = container.resolve<FindAllUsersRoute>(t.routes.FindAllUsersRoute)
 
     const json = await route.execute()
 
