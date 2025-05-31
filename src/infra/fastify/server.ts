@@ -39,17 +39,21 @@ function createFastifyInstance(): FastifyInstance {
 
 function setupErrorHandler(fastify: FastifyInstance) {
   fastify.setErrorHandler(function (error, _request, reply) {
+    const json = {
+      message: error.message,
+      error: 'Internal Server Error',
+      statusCode: 500,
+    }
+
     if (error instanceof BaseError) {
       const status = error.toHttpStatus()
 
-      const json = {
-        message: error.message,
-        error: status.name,
-        statusCode: status.code,
-      }
-
-      reply.status(status.code).send(json)
+      json.message = error.message
+      json.error = status.name
+      json.statusCode = status.code
     }
+
+    reply.status(json.statusCode).send(json)
   })
 }
 
