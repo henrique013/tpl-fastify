@@ -11,7 +11,7 @@ export type UserRaw = {
 
 export class User {
   private constructor(
-    private readonly _id: Id | undefined,
+    private _id: Id | undefined,
     private _name: Name,
     private _email: Email
   ) {}
@@ -26,6 +26,10 @@ export class User {
 
   get id(): Id | undefined {
     return this._id
+  }
+
+  set id(id: Id) {
+    this._id = id
   }
 
   get name(): Name {
