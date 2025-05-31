@@ -1,4 +1,4 @@
-import { HealthReq, HealthRoute } from '@app/routes/health.js'
+import { HealthRoute } from '@app/routes/health.js'
 import { RouteOptions } from 'fastify'
 import { container } from 'tsyringe'
 import { t } from '@infra/tsyringe/tokens.js'
@@ -27,9 +27,11 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (request, reply) {
+    const query = request.query as { uptime?: boolean }
+
     const route = container.resolve<HealthRoute>(t.routes.HealthRoute)
 
-    const json = await route.execute(request.query as HealthReq)
+    const json = await route.execute(query)
 
     reply.send(json)
   },
