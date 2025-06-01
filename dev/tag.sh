@@ -9,5 +9,6 @@ fi
 # use npm version to create the tag
 npm version "$1"
 
-# push the tag to the remote repository
+# push the commits and tags
+git push origin
 git push origin --tags
