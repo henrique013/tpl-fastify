@@ -25,7 +25,7 @@ export class Server {
   }
 
   private static createFastifyInstance(debug: boolean): FastifyInstance {
-    const level = debug ? 'debug' : 'info'
+    const level = debug ? 'debug' : 'warn'
 
     const fastify: FastifyInstance = Fastify({
       logger: {
@@ -94,6 +94,8 @@ export class Server {
     try {
       const host = '0.0.0.0'
       const port = this.options.port
+
+      console.log(`Server will listen on ${host}:${port}`)
 
       await this.fastify.listen({ host, port })
     } catch (err) {
