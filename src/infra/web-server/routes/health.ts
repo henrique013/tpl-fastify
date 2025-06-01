@@ -1,4 +1,4 @@
-import { HealthRoute } from '@app/routes/health.js'
+import { HealthRoute } from '@domain/routes/health.js'
 import { RouteOptions } from 'fastify'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'

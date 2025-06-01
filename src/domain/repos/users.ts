@@ -1,5 +1,5 @@
-import { User } from '@app/entities/user.js'
-import { Id } from '@app/values/id.js'
+import { User } from '@domain/entities/user.js'
+import { Id } from '@domain/values/id.js'
 
 export interface IUsersRepo {
   create(user: User): Promise<User>

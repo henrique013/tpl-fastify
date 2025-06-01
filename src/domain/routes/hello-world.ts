@@ -1,4 +1,4 @@
-import { Route } from '@app/routes.js'
+import { Route } from '@domain/routes.js'
 
 export class HelloWorldRoute implements Route<void, { message: string }> {
   async execute() {

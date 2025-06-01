@@ -1,7 +1,7 @@
 import { z } from 'zod'
-import { BaseValue } from '@app/values.js'
+import { BaseValue } from '@domain/values.js'
 
-// PostgreSQL int4 positive range: 0 to 2,147,483,647
+// PostgreSQL int4 positive range: 0 to 2.147.483.647
 const MAX_VALUE = 2_147_483_647
 
 const schema = z

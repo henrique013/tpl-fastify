@@ -1,8 +1,8 @@
-import { UserRaw } from '@app/entities/user.js'
-import { NotFoundError } from '@app/errors.js'
-import { IUsersRepo } from '@app/repos/users.js'
-import { Route } from '@app/routes.js'
-import { Id } from '@app/values/id.js'
+import { UserRaw } from '@domain/entities/user.js'
+import { NotFoundError } from '@domain/errors.js'
+import { IUsersRepo } from '@domain/repos/users.js'
+import { Route } from '@domain/routes.js'
+import { Id } from '@domain/values/id.js'
 
 export type DeleteUserReq = {
   id: number

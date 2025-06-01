@@ -1,4 +1,4 @@
-import { UpdateUserRoute } from '@app/routes/users.update.js'
+import { UpdateUserRoute } from '@domain/routes/users.update.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'

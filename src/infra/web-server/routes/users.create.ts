@@ -1,4 +1,4 @@
-import { CreateUserRoute } from '@app/routes/users.create.js'
+import { CreateUserRoute } from '@domain/routes/users.create.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'

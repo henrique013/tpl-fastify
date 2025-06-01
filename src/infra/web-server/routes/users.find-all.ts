@@ -1,4 +1,4 @@
-import { FindAllUsersRoute } from '@app/routes/users.find-all.js'
+import { FindAllUsersRoute } from '@domain/routes/users.find-all.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'

@@ -1,7 +1,7 @@
-import { Id } from '@app/values/id.js'
-import { Name } from '@app/values/name.js'
-import { Email } from '@app/values/email.js'
-import { BadArgumentError } from '@app/errors.js'
+import { Id } from '@domain/values/id.js'
+import { Name } from '@domain/values/name.js'
+import { Email } from '@domain/values/email.js'
+import { BadArgumentError } from '@domain/errors.js'
 
 export type UserRaw = {
   id?: number

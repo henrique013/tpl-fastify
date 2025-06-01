@@ -1,5 +1,5 @@
 import Fastify, { FastifyInstance } from 'fastify'
-import { BaseError } from '@app/errors.js'
+import { BaseError } from '@domain/errors.js'
 import * as Sentry from '@sentry/node'
 
 export type ServerOptions = {

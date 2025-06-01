@@ -1,11 +1,11 @@
 import { DependencyContainer } from 'tsyringe'
 import { t } from '@infra/container/tokens.js'
-import { IUsersRepo } from '@app/repos/users.js'
-import { FindAllUsersRoute } from '@app/routes/users.find-all.js'
-import { FindOneUserRoute } from '@app/routes/users.find-one.js'
-import { DeleteUserRoute } from '@app/routes/users.delete.js'
-import { UpdateUserRoute } from '@app/routes/users.update.js'
-import { CreateUserRoute } from '@app/routes/users.create.js'
+import { IUsersRepo } from '@domain/repos/users.js'
+import { FindAllUsersRoute } from '@domain/routes/users.find-all.js'
+import { FindOneUserRoute } from '@domain/routes/users.find-one.js'
+import { DeleteUserRoute } from '@domain/routes/users.delete.js'
+import { UpdateUserRoute } from '@domain/routes/users.update.js'
+import { CreateUserRoute } from '@domain/routes/users.create.js'
 
 export function registerUsersRoutes(container: DependencyContainer) {
   container.register(t.routes.FindAllUsersRoute, {

@@ -1,4 +1,4 @@
-import { HelloWorldRoute } from '@app/routes/hello-world.js'
+import { HelloWorldRoute } from '@domain/routes/hello-world.js'
 import { RouteOptions } from 'fastify'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'

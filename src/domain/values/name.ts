@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { BaseValue } from '@app/values.js'
+import { BaseValue } from '@domain/values.js'
 
 const schema = z
   .string()

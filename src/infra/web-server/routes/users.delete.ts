@@ -1,4 +1,4 @@
-import { DeleteUserRoute } from '@app/routes/users.delete.js'
+import { DeleteUserRoute } from '@domain/routes/users.delete.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'

@@ -1,7 +1,7 @@
-import { UserRaw } from '@app/entities/user.js'
-import { IUsersRepo } from '@app/repos/users.js'
-import { Route } from '@app/routes.js'
-import { User } from '@app/entities/user.js'
+import { UserRaw } from '@domain/entities/user.js'
+import { IUsersRepo } from '@domain/repos/users.js'
+import { Route } from '@domain/routes.js'
+import { User } from '@domain/entities/user.js'
 
 export type CreateUserReq = {
   name: string

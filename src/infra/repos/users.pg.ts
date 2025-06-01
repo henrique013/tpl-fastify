@@ -1,9 +1,9 @@
-import { User } from '@app/entities/user.js'
-import { Id } from '@app/values/id.js'
+import { User } from '@domain/entities/user.js'
+import { Id } from '@domain/values/id.js'
 import { DrizzlePg } from '@infra/orm/types.js'
 import { usersTable } from '@infra/orm/schema.js'
 import { eq } from 'drizzle-orm'
-import { IUsersRepo } from '@app/repos/users.js'
+import { IUsersRepo } from '@domain/repos/users.js'
 
 export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}

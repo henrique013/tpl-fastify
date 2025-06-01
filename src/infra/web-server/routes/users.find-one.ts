@@ -1,4 +1,4 @@
-import { FindOneUserRoute } from '@app/routes/users.find-one.js'
+import { FindOneUserRoute } from '@domain/routes/users.find-one.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
