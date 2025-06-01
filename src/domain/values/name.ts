@@ -1,10 +1,13 @@
 import { z } from 'zod'
 import { BaseValue } from '@domain/values.js'
 
+const MIN_LENGTH = 2
+const MAX_LENGTH = 50
+
 const schema = z
   .string()
-  .min(2, 'Nome deve ter no mínimo 2 caracteres')
-  .max(50, 'Nome deve ter no máximo 50 caracteres')
+  .min(MIN_LENGTH, `Nome deve ter no mínimo ${MIN_LENGTH} caracteres`)
+  .max(MAX_LENGTH, `Nome deve ter no máximo ${MAX_LENGTH} caracteres`)
   .transform((value) =>
     value
       .split(/\s+/)
@@ -13,6 +16,9 @@ const schema = z
   )
 
 export class Name extends BaseValue<string> {
+  static readonly MIN_LENGTH = MIN_LENGTH
+  static readonly MAX_LENGTH = MAX_LENGTH
+
   static from(value: string): Name {
     return new Name(value.trim(), schema)
   }
