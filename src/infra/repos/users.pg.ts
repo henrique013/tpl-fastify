@@ -4,6 +4,7 @@ import { DrizzlePg } from '@infra/orm/types.js'
 import { usersTable } from '@infra/orm/schema.js'
 import { eq } from 'drizzle-orm'
 import { IUsersRepo } from '@domain/repos/users.js'
+import { NotFoundError } from '@domain/errors.js'
 
 export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}
@@ -41,6 +42,14 @@ export class PgUsersRepo implements IUsersRepo {
 
     const user = result.length ? User.fromRaw(result[0]!) : null
 
+    return user
+  }
+
+  async findByIdOrFail(id: Id): Promise<User> {
+    const user = await this.findById(id)
+    if (!user) {
+      throw new NotFoundError('User not found')
+    }
     return user
   }
 

@@ -2,6 +2,7 @@ import { User } from '@domain/entities/user.js'
 import { Id } from '@domain/values/id.js'
 import { Redis } from 'ioredis'
 import { IUsersRepo } from '@domain/repos/users.js'
+import { NotFoundError } from '@domain/errors.js'
 
 export class CachedUsersRepo implements IUsersRepo {
   private readonly CACHE_PREFIX = 'users'
@@ -44,6 +45,14 @@ export class CachedUsersRepo implements IUsersRepo {
       await this.saveUserInCache(user)
     }
 
+    return user
+  }
+
+  async findByIdOrFail(id: Id): Promise<User> {
+    const user = await this.findById(id)
+    if (!user) {
+      throw new NotFoundError('User not found')
+    }
     return user
   }
 

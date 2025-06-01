@@ -1,5 +1,4 @@
 import { UserRaw } from '@domain/entities/user.js'
-import { NotFoundError } from '@domain/errors.js'
 import { IUsersRepo } from '@domain/repos/users.js'
 import { Route } from '@domain/routes.js'
 import { Id } from '@domain/values/id.js'
@@ -13,11 +12,7 @@ export class DeleteUserRoute implements Route<DeleteUserReq, UserRaw> {
 
   async execute(req: DeleteUserReq) {
     const id = Id.from(req.id)
-    const user = await this.repo.findById(id)
-
-    if (!user) {
-      throw new NotFoundError('User not found')
-    }
+    const user = await this.repo.findByIdOrFail(id)
 
     await this.repo.delete(id)
 

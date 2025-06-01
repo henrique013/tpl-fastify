@@ -10,5 +10,7 @@ export interface IUsersRepo {
 
   findById(id: Id): Promise<User | null>
 
+  findByIdOrFail(id: Id): Promise<User>
+
   findAll(): Promise<User[]>
 }
