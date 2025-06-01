@@ -10,4 +10,4 @@ fi
 npm version "$1"
 
 # push the tag to the remote repository
-git push origin
+git push origin --tags
