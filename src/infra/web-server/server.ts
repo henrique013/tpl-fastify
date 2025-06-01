@@ -90,7 +90,7 @@ export class Server {
     fastify.route((await import('@infra/web-server/routes/users.create.js')).routeOpt)
   }
 
-  public async listen(): Promise<void> {
+  async listen(): Promise<void> {
     try {
       const host = '0.0.0.0'
       const port = this.options.port

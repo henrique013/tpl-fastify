@@ -4,7 +4,7 @@ export type HttpStatus = {
 }
 
 export abstract class BaseError extends Error {
-  public readonly extra: Record<string, unknown> | undefined
+  readonly extra: Record<string, unknown> | undefined
 
   /**
    * @param message - The error message
@@ -22,7 +22,7 @@ export abstract class BaseError extends Error {
   /**
    * @returns The HTTP status code and name for the error
    */
-  public toHttpStatus(): HttpStatus {
+  toHttpStatus(): HttpStatus {
     return {
       code: 500,
       name: 'Internal Server Error',
@@ -33,7 +33,7 @@ export abstract class BaseError extends Error {
    * @param showExtra - Whether to include the extra data in the error response
    * @returns The error as a JSON object
    */
-  public toJSON(showExtra: boolean = false): Record<string, unknown> {
+  toJSON(showExtra: boolean = false): Record<string, unknown> {
     return {
       name: this.name,
       message: this.message,
@@ -43,7 +43,7 @@ export abstract class BaseError extends Error {
 }
 
 export class BadArgumentError extends BaseError {
-  public override toHttpStatus(): HttpStatus {
+  override toHttpStatus(): HttpStatus {
     return {
       code: 400,
       name: 'Bad Request',
@@ -52,7 +52,7 @@ export class BadArgumentError extends BaseError {
 }
 
 export class NotFoundError extends BaseError {
-  public override toHttpStatus(): HttpStatus {
+  override toHttpStatus(): HttpStatus {
     return {
       code: 404,
       name: 'Not Found',
