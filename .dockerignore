@@ -3,7 +3,6 @@
 .vscode
 dev
 node_modules
-types
 .dockerignore
 .editorconfig
 .gitignore
