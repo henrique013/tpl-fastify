@@ -14,3 +14,8 @@ pre-commit:
         - '**/*.ts'
         - 'eslint.config.js'
       run: npx eslint .
+
+    - name: test
+      glob:
+        - '**/*.ts'
+      run: npx vitest run
