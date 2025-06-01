@@ -17,14 +17,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: [
-        'node_modules/**',
-        '**/*.config.{js,ts}',
-        '**/*.d.ts',
-        '**/*.{test,spec}.ts',
-        'src/**/types.ts',
-        'src/infra/{env,main}.ts',
-      ],
+      exclude: ['node_modules/**', '**/*.config.{js,ts}', '**/*.d.ts', '**/*.{test,spec}.ts', 'src/infra/**/*.ts'],
     },
 
     // Timeout for tests
