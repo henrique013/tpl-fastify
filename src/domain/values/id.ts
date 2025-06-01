@@ -6,14 +6,17 @@ import { BaseValue } from '@domain/values.js'
  * @see https://www.postgresql.org/docs/current/datatype-numeric.html#DATATYPE-INT4
  */
 const MAX_VALUE = 2_147_483_647
+const MIN_VALUE = 1
 
 const schema = z
   .number()
   .int('ID deve ser um número inteiro')
   .nonnegative('ID não pode ser negativo')
+  .min(MIN_VALUE, `ID deve ser maior ou igual a ${MIN_VALUE}`)
   .max(MAX_VALUE, `ID deve ser menor ou igual a ${MAX_VALUE}`)
 
 export class Id extends BaseValue<number> {
+  static readonly MIN_VALUE = MIN_VALUE
   static readonly MAX_VALUE = MAX_VALUE
 
   static from(value: number): Id {
