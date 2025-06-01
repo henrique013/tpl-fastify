@@ -20,16 +20,6 @@ export abstract class BaseError extends Error {
   }
 
   /**
-   * @returns The HTTP status code and name for the error
-   */
-  toHttpStatus(): HttpStatus {
-    return {
-      code: 500,
-      name: 'Internal Server Error',
-    }
-  }
-
-  /**
    * @param showExtra - Whether to include the extra data in the error response
    * @returns The error as a JSON object
    */
@@ -40,10 +30,15 @@ export abstract class BaseError extends Error {
       ...(showExtra && this.extra && { extra: this.extra }),
     }
   }
+
+  /**
+   * @returns The HTTP status code and name for the error
+   */
+  abstract toHttpStatus(): HttpStatus
 }
 
 export class BadArgumentError extends BaseError {
-  override toHttpStatus(): HttpStatus {
+  toHttpStatus(): HttpStatus {
     return {
       code: 400,
       name: 'Bad Request',
@@ -52,7 +47,7 @@ export class BadArgumentError extends BaseError {
 }
 
 export class NotFoundError extends BaseError {
-  override toHttpStatus(): HttpStatus {
+  toHttpStatus(): HttpStatus {
     return {
       code: 404,
       name: 'Not Found',
