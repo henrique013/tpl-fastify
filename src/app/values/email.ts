@@ -1,21 +1,14 @@
 import { z } from 'zod'
-import { validateOrFail } from '@app/values.js'
+import { BaseValue } from '@app/values.js'
 
 const schema = z
   .string()
   .email('Email inválido')
   .transform((value) => value.toLowerCase().trim())
 
-export class Email {
-  private readonly _value: string
-
-  private constructor(value: string) {
-    this._value = value
-  }
-
+export class Email extends BaseValue<string> {
   static from(value: string): Email {
-    validateOrFail(value, schema)
-    return new Email(value)
+    return new Email(value, schema)
   }
 
   toString(): string {

@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { validateOrFail } from '@app/values.js'
+import { BaseValue } from '@app/values.js'
 
 const schema = z
   .string()
@@ -13,16 +13,9 @@ const schema = z
       .join(' ')
   )
 
-export class Name {
-  private readonly _value: string
-
-  private constructor(value: string) {
-    this._value = value
-  }
-
+export class Name extends BaseValue<string> {
   static from(value: string): Name {
-    validateOrFail(value, schema)
-    return new Name(value)
+    return new Name(value, schema)
   }
 
   toString(): string {
