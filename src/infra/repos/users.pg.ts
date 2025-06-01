@@ -4,7 +4,7 @@ import { DrizzlePg } from '@infra/orm/types.js'
 import { usersTable } from '@infra/orm/schema.js'
 import { eq } from 'drizzle-orm'
 import { IUsersRepo } from '@domain/repos/users.js'
-import { NotFoundError } from '@domain/errors.js'
+import { NotFoundError } from '@domain/errors/not-found.js'
 
 export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}

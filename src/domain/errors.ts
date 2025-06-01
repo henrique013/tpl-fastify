@@ -36,21 +36,3 @@ export abstract class BaseError extends Error {
    */
   abstract toHttpStatus(): HttpStatus
 }
-
-export class BadArgumentError extends BaseError {
-  toHttpStatus(): HttpStatus {
-    return {
-      code: 400,
-      name: 'Bad Request',
-    }
-  }
-}
-
-export class NotFoundError extends BaseError {
-  toHttpStatus(): HttpStatus {
-    return {
-      code: 404,
-      name: 'Not Found',
-    }
-  }
-}

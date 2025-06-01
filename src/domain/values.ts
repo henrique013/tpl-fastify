@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { BadArgumentError } from '@domain/errors.js'
+import { BadArgumentError } from '@domain/errors/bad-argument.js'
 
 export abstract class BaseValue<T> {
   protected readonly _value: T

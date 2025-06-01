@@ -1,7 +1,7 @@
 import { Id } from '@domain/values/id.js'
 import { Name } from '@domain/values/name.js'
 import { Email } from '@domain/values/email.js'
-import { BadArgumentError } from '@domain/errors.js'
+import { BadArgumentError } from '@domain/errors/bad-argument.js'
 
 export type UserRaw = {
   id?: number
