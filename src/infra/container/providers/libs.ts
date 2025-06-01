@@ -7,15 +7,17 @@ import * as schema from '@infra/orm/schema.js'
 import { env } from '@infra/env.js'
 import { DrizzlePg } from '@infra/orm/types.js'
 
+const MAX_TIMEOUT_MS = 10_000
+
 export function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({
     connectionString: env.PG_API_URL,
-    connectionTimeoutMillis: 10000,
+    connectionTimeoutMillis: MAX_TIMEOUT_MS,
   })
 
   const redis = new Redis(env.REDIS_URL, {
-    connectTimeout: 10000,
-    commandTimeout: 10000,
+    connectTimeout: MAX_TIMEOUT_MS,
+    commandTimeout: MAX_TIMEOUT_MS,
   })
 
   const drizzlePg: DrizzlePg = drizzle(pgPool, { schema })
