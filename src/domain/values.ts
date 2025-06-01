@@ -5,13 +5,12 @@ export abstract class BaseValue<T> {
   protected readonly _value: T
 
   protected constructor(value: T, schema: z.ZodSchema<T>) {
-    this.validateOrFail(value, schema)
-    this._value = value
+    this._value = this.validateOrFail(value, schema)
   }
 
-  protected validateOrFail(value: T, schema: z.ZodSchema<T>): void {
+  protected validateOrFail(value: T, schema: z.ZodSchema<T>): T {
     try {
-      schema.parse(value)
+      return schema.parse(value)
     } catch (error) {
       if (error instanceof z.ZodError && error.errors[0]) {
         throw new BadArgumentError(error.errors[0].message)
