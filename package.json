@@ -15,7 +15,8 @@
     "migrate:gen": "./dev/migrate-gen.sh",
     "tag": "./dev/tag.sh",
     "postinstall": "lefthook install",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {

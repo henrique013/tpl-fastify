@@ -23,9 +23,6 @@ export default defineConfig({
     // Timeout for tests
     testTimeout: 10000,
 
-    // Setup files
-    //setupFiles: ['./test/setup.ts'],
-
     // Alias settings (same as tsconfig.json)
     alias: {
       '@domain': resolve(__dirname, './src/domain'),
