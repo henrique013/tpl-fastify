@@ -7,7 +7,6 @@ const schema = z
   .max(50, 'Nome deve ter no máximo 50 caracteres')
   .transform((value) =>
     value
-      .trim()
       .split(/\s+/)
       .map((word) => word.trim())
       .join(' ')
@@ -15,7 +14,7 @@ const schema = z
 
 export class Name extends BaseValue<string> {
   static from(value: string): Name {
-    return new Name(value, schema)
+    return new Name(value.trim(), schema)
   }
 
   toString(): string {
