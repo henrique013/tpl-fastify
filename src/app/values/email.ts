@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { BadArgumentError } from '@app/errors.js'
+import { validateOrFail } from '@app/values.js'
 
 const schema = z
   .string()
@@ -14,15 +14,8 @@ export class Email {
   }
 
   static from(value: string): Email {
-    try {
-      const validatedValue = schema.parse(value)
-      return new Email(validatedValue)
-    } catch (error) {
-      if (error instanceof z.ZodError && error.errors[0]) {
-        throw new BadArgumentError(error.errors[0].message)
-      }
-      throw error
-    }
+    validateOrFail(value, schema)
+    return new Email(value)
   }
 
   toString(): string {

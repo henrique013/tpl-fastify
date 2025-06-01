@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { BadArgumentError } from '@app/errors.js'
+import { validateOrFail } from '@app/values.js'
 
 // PostgreSQL int4 positive range: 0 to 2,147,483,647
 const MAX_VALUE = 2_147_483_647
@@ -18,15 +18,8 @@ export class Id {
   }
 
   static from(value: number): Id {
-    try {
-      const validatedValue = schema.parse(value)
-      return new Id(validatedValue)
-    } catch (error) {
-      if (error instanceof z.ZodError && error.errors[0]) {
-        throw new BadArgumentError(error.errors[0].message)
-      }
-      throw error
-    }
+    validateOrFail(value, schema)
+    return new Id(value)
   }
 
   toNumber(): number {
