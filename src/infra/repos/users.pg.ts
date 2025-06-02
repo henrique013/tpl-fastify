@@ -6,11 +6,18 @@ import { eq } from 'drizzle-orm'
 import { IUsersRepo } from '@domain/repos/users.js'
 import { NotFoundError } from '@domain/errors/not-found.js'
 import { Email } from '@domain/values/email.js'
+import { ConflictError } from '@domain/errors/conflict.js'
 
 export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}
 
   async create(user: User): Promise<User> {
+    const id = await this.findIdByEmail(user.email)
+
+    if (id) {
+      throw new ConflictError('User with this email already exists')
+    }
+
     const userRaw = user.toRaw()
 
     delete userRaw.id
@@ -23,6 +30,12 @@ export class PgUsersRepo implements IUsersRepo {
   }
 
   async update(user: User): Promise<User> {
+    const id = await this.findIdByEmail(user.email)
+
+    if (id && id.toNumber() !== user.idOrFail().toNumber()) {
+      throw new ConflictError('User with this email already exists')
+    }
+
     const userRaw = user.toRaw()
 
     delete userRaw.id
