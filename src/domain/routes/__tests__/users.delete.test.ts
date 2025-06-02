@@ -19,7 +19,7 @@ const mockRepo: IUsersRepo = {
 }
 
 describe('DeleteUserRoute', () => {
-  it('should delete a user successfully', async () => {
+  it('should delete a user and return the deleted user', async () => {
     const route = new DeleteUserRoute(mockRepo)
     const request = {
       id: Id.from(1),
