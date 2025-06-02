@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user.js'
-import { CreateUserRoute } from '@domain/routes/users.create.js'
+import { UserService } from '@domain/services/users.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -30,16 +30,15 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
-    const route = container.resolve<CreateUserRoute>(t.routes.CreateUserRoute)
+    const service = container.resolve<UserService>(t.services.UserService)
 
     const user = User.fromRaw({
       name: body.name,
       email: body.email,
     })
 
-    const json = await route.execute({
-      user,
-    })
+    const newUser = await service.create(user)
+    const json = newUser.toRaw()
 
     reply.code(201).send(json)
   },

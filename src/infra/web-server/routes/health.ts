@@ -1,7 +1,10 @@
-import { HealthRoute } from '@domain/routes/health.js'
 import { RouteOptions } from 'fastify'
-import { container } from '@infra/container/container.js'
-import { t } from '@infra/container/tokens.js'
+
+type HealthResponse = {
+  message: string
+  timestamp: string
+  uptime?: number
+}
 
 export const routeOpt: RouteOptions = {
   method: 'GET',
@@ -28,9 +31,15 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const query = request.query as { uptime?: boolean }
-    const route = container.resolve<HealthRoute>(t.routes.HealthRoute)
 
-    const json = await route.execute(query)
+    const json: HealthResponse = {
+      message: 'OK',
+      timestamp: new Date().toISOString(),
+    }
+
+    if (query.uptime) {
+      json.uptime = process.uptime()
+    }
 
     reply.send(json)
   },

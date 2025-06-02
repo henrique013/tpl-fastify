@@ -1,7 +1,4 @@
-import { HelloWorldRoute } from '@domain/routes/hello-world.js'
 import { RouteOptions } from 'fastify'
-import { container } from '@infra/container/container.js'
-import { t } from '@infra/container/tokens.js'
 
 export const routeOpt: RouteOptions = {
   method: 'GET',
@@ -18,9 +15,8 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const route = container.resolve<HelloWorldRoute>(t.routes.HelloWorldRoute)
-    const json = await route.execute()
-
-    reply.send(json)
+    reply.send({
+      message: 'Hello World',
+    })
   },
 }

@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user.js'
-import { UpdateUserRoute } from '@domain/routes/users.update.js'
+import { UserService } from '@domain/services/users.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -38,7 +38,7 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const params = request.params as { id: number }
     const body = request.body as { name: string; email: string }
-    const route = container.resolve<UpdateUserRoute>(t.routes.UpdateUserRoute)
+    const service = container.resolve<UserService>(t.services.UserService)
 
     const user = User.fromRaw({
       id: params.id,
@@ -46,9 +46,8 @@ export const routeOpt: RouteOptions = {
       email: body.email,
     })
 
-    const json = await route.execute({
-      user,
-    })
+    const updatedUser = await service.update(user)
+    const json = updatedUser.toRaw()
 
     reply.send(json)
   },

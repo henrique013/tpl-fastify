@@ -7,14 +7,8 @@ const TOKENS = {
   repos: {
     IUsersRepo: Symbol.for('IUsersRepo'),
   },
-  routes: {
-    HelloWorldRoute: Symbol.for('HelloWorldRoute'),
-    HealthRoute: Symbol.for('HealthRoute'),
-    FindAllUsersRoute: Symbol.for('FindAllUsersRoute'),
-    FindOneUserRoute: Symbol.for('FindOneUserRoute'),
-    DeleteUserRoute: Symbol.for('DeleteUserRoute'),
-    UpdateUserRoute: Symbol.for('UpdateUserRoute'),
-    CreateUserRoute: Symbol.for('CreateUserRoute'),
+  services: {
+    UserService: Symbol.for('UserService'),
   },
 }
 

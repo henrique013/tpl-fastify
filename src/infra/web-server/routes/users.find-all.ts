@@ -1,4 +1,4 @@
-import { FindAllUsersRoute } from '@domain/routes/users.find-all.js'
+import { UserService } from '@domain/services/users.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -23,9 +23,10 @@ export const routeOpt: RouteOptions = {
     },
   },
   handler: async function (_request, reply) {
-    const route = container.resolve<FindAllUsersRoute>(t.routes.FindAllUsersRoute)
+    const service = container.resolve<UserService>(t.services.UserService)
 
-    const json = await route.execute()
+    const users = await service.findAll()
+    const json = users.map((user) => user.toRaw())
 
     reply.send(json)
   },

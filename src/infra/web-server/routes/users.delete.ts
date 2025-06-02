@@ -1,4 +1,4 @@
-import { DeleteUserRoute } from '@domain/routes/users.delete.js'
+import { UserService } from '@domain/services/users.js'
 import { Id } from '@domain/values/id.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
@@ -29,13 +29,11 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const params = request.params as { id: number }
-    const route = container.resolve<DeleteUserRoute>(t.routes.DeleteUserRoute)
+    const service = container.resolve<UserService>(t.services.UserService)
 
     const id = Id.from(params.id)
-
-    const json = await route.execute({
-      id,
-    })
+    const deletedUser = await service.delete(id)
+    const json = deletedUser.toRaw()
 
     reply.send(json)
   },

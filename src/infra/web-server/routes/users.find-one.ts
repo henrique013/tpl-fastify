@@ -1,4 +1,4 @@
-import { FindOneUserRoute } from '@domain/routes/users.find-one.js'
+import { UserService } from '@domain/services/users.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -29,13 +29,11 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const params = request.params as { id: number }
-    const route = container.resolve<FindOneUserRoute>(t.routes.FindOneUserRoute)
+    const service = container.resolve<UserService>(t.services.UserService)
 
     const id = Id.from(params.id)
-
-    const json = await route.execute({
-      id,
-    })
+    const user = await service.findOneOrFail(id)
+    const json = user.toRaw()
 
     reply.send(json)
   },
