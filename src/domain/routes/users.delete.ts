@@ -4,17 +4,16 @@ import { Route } from '@domain/routes.js'
 import { Id } from '@domain/values/id.js'
 
 export type DeleteUserReq = {
-  id: number
+  id: Id
 }
 
 export class DeleteUserRoute implements Route<DeleteUserReq, UserRaw> {
   constructor(private readonly repo: IUsersRepo) {}
 
   async execute(req: DeleteUserReq) {
-    const id = Id.from(req.id)
-    const user = await this.repo.findByIdOrFail(id)
+    const user = await this.repo.findByIdOrFail(req.id)
 
-    await this.repo.delete(id)
+    await this.repo.delete(req.id)
 
     return user.toRaw()
   }

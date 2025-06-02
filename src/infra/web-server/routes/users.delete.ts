@@ -1,4 +1,5 @@
 import { DeleteUserRoute } from '@domain/routes/users.delete.js'
+import { Id } from '@domain/values/id.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
@@ -29,9 +30,13 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const params = request.params as { id: number }
 
+    const id = Id.from(params.id)
+
     const route = container.resolve<DeleteUserRoute>(t.routes.DeleteUserRoute)
 
-    const json = await route.execute(params)
+    const json = await route.execute({
+      id,
+    })
 
     reply.send(json)
   },
