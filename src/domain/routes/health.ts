@@ -11,8 +11,13 @@ export type HealthResp = {
 }
 
 export class HealthRoute implements Route<HealthReq, HealthResp> {
+  constructor(
+    private readonly process: NodeJS.Process,
+    private readonly dateProvider: () => Date
+  ) {}
+
   async execute(req: HealthReq) {
-    const timestamp = new Date().toISOString()
+    const timestamp = this.dateProvider().toISOString()
 
     const json: HealthResp = {
       message: 'OK',
@@ -20,7 +25,7 @@ export class HealthRoute implements Route<HealthReq, HealthResp> {
     }
 
     if (req.uptime) {
-      json.uptime = process.uptime()
+      json.uptime = this.process.uptime()
     }
 
     return json

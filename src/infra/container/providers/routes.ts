@@ -9,6 +9,6 @@ export function registerRoutes(container: DependencyContainer) {
   })
 
   container.register(t.routes.HealthRoute, {
-    useClass: HealthRoute,
+    useFactory: () => new HealthRoute(process, () => new Date()),
   })
 }
