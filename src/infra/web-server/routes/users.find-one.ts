@@ -2,6 +2,7 @@ import { FindOneUserRoute } from '@domain/routes/users.find-one.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
 import { RouteOptions } from 'fastify'
+import { Id } from '@domain/values/id.js'
 
 export const routeOpt: RouteOptions = {
   method: 'GET',
@@ -29,9 +30,13 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const params = request.params as { id: number }
 
+    const id = Id.from(params.id)
+
     const route = container.resolve<FindOneUserRoute>(t.routes.FindOneUserRoute)
 
-    const json = await route.execute(params)
+    const json = await route.execute({
+      id,
+    })
 
     reply.send(json)
   },

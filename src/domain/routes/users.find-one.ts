@@ -4,15 +4,14 @@ import { Route } from '@domain/routes.js'
 import { Id } from '@domain/values/id.js'
 
 export type FindOneUserReq = {
-  id: number
+  id: Id
 }
 
 export class FindOneUserRoute implements Route<FindOneUserReq, UserRaw> {
   constructor(private readonly repo: IUsersRepo) {}
 
   async execute(req: FindOneUserReq) {
-    const id = Id.from(req.id)
-    const user = await this.repo.findByIdOrFail(id)
+    const user = await this.repo.findByIdOrFail(req.id)
 
     return user.toRaw()
   }
