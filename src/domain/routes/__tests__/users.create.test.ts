@@ -18,7 +18,7 @@ const mockRepo: IUsersRepo = {
 }
 
 describe('CreateUserRoute', () => {
-  it('should create a new user successfully', async () => {
+  it('should create a new user and return the created user', async () => {
     const route = new CreateUserRoute(mockRepo)
     const request = {
       user: User.fromRaw({
