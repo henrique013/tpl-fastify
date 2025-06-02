@@ -4,20 +4,14 @@ import { Route } from '@domain/routes.js'
 import { User } from '@domain/entities/user.js'
 
 export type CreateUserReq = {
-  name: string
-  email: string
+  user: User
 }
 
 export class CreateUserRoute implements Route<CreateUserReq, UserRaw> {
   constructor(private readonly repo: IUsersRepo) {}
 
   async execute(req: CreateUserReq) {
-    const user = User.fromRaw({
-      name: req.name,
-      email: req.email,
-    })
-
-    const newUser = await this.repo.create(user)
+    const newUser = await this.repo.create(req.user)
 
     return newUser.toRaw()
   }
