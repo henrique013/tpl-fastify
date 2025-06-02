@@ -21,8 +21,10 @@ describe('CreateUserRoute', () => {
   it('should create a new user successfully', async () => {
     const route = new CreateUserRoute(mockRepo)
     const request = {
-      name: 'John Doe',
-      email: 'john@example.com',
+      user: User.fromRaw({
+        name: 'John Doe',
+        email: 'john@example.com',
+      }),
     }
 
     const result = await route.execute(request)
