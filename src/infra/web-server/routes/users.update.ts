@@ -1,3 +1,4 @@
+import { User } from '@domain/entities/user.js'
 import { UpdateUserRoute } from '@domain/routes/users.update.js'
 import { container } from '@infra/container/container.js'
 import { t } from '@infra/container/tokens.js'
@@ -37,13 +38,16 @@ export const routeOpt: RouteOptions = {
   handler: async function (request, reply) {
     const params = request.params as { id: number }
     const body = request.body as { name: string; email: string }
-
     const route = container.resolve<UpdateUserRoute>(t.routes.UpdateUserRoute)
 
-    const json = await route.execute({
+    const user = User.fromRaw({
       id: params.id,
       name: body.name,
       email: body.email,
+    })
+
+    const json = await route.execute({
+      user,
     })
 
     reply.send(json)
