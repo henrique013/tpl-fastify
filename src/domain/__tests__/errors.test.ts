@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { BaseError, HttpStatus } from '@domain/errors.js'
 
-// Classe concreta para testar a classe abstrata BaseError
+// Concrete implementation for testing
 class TestError extends BaseError {
   toHttpStatus(): HttpStatus {
     return {
