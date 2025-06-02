@@ -10,7 +10,11 @@ export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}
 
   async create(user: User): Promise<User> {
-    const result = await this.db.insert(usersTable).values(user.toRaw()).returning()
+    const userRaw = user.toRaw()
+
+    delete userRaw.id
+
+    const result = await this.db.insert(usersTable).values(userRaw).returning()
 
     const newUser = User.fromRaw(result[0]!)
 
