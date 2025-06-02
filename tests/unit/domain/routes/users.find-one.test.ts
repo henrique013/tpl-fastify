@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { UpdateUserRoute } from '../users.update.js'
+import { FindOneUserRoute } from '../../../../src/domain/routes/users.find-one.js'
 import { User } from '@domain/entities/user.js'
 import { IUsersRepo } from '@domain/repos/users.js'
+import { Id } from '@domain/values/id.js'
 
 const mockUser = User.fromRaw({
-  id: 123,
   name: 'John Doe',
   email: 'john@example.com',
 })
@@ -18,11 +18,11 @@ const mockRepo: IUsersRepo = {
   findAll: async () => [mockUser],
 }
 
-describe('UpdateUserRoute', () => {
-  it('should update a user and return the updated user', async () => {
-    const route = new UpdateUserRoute(mockRepo)
+describe('FindOneUserRoute', () => {
+  it('should return a user by id', async () => {
+    const route = new FindOneUserRoute(mockRepo)
     const result = await route.execute({
-      user: mockUser,
+      id: Id.from(123),
     })
 
     expect(result).toEqual(mockUser.toRaw())

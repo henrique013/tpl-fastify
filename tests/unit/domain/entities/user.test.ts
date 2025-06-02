@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { User } from '../user.js'
+import { User } from '../../../../src/domain/entities/user.js'
 import { Id } from '@domain/values/id.js'
 import { Name } from '@domain/values/name.js'
 import { Email } from '@domain/values/email.js'

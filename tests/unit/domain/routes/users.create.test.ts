@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { FindAllUsersRoute } from '../users.find-all.js'
+import { CreateUserRoute } from '../../../../src/domain/routes/users.create.js'
 import { User } from '@domain/entities/user.js'
 import { IUsersRepo } from '@domain/repos/users.js'
 
@@ -17,11 +17,18 @@ const mockRepo: IUsersRepo = {
   findAll: async () => [mockUser],
 }
 
-describe('FindAllUsersRoute', () => {
-  it('should return all users', async () => {
-    const route = new FindAllUsersRoute(mockRepo)
-    const result = await route.execute()
+describe('CreateUserRoute', () => {
+  it('should create a new user and return the created user', async () => {
+    const route = new CreateUserRoute(mockRepo)
+    const request = {
+      user: User.fromRaw({
+        name: 'John Doe',
+        email: 'john@example.com',
+      }),
+    }
 
-    expect(result).toEqual([mockUser.toRaw()])
+    const result = await route.execute(request)
+
+    expect(result).toEqual(mockUser.toRaw())
   })
 })

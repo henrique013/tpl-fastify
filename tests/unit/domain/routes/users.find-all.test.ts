@@ -1,8 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { DeleteUserRoute } from '../users.delete.js'
+import { FindAllUsersRoute } from '../../../../src/domain/routes/users.find-all.js'
 import { User } from '@domain/entities/user.js'
 import { IUsersRepo } from '@domain/repos/users.js'
-import { Id } from '@domain/values/id.js'
 
 const mockUser = User.fromRaw({
   name: 'John Doe',
@@ -18,15 +17,11 @@ const mockRepo: IUsersRepo = {
   findAll: async () => [mockUser],
 }
 
-describe('DeleteUserRoute', () => {
-  it('should delete a user and return the deleted user', async () => {
-    const route = new DeleteUserRoute(mockRepo)
-    const request = {
-      id: Id.from(1),
-    }
+describe('FindAllUsersRoute', () => {
+  it('should return all users', async () => {
+    const route = new FindAllUsersRoute(mockRepo)
+    const result = await route.execute()
 
-    const result = await route.execute(request)
-
-    expect(result).toEqual(mockUser.toRaw())
+    expect(result).toEqual([mockUser.toRaw()])
   })
 })

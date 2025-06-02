@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { HelloWorldRoute } from '../hello-world.js'
+import { HelloWorldRoute } from '../../../../src/domain/routes/hello-world.js'
 
 describe('HelloWorldRoute', () => {
   it('should return hello world message', async () => {

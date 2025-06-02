@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { FindOneUserRoute } from '../users.find-one.js'
+import { DeleteUserRoute } from '../../../../src/domain/routes/users.delete.js'
 import { User } from '@domain/entities/user.js'
 import { IUsersRepo } from '@domain/repos/users.js'
 import { Id } from '@domain/values/id.js'
@@ -18,12 +18,14 @@ const mockRepo: IUsersRepo = {
   findAll: async () => [mockUser],
 }
 
-describe('FindOneUserRoute', () => {
-  it('should return a user by id', async () => {
-    const route = new FindOneUserRoute(mockRepo)
-    const result = await route.execute({
-      id: Id.from(123),
-    })
+describe('DeleteUserRoute', () => {
+  it('should delete a user and return the deleted user', async () => {
+    const route = new DeleteUserRoute(mockRepo)
+    const request = {
+      id: Id.from(1),
+    }
+
+    const result = await route.execute(request)
 
     expect(result).toEqual(mockUser.toRaw())
   })
