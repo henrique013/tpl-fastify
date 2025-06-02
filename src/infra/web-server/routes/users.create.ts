@@ -30,13 +30,12 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const body = request.body as { name: string; email: string }
+    const route = container.resolve<CreateUserRoute>(t.routes.CreateUserRoute)
 
     const user = User.fromRaw({
       name: body.name,
       email: body.email,
     })
-
-    const route = container.resolve<CreateUserRoute>(t.routes.CreateUserRoute)
 
     const json = await route.execute({
       user,

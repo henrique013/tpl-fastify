@@ -29,10 +29,9 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const params = request.params as { id: number }
+    const route = container.resolve<DeleteUserRoute>(t.routes.DeleteUserRoute)
 
     const id = Id.from(params.id)
-
-    const route = container.resolve<DeleteUserRoute>(t.routes.DeleteUserRoute)
 
     const json = await route.execute({
       id,

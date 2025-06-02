@@ -28,7 +28,6 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (request, reply) {
     const query = request.query as { uptime?: boolean }
-
     const route = container.resolve<HealthRoute>(t.routes.HealthRoute)
 
     const json = await route.execute(query)
