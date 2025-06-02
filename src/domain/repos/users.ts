@@ -1,4 +1,5 @@
 import { User } from '@domain/entities/user.js'
+import { Email } from '@domain/values/email.js'
 import { Id } from '@domain/values/id.js'
 
 export interface IUsersRepo {
@@ -11,6 +12,8 @@ export interface IUsersRepo {
   findById(id: Id): Promise<User | null>
 
   findByIdOrFail(id: Id): Promise<User>
+
+  findIdByEmail(email: Email): Promise<Id | null>
 
   findAll(): Promise<User[]>
 }

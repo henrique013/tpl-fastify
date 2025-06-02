@@ -14,6 +14,7 @@ const mockRepo: IUsersRepo = {
   delete: async () => {},
   findById: async () => null,
   findByIdOrFail: async () => mockUser,
+  findIdByEmail: async () => null,
   findAll: async () => [mockUser],
 }
 

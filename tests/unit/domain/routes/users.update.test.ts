@@ -16,6 +16,7 @@ const mockRepo: IUsersRepo = {
   findById: async () => null,
   findByIdOrFail: async () => mockUser,
   findAll: async () => [mockUser],
+  findIdByEmail: async () => null,
 }
 
 describe('UpdateUserRoute', () => {

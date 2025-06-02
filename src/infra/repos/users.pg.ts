@@ -5,6 +5,7 @@ import { usersTable } from '@infra/orm/schema.js'
 import { eq } from 'drizzle-orm'
 import { IUsersRepo } from '@domain/repos/users.js'
 import { NotFoundError } from '@domain/errors/not-found.js'
+import { Email } from '@domain/values/email.js'
 
 export class PgUsersRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}
@@ -55,6 +56,17 @@ export class PgUsersRepo implements IUsersRepo {
       throw new NotFoundError('User not found')
     }
     return user
+  }
+
+  async findIdByEmail(email: Email): Promise<Id | null> {
+    const result = await this.db
+      .select({ id: usersTable.id })
+      .from(usersTable)
+      .where(eq(usersTable.email, email.toString()))
+
+    const id = result.length ? Id.from(result[0]!.id) : null
+
+    return id
   }
 
   async findAll(): Promise<User[]> {
