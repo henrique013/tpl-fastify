@@ -36,27 +36,22 @@ export class UserService {
 
   async delete(id: Id): Promise<User> {
     const user = await this.repo.findByIdOrFail(id)
-
     await this.repo.delete(id)
-
     return user
   }
 
   async findOne(id: Id): Promise<User | null> {
     const user = await this.repo.findById(id)
-
     return user
   }
 
   async findOneOrFail(id: Id): Promise<User> {
     const user = await this.repo.findByIdOrFail(id)
-
     return user
   }
 
   async findAll(): Promise<User[]> {
     const users = await this.repo.findAll()
-
     return users
   }
 }
