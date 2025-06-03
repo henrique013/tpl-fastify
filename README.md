@@ -106,3 +106,6 @@ Dentro do `package.json` você encontra os seguintes comandos:
 - `npm run migrate`: Executa todas as migrações pendentes do banco de dados
 - `npm postinstall`: Configura o lefthook para executar os hooks de commit e push
   - Este comando é executado automaticamente após a instalação das dependências do projeto
+- `npm test`: Executa todos os testes uma vez
+- `npm run test:watch`: Executa os testes em modo de observação (watch mode)
+- `npm run coverage`: Executa os testes e gera um relatório de cobertura de código
