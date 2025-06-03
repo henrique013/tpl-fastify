@@ -6,10 +6,13 @@ node_modules
 tests
 .dockerignore
 .editorconfig
+.env
+.env.example
 .gitignore
 .prettierignore
 .prettierrc
 Dockerfile
+drizzle.config.ts
 eslint.config.js
 lefthook.yml
 README.md
