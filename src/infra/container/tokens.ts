@@ -8,7 +8,7 @@ const TOKENS = {
     IUsersRepo: Symbol.for('IUsersRepo'),
   },
   services: {
-    UserService: Symbol.for('UserService'),
+    IUserService: Symbol.for('IUserService'),
   },
 }
 
