@@ -1,6 +1,6 @@
 {
   "name": "tpl-fastify",
-  "version": "7.4.1",
+  "version": "8.0.0",
   "description": "",
   "license": "ISC",
   "author": "Fastify API bootstrap template.",
