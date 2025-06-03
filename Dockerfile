@@ -6,6 +6,8 @@ USER node
 
 WORKDIR /home/node/api
 
+COPY --chown=node:node bin/scripts/ bin/scripts/
+
 COPY --chown=node:node package*.json .
 
 RUN npm install --omit=dev
