@@ -9,12 +9,12 @@
     "node": ">=22.0.0"
   },
   "scripts": {
-    "dev": "tsx watch --env-file=dev/.env --inspect=0.0.0.0:9229 src/infra/main.ts",
+    "dev": "tsx watch --env-file=.env --inspect=0.0.0.0:9229 src/infra/main.ts",
     "start": "tsx src/infra/main.ts",
-    "migrate": "dotenv -e dev/.env -- npx drizzle-kit migrate",
-    "migrate:gen": "./dev/migrate-gen.sh",
-    "tag": "./dev/tag.sh",
-    "postinstall": "./dev/postinstall.sh",
+    "migrate": "dotenv -e .env -- npx drizzle-kit migrate",
+    "migrate:gen": "./bin/scripts/migrate.gen.sh",
+    "tag": "./bin/scripts/tag.sh",
+    "postinstall": "[ \"$NODE_ENV\" = \"development\" ] && lefthook install || true",
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage"
@@ -27,6 +27,7 @@
     "pg": "^8.15.6",
     "pino-pretty": "^13.0.0",
     "reflect-metadata": "^0.2.2",
+    "tsx": "^4.19.4",
     "tsyringe": "^4.10.0",
     "zod": "^3.24.3"
   },
@@ -42,7 +43,6 @@
     "globals": "^16.0.0",
     "lefthook": "^1.11.13",
     "prettier": "^3.5.3",
-    "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.31.0",
     "vitest": "^3.1.4"
