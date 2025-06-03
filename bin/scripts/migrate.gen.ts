@@ -12,7 +12,6 @@ if (!migrationName?.match(/^[a-z0-9]+(-[a-z0-9]+)*$/)) {
 // generate the migration
 try {
   const command = `npx dotenv -e dev/.env -- npx drizzle-kit generate --name ${migrationName}`
-  console.log(command)
   execSync(command, { stdio: 'inherit' })
 } catch (error) {
   console.error('Error generating migration:', error)
