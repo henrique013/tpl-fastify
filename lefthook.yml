@@ -1,21 +1,21 @@
 pre-commit:
   jobs:
     - name: format
-      run: npx prettier --write --cache .
+      run: npm run format
 
     - name: compile
       glob:
         - '**/*.ts'
         - 'tsconfig.json'
-      run: npx tsc --noEmit
+      run: npm run compile
 
     - name: lint
       glob:
         - '**/*.ts'
         - 'eslint.config.js'
-      run: npx eslint .
+      run: npm run lint
 
     - name: test
       glob:
         - '**/*.ts'
-      run: npx vitest run
+      run: npm run test
