@@ -109,3 +109,6 @@ Dentro do `package.json` você encontra os seguintes comandos:
 - `npm test`: Executa todos os testes uma vez
 - `npm run test:watch`: Executa os testes em modo de observação (watch mode)
 - `npm run coverage`: Executa os testes e gera um relatório de cobertura de código
+- `npm run compile`: Verifica se há erros de compilação TypeScript sem gerar arquivos
+- `npm run lint`: Executa o ESLint para verificar a qualidade do código
+- `npm run format`: Formata o código usando o Prettier
