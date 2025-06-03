@@ -3,15 +3,23 @@ import { User, UserRaw } from '@domain/entities/user.js'
 import { IUserService } from '@domain/services/users.js'
 import { Id } from '@domain/values/id.js'
 
+export interface CachedUserServiceOptions {
+  ttl_sec?: number
+}
+
 export class CachedUserService implements IUserService {
   private readonly ENTITY_KEY_PREFIX = 'users:entity:'
   private readonly ALL_ENTITIES_KEY = 'users:all_entities'
-  private readonly CACHE_TTL = 60 // 1 minute in seconds
 
-  constructor(
-    private readonly service: IUserService,
-    private readonly redis: Redis
-  ) {}
+  private readonly service: IUserService
+  private readonly redis: Redis
+  private readonly ttl_sec: number
+
+  constructor(service: IUserService, redis: Redis, options: CachedUserServiceOptions = {}) {
+    this.service = service
+    this.redis = redis
+    this.ttl_sec = options.ttl_sec ?? 60
+  }
 
   async create(user: User): Promise<User> {
     const newUser = await this.service.create(user)
@@ -81,14 +89,14 @@ export class CachedUserService implements IUserService {
     const raw = user.toRaw()
     const value = JSON.stringify(raw)
 
-    await this.redis.set(key, value, 'EX', this.CACHE_TTL)
+    await this.redis.set(key, value, 'EX', this.ttl_sec)
   }
 
   private async cacheUsers(users: User[]): Promise<void> {
     const raws = users.map((user) => user.toRaw())
     const value = JSON.stringify(raws)
 
-    await this.redis.set(this.ALL_ENTITIES_KEY, value, 'EX', this.CACHE_TTL)
+    await this.redis.set(this.ALL_ENTITIES_KEY, value, 'EX', this.ttl_sec)
   }
 
   private async invalidateCache(id?: number): Promise<void> {
