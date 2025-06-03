@@ -14,7 +14,7 @@
     "migrate": "dotenv -e dev/.env -- npx drizzle-kit migrate",
     "migrate:gen": "./dev/migrate-gen.sh",
     "tag": "./dev/tag.sh",
-    "postinstall": "lefthook install",
+    "postinstall": "./dev/postinstall.sh",
     "test": "vitest run",
     "test:watch": "vitest",
     "coverage": "vitest run --coverage"
