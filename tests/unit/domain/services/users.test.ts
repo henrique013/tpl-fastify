@@ -62,57 +62,75 @@ describe('UserService', () => {
       expect(repo.findIdByEmail).toHaveBeenCalledWith(user.email)
       expect(repo.create).not.toHaveBeenCalled()
     })
+
+    it('should throw BadArgumentError when user has ID', async () => {
+      const user = User.fromRaw({
+        id: 1,
+        name: 'John Doe',
+        email: 'john@example.com',
+      })
+
+      await expect(service.create(user)).rejects.toThrow('User ID should not be set when creating a new user')
+      expect(repo.findIdByEmail).not.toHaveBeenCalled()
+      expect(repo.create).not.toHaveBeenCalled()
+    })
   })
 
   describe('update', () => {
     it('should update user when email does not exist or belongs to same user', async () => {
-      const user = User.fromRaw({
+      const currentUser = User.fromRaw({
         id: 1,
         name: 'John Doe',
         email: 'john@example.com',
       })
 
-      repo.findIdByEmail.mockResolvedValue(null)
-      repo.findByIdOrFail.mockResolvedValue(user)
-      repo.update.mockResolvedValue(user)
+      const updatedUser = User.fromRaw({
+        id: 1,
+        name: 'John Doe Updated',
+        email: 'john@example.com',
+      })
 
-      const result = await service.update(user)
+      repo.findByIdOrFail.mockResolvedValue(currentUser)
+      repo.findIdByEmail.mockResolvedValue(currentUser.idOrFail())
+      repo.update.mockResolvedValue(updatedUser)
 
-      expect(repo.findIdByEmail).toHaveBeenCalledWith(user.email)
-      expect(repo.findByIdOrFail).toHaveBeenCalledWith(user.idOrFail())
-      expect(repo.update).toHaveBeenCalledWith(user)
-      expect(result).toBe(user)
+      const result = await service.update(updatedUser)
+
+      expect(repo.findByIdOrFail).toHaveBeenCalledWith(updatedUser.idOrFail())
+      expect(repo.findIdByEmail).toHaveBeenCalledWith(updatedUser.email)
+      expect(repo.update).toHaveBeenCalledWith(updatedUser)
+      expect(result).toBe(updatedUser)
     })
 
     it('should throw ConflictError when email belongs to another user', async () => {
-      const user = User.fromRaw({
+      const updatedUser = User.fromRaw({
         id: 1,
-        name: 'John Doe',
-        email: 'john@example.com',
+        name: 'John Doe Updated',
+        email: 'jane@example.com',
       })
 
       const otherUserId = Id.from(2)
+      repo.findByIdOrFail.mockResolvedValue(updatedUser)
       repo.findIdByEmail.mockResolvedValue(otherUserId)
 
-      await expect(service.update(user)).rejects.toThrow(ConflictError)
-      expect(repo.findIdByEmail).toHaveBeenCalledWith(user.email)
-      expect(repo.findByIdOrFail).not.toHaveBeenCalled()
+      await expect(service.update(updatedUser)).rejects.toThrow(ConflictError)
+      expect(repo.findByIdOrFail).toHaveBeenCalledWith(updatedUser.idOrFail())
+      expect(repo.findIdByEmail).toHaveBeenCalledWith(updatedUser.email)
       expect(repo.update).not.toHaveBeenCalled()
     })
 
     it('should throw NotFoundError when user does not exist', async () => {
-      const user = User.fromRaw({
+      const updatedUser = User.fromRaw({
         id: 1,
-        name: 'John Doe',
+        name: 'John Doe Updated',
         email: 'john@example.com',
       })
 
-      repo.findIdByEmail.mockResolvedValue(null)
       repo.findByIdOrFail.mockRejectedValue(new NotFoundError('User not found'))
 
-      await expect(service.update(user)).rejects.toThrow(NotFoundError)
-      expect(repo.findIdByEmail).toHaveBeenCalledWith(user.email)
-      expect(repo.findByIdOrFail).toHaveBeenCalledWith(user.idOrFail())
+      await expect(service.update(updatedUser)).rejects.toThrow(NotFoundError)
+      expect(repo.findByIdOrFail).toHaveBeenCalledWith(updatedUser.idOrFail())
+      expect(repo.findIdByEmail).not.toHaveBeenCalled()
       expect(repo.update).not.toHaveBeenCalled()
     })
   })
