@@ -15,7 +15,9 @@ export class CachedUserService implements IUserService {
 
   async create(user: User): Promise<User> {
     const newUser = await this.service.create(user)
-    await this.redis.del(this.ALL_ENTITIES_KEY)
+
+    await this.invalidateCache()
+
     return newUser
   }
 
@@ -23,8 +25,7 @@ export class CachedUserService implements IUserService {
     const updatedUser = await this.service.update(user)
     const id = updatedUser.idOrFail().toNumber()
 
-    await this.redis.del(this.getEntityKey(id))
-    await this.redis.del(this.ALL_ENTITIES_KEY)
+    await this.invalidateCache(id)
 
     return updatedUser
   }
@@ -33,8 +34,7 @@ export class CachedUserService implements IUserService {
     const user = await this.service.delete(id)
     const idNumber = id.toNumber()
 
-    await this.redis.del(this.getEntityKey(idNumber))
-    await this.redis.del(this.ALL_ENTITIES_KEY)
+    await this.invalidateCache(idNumber)
 
     return user
   }
@@ -89,5 +89,14 @@ export class CachedUserService implements IUserService {
     const value = JSON.stringify(raws)
 
     await this.redis.set(this.ALL_ENTITIES_KEY, value, 'EX', this.CACHE_TTL)
+  }
+
+  private async invalidateCache(id?: number): Promise<void> {
+    if (id) {
+      const key = this.getEntityKey(id)
+      await this.redis.del(key)
+    }
+
+    await this.redis.del(this.ALL_ENTITIES_KEY)
   }
 }
