@@ -76,11 +76,9 @@ export class CachedUserService implements IUserService {
   }
 
   private async cacheUser(user: User): Promise<void> {
-    const raw = user.toRaw()
-    if (!user.id) return
-
-    const id = user.id.toNumber()
+    const id = user.idOrFail().toNumber()
     const key = this.getEntityKey(id)
+    const raw = user.toRaw()
     const value = JSON.stringify(raw)
 
     await this.redis.set(key, value, 'EX', this.CACHE_TTL)
