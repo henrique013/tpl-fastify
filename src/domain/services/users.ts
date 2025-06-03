@@ -3,7 +3,19 @@ import { IUsersRepo } from '@domain/repos/users.js'
 import { Id } from '@domain/values/id.js'
 import { ConflictError } from '@domain/errors/conflict.js'
 
-export class UserService {
+export interface IUserService {
+  create(user: User): Promise<User>
+
+  update(user: User): Promise<User>
+
+  delete(id: Id): Promise<User>
+
+  findOneOrFail(id: Id): Promise<User>
+
+  findAll(): Promise<User[]>
+}
+
+export class UserService implements IUserService {
   constructor(private readonly repo: IUsersRepo) {}
 
   async create(user: User): Promise<User> {
@@ -37,11 +49,6 @@ export class UserService {
   async delete(id: Id): Promise<User> {
     const user = await this.repo.findByIdOrFail(id)
     await this.repo.delete(id)
-    return user
-  }
-
-  async findOne(id: Id): Promise<User | null> {
-    const user = await this.repo.findById(id)
     return user
   }
 

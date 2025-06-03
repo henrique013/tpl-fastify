@@ -146,34 +146,6 @@ describe('UserService', () => {
     })
   })
 
-  describe('findOne', () => {
-    it('should return user when found', async () => {
-      const user = User.fromRaw({
-        id: 1,
-        name: 'John Doe',
-        email: 'john@example.com',
-      })
-
-      repo.findById.mockResolvedValue(user)
-
-      const result = await service.findOne(user.idOrFail())
-
-      expect(repo.findById).toHaveBeenCalledWith(user.idOrFail())
-      expect(result).toBe(user)
-    })
-
-    it('should return null when user not found', async () => {
-      const id = Id.from(1)
-
-      repo.findById.mockResolvedValue(null)
-
-      const result = await service.findOne(id)
-
-      expect(repo.findById).toHaveBeenCalledWith(id)
-      expect(result).toBeNull()
-    })
-  })
-
   describe('findOneOrFail', () => {
     it('should return user when found', async () => {
       const user = User.fromRaw({
