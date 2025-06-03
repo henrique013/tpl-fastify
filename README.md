@@ -18,8 +18,8 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 2. Configure as variáveis de ambiente:
 
    ```bash
-   cp dev/.env.example dev/.env
-   nano dev/.env
+   cp .env.example .env
+   nano .env
    ```
 
 3. Execute as migrações do banco de dados:
@@ -41,7 +41,7 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 ## 🌐 Endpoints
 
-Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo `dev/.env`.
+Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo `.env`.
 
 - `GET /`: Endpoint raiz
 
