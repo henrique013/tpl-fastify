@@ -4,7 +4,7 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 ## 📋 Pré-requisitos
 
-- Node 22+
+- Node 20+
 
 ## ⚙️ Instalação e Execução
 
