@@ -2,7 +2,6 @@
 .github
 .vscode
 coverage
-dev
 node_modules
 tests
 .dockerignore
@@ -14,3 +13,4 @@ Dockerfile
 eslint.config.js
 lefthook.yml
 README.md
+vitest.config.ts
