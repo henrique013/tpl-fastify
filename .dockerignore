@@ -15,5 +15,6 @@ Dockerfile
 drizzle.config.ts
 eslint.config.js
 lefthook.yml
+LICENSE
 README.md
 vitest.config.ts
