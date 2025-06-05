@@ -11,13 +11,13 @@ export type UserRaw = {
 
 export class User {
   constructor(
-    public id: Id | undefined,
+    public id: Id | null,
     public name: Name,
     public email: Email
   ) {}
 
   static fromRaw(raw: UserRaw): User {
-    const id = raw.id ? Id.from(raw.id) : undefined
+    const id = raw.id ? Id.from(raw.id) : null
     const name = Name.from(raw.name)
     const email = Email.from(raw.email)
 

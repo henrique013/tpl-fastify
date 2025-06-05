@@ -15,7 +15,7 @@ describe('User', () => {
 
       const user = User.fromRaw(raw)
 
-      expect(user.id).toBeUndefined()
+      expect(user.id).toBeNull()
       expect(user.name.toString()).toBe('John Doe')
       expect(user.email.toString()).toBe('john@example.com')
     })
