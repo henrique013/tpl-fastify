@@ -72,6 +72,8 @@ export class Server {
       }
 
       reply.status(json.statusCode).send(json)
+
+      fastify.log.error(error)
     })
   }
 
