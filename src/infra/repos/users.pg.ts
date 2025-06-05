@@ -7,7 +7,7 @@ import { IUsersRepo } from '@domain/repos/users.js'
 import { NotFoundError } from '@domain/errors/not-found.js'
 import { Email } from '@domain/values/email.js'
 
-export class PgUsersRepo implements IUsersRepo {
+export class UsersPgRepo implements IUsersRepo {
   constructor(private readonly db: DrizzlePg) {}
 
   async create(user: User): Promise<User> {
