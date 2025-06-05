@@ -3,6 +3,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   test: {
+    bail: 1,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
