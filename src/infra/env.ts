@@ -11,6 +11,7 @@ const envSchema = z.object({
   REDIS_URL: z.string().url(),
   PG_API_URL: z.string().url(),
   PG_MIGRATIONS_URL: z.string().url(),
+  API_CORS_ORIGINS: z.string().url().optional(),
   SENTRY_DSN: z.string().url().optional(),
 })
 

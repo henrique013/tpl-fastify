@@ -1,6 +1,8 @@
 import Fastify, { FastifyInstance } from 'fastify'
 import { BaseError } from '@domain/errors.js'
 import * as Sentry from '@sentry/node'
+import cors from '@fastify/cors'
+import { env } from '@infra/env.js'
 
 export type ServerOptions = {
   port: number
@@ -40,6 +42,16 @@ export class Server {
           },
         },
       },
+    })
+
+    // Register CORS plugin with secure defaults
+    const corsOrigins = env.API_CORS_ORIGINS?.split(',') ?? []
+    fastify.register(cors, {
+      origin: process.env['NODE_ENV'] === 'production' ? corsOrigins : true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
+      maxAge: 86400, // 24 hours
     })
 
     return fastify
