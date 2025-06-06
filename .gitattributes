@@ -1,0 +1,49 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Source files
+*.ts text
+*.js text
+*.tsx text
+*.jsx text
+*.d.ts text
+
+# Documentation
+*.md text diff=markdown
+*.txt text
+LICENSE text
+CHANGELOG text
+README text
+
+# Config files
+*.{json,yml,yaml,toml} text
+*.env* text
+*.config.{js,ts} text
+.editorconfig text
+.prettierrc text
+.eslintrc text
+tsconfig.json text
+
+# Binary files
+*.{png,jpg,jpeg,gif,ico} binary
+*.{mov,mp4,mp3,flv,fla,swf} binary
+*.{gz,zip,7z} binary
+*.{ttf,eot,woff,woff2} binary
+*.{pyc,pdf} binary
+*.{sqlite,sqlite3,db} binary
+
+# Generated files and dependencies
+{dist,build,coverage,node_modules}/** binary
+.{next,nuxt,cache,temp,tmp}/** binary
+*.log binary
+
+# Scripts
+*.{sh,bash} text eol=lf
+*.{bat,cmd,ps1} text eol=crlf
+
+# Exclude from exports
+.gitattributes export-ignore
+.gitignore export-ignore
+.github/** export-ignore
+.vscode/** export-ignore
+.idea/** export-ignore
