@@ -5,6 +5,7 @@
   "author": "Henrique Alves <henrique013.a@gmail.com> (https://github.com/henrique013)",
   "license": "MIT",
   "type": "module",
+  "private": true,
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=10.0.0"
