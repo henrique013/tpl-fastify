@@ -2,7 +2,7 @@ import { execSync } from 'node:child_process'
 import { exit } from 'node:process'
 
 // check if we're in development environment
-const isDevelopment = process.env['NODE_ENV'] === 'development'
+const isDevelopment = process.env['NODE_ENV'] !== 'production'
 
 if (isDevelopment) {
   try {
