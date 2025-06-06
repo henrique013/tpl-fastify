@@ -4,9 +4,7 @@ import tseslint from 'typescript-eslint'
 import eslintConfigPrettier from 'eslint-config-prettier/flat'
 
 export default tseslint.config(
-  {
-    ignores: ['coverage', 'dist'],
-  },
+  { ignores: ['coverage'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended, eslintConfigPrettier],
     files: ['**/*.{ts,tsx}'],
