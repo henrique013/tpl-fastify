@@ -1,6 +1,6 @@
 {
   "name": "tpl-fastify",
-  "version": "8.4.0",
+  "version": "8.4.1",
   "description": "Fastify API bootstrap template.",
   "author": "Henrique Alves <henrique013.a@gmail.com> (https://github.com/henrique013)",
   "license": "MIT",
