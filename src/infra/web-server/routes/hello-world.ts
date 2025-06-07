@@ -28,7 +28,7 @@ export const routeOpt: RouteOptions = {
   },
   handler: async function (_request, reply) {
     reply.send({
-      message: 'DDD API - Lista de Endpoints Disponíveis',
+      message: 'Template API - Lista de Endpoints Disponíveis',
       endpoints: [
         {
           method: 'GET',
