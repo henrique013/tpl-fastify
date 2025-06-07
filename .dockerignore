@@ -3,7 +3,6 @@
 .vscode
 coverage
 node_modules
-tests
 .dockerignore
 .editorconfig
 .env
