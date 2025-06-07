@@ -1,5 +1,5 @@
 import { defineConfig } from 'drizzle-kit'
-import { env } from './src/infra/env'
+import { env } from '@infra/env.js'
 
 export default defineConfig({
   out: './src/infra/orm/migrations',

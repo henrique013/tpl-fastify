@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "tsx watch --env-file=.env --inspect=0.0.0.0:9229 src/infra/main.ts",
     "start": "tsx src/infra/main.ts",
-    "migrate": "dotenv -e .env -- npx drizzle-kit migrate",
+    "migrate": "tsx --env-file=.env node_modules/.bin/drizzle-kit migrate",
     "migrate:gen": "tsx bin/scripts/migrate.gen.ts",
     "tag": "tsx bin/scripts/tag.ts",
     "postinstall": "tsx bin/scripts/postinstall.ts",
@@ -41,7 +41,6 @@
     "@types/node": "^22.13.17",
     "@types/pg": "^8.11.14",
     "@vitest/coverage-v8": "^3.1.4",
-    "dotenv-cli": "^8.0.0",
     "drizzle-kit": "^0.31.1",
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
