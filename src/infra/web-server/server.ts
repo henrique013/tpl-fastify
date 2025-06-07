@@ -27,11 +27,10 @@ export class Server {
   }
 
   private static createFastifyInstance(debug: boolean): FastifyInstance {
-    const level = debug ? 'debug' : 'warn'
-
+    // Create Fastify instance with logger
     const fastify: FastifyInstance = Fastify({
       logger: {
-        level,
+        level: debug ? 'debug' : 'warn',
         transport: {
           target: 'pino-pretty',
           options: {
@@ -45,9 +44,9 @@ export class Server {
     })
 
     // Register CORS plugin with secure defaults
-    const corsOrigins = env.API_CORS_ORIGINS?.split(',') ?? []
+    const origin = env.API_CORS_ORIGINS === '*' ? true : env.API_CORS_ORIGINS.split(',')
     fastify.register(cors, {
-      origin: process.env['NODE_ENV'] === 'production' ? corsOrigins : true,
+      origin,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true,
