@@ -48,50 +48,144 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
 
 Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo `.env`.
 
+### Endpoints do Sistema
+
 - `GET /`: Endpoint raiz
 
-  ```bash
-  curl http://localhost:3000/
+  - Resposta: Lista todos os endpoints disponíveis na API
+
+  ```json
+  {
+    "message": "Template API - Lista de Endpoints Disponíveis",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/",
+        "description": "Lista todos os endpoints disponíveis na API"
+      },
+      {
+        "method": "GET",
+        "path": "/health",
+        "description": "Verificação de saúde da aplicação. Parâmetro opcional: ?uptime=true"
+      },
+      {
+        "method": "GET",
+        "path": "/users",
+        "description": "Lista todos os usuários cadastrados"
+      },
+      {
+        "method": "GET",
+        "path": "/users/:id",
+        "description": "Obtém um usuário específico pelo ID"
+      },
+      {
+        "method": "POST",
+        "path": "/users",
+        "description": "Cria um novo usuário"
+      },
+      {
+        "method": "PUT",
+        "path": "/users/:id",
+        "description": "Atualiza um usuário existente"
+      },
+      {
+        "method": "DELETE",
+        "path": "/users/:id",
+        "description": "Remove um usuário pelo ID"
+      }
+    ]
+  }
   ```
 
-- `GET /health`: Endpoint de verificação de saúde
-
-  ```bash
-  curl http://localhost:3000/health
-  curl http://localhost:3000/health?uptime=true
+- `GET /health`: Verificação de saúde da aplicação
+  - Parâmetro opcional: `?uptime=true` para incluir informações de uptime
+  - Resposta:
+  ```json
+  {
+    "message": "OK",
+    "timestamp": "2024-03-21T12:00:00.000Z",
+    "uptime": 123
+  }
   ```
+
+### Gerenciamento de Usuários
 
 - `GET /users`: Lista todos os usuários
 
-  ```bash
-  curl http://localhost:3000/users
+  - Resposta:
+
+  ```json
+  [
+    {
+      "id": 123,
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  ]
   ```
 
 - `GET /users/:id`: Obtém um usuário específico
 
-  ```bash
-  curl http://localhost:3000/users/123
+  - Resposta:
+
+  ```json
+  {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
   ```
 
 - `POST /users`: Cria um novo usuário
 
-  ```bash
-  curl -X POST http://localhost:3000/users \
-    -H "Content-Type: application/json" \
-    -d '{"name": "John Doe", "email": "john@example.com"}'
+  - Corpo da requisição:
+
+  ```json
+  {
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+  ```
+
+  - Resposta (201 Created):
+
+  ```json
+  {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
   ```
 
 - `PUT /users/:id`: Atualiza um usuário existente
 
-  ```bash
-  curl -X PUT http://localhost:3000/users/123 \
-    -H "Content-Type: application/json" \
-    -d '{"name": "John Doe Updated", "email": "john.updated@example.com"}'
+  - Corpo da requisição:
+
+  ```json
+  {
+    "name": "John Doe Updated",
+    "email": "john.updated@example.com"
+  }
+  ```
+
+  - Resposta:
+
+  ```json
+  {
+    "id": 123,
+    "name": "John Doe Updated",
+    "email": "john.updated@example.com"
+  }
   ```
 
 - `DELETE /users/:id`: Remove um usuário
-  ```bash
-  curl -X DELETE http://localhost:3000/users/123
+  - Resposta:
+  ```json
+  {
+    "id": 123,
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
   ```
 
 ## 🔑 Comandos Importantes
