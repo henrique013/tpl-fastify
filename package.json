@@ -16,12 +16,12 @@
     "migrate": "tsx --env-file=.env node_modules/.bin/drizzle-kit migrate",
     "migrate:gen": "tsx src/infra/scripts/migrate.gen.ts",
     "tag": "tsx src/infra/scripts/tag.ts",
-    "postinstall": "tsx src/infra/scripts/postinstall.ts",
     "compile": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write --cache .",
     "test": "vitest run",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "postinstall": "tsx src/infra/scripts/postinstall.ts"
   },
   "dependencies": {
     "@fastify/cors": "^11.0.1",
