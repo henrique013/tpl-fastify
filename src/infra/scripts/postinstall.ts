@@ -1,8 +1,9 @@
 import { execSync } from 'node:child_process'
 import { exit } from 'node:process'
+import { env } from '@infra/env.js'
 
 // check if we're in development environment
-const isDevelopment = process.env['NODE_ENV'] !== 'production'
+const isDevelopment = env.NODE_ENV !== 'production'
 
 if (isDevelopment) {
   try {
