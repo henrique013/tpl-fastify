@@ -16,7 +16,7 @@
     "migrate": "tsx --env-file=.env node_modules/.bin/drizzle-kit migrate",
     "migrate:gen": "tsx src/infra/scripts/migrate.gen.ts",
     "tag": "tsx src/infra/scripts/tag.ts",
-    "postinstall": "tsx --env-file=.env src/infra/scripts/postinstall.ts",
+    "postinstall": "tsx src/infra/scripts/postinstall.ts",
     "compile": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write --cache .",
