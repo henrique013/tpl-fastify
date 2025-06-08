@@ -211,3 +211,28 @@ Dentro do `package.json` você encontra os seguintes comandos:
 - `npm run compile`: Verifica se há erros de compilação TypeScript sem gerar arquivos
 - `npm run lint`: Executa o ESLint para verificar a qualidade do código
 - `npm run format`: Formata o código usando o Prettier
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── domain/           # Regras de negócio e entidades
+│   ├── entities/     # Entidades (City)
+│   ├── errors/       # Erros personalizados
+│   ├── repos/        # Interfaces dos repositórios
+│   ├── services/     # Serviços de domínio
+│   ├── tests/        # Testes
+│   └── values/       # Value Objects (DDD, State, etc)
+└── infra/            # Infraestrutura
+    ├── container/    # Injeção de dependências
+    ├── orm/          # Configuração do ORM
+    ├── repos/        # Implementações dos repositórios
+    ├── scripts/      # Scripts de inicialização e configuração
+    ├── services/     # Serviços de infraestrutura
+    └── web-server/   # Configuração do servidor web
+```
+
+## 📧 Contato
+
+- LinkedIn: [Henrique Alves](https://www.linkedin.com/in/henrique-alves-a44b99135)
+- GitHub: [henrique013](https://github.com/henrique013)
