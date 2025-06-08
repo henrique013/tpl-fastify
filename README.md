@@ -2,6 +2,10 @@
 
 Este é um template básico para uma API Fastify com TypeScript, configurado para desenvolvimento usando Docker.
 
+## 🌐 Acesso Online
+
+Você pode acessar a versão online do projeto [aqui](https://fastify.solidsistemas.com/).
+
 ## 📋 Pré-requisitos
 
 - Node 20+
@@ -44,7 +48,7 @@ Este é um template básico para uma API Fastify com TypeScript, configurado par
    - A API estará disponível em `http://localhost:${API_PORT}`
    - Você pode testar os endpoints usando a documentação abaixo
 
-## 🌐 Endpoints
+## 🔌 Endpoints
 
 Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo `.env`.
 
