@@ -8,7 +8,7 @@ USER node
 
 WORKDIR /home/node/api
 
-COPY --chown=node:node bin/scripts/ bin/scripts/
+COPY --chown=node:node src/infra/scripts/ src/infra/scripts/
 
 COPY --chown=node:node package*.json .
 
