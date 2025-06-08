@@ -19,7 +19,7 @@ export class Server {
   static async create(options: ServerOptions): Promise<Server> {
     const fastify = this.createFastifyInstance(options.debug)
 
-    this.setupCustomErrorHandler(fastify, options.sentry_dsn)
+    this.setupCustomErrorHandler(fastify, options.debug, options.sentry_dsn)
 
     await this.setupRoutes(fastify)
 
@@ -56,7 +56,7 @@ export class Server {
     return fastify
   }
 
-  private static setupCustomErrorHandler(fastify: FastifyInstance, sentry_dsn?: string) {
+  private static setupCustomErrorHandler(fastify: FastifyInstance, debug: boolean, sentry_dsn?: string) {
     if (sentry_dsn) {
       Sentry.init({
         dsn: sentry_dsn,
@@ -84,7 +84,9 @@ export class Server {
 
       reply.status(json.statusCode).send(json)
 
-      fastify.log.error(error)
+      if (debug) {
+        fastify.log.error(error)
+      }
     })
   }
 
