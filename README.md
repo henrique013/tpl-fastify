@@ -227,9 +227,9 @@ Endpoints disponíveis na API:
   }
   ```
 
-## 🔑 Comandos Importantes
+## ⌨️ Comandos Disponíveis
 
-Dentro do `package.json` você encontra os seguintes comandos:
+Comandos principais do projeto:
 
 - `npm run dev`: Inicia o servidor de desenvolvimento
 - `npm start`: Inicia o servidor em modo de produção _(requer variáveis de ambiente configuradas no sistema operacional)_
