@@ -1,58 +1,93 @@
 # 🚀 Template de API Fastify
 
-Este é um template básico para uma API Fastify com TypeScript, configurado para desenvolvimento usando Docker.
+Template bootstrap para uma API Fastify com TypeScript.
 
 ## 🌐 Acesso Online
 
-Você pode acessar a versão online do projeto [aqui](https://fastify.solidsistemas.com/).
+Acesse a versão online do projeto [aqui](https://fastify.solidsistemas.com/).
+
+## 🔎 Sobre o Projeto
+
+Template bootstrap para desenvolvimento de APIs RESTful utilizando Fastify e TypeScript. O projeto oferece uma estrutura inicial com gerenciamento de usuários, sistema de migrações com Drizzle ORM, testes automatizados com Vitest, versionamento semântico, suporte a Docker e integração com lefthook para garantir qualidade do código.
+
+## ✨ Recursos e Diferenciais
+
+Principais recursos e diferenciais do projeto:
+
+- Fastify como framework web de alta performance
+- TypeScript para tipagem estática e melhor DX
+- Drizzle ORM para gerenciamento de banco de dados
+- Testes automatizados com Vitest
+- Versionamento semântico automatizado
+
+## 🛠️ Tecnologias e Bibliotecas
+
+Principais tecnologias e bibliotecas utilizadas:
+
+- [Fastify](https://www.fastify.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zod](https://zod.dev/)
+- [TSX](https://tsx.is/)
+- [Tsyringe](https://github.com/microsoft/tsyringe)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Vitest](https://vitest.dev/)
+- [ESLint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Lefthook](https://github.com/evilmartians/lefthook)
+- [Sentry](https://sentry.io/)
+- [Docker](https://www.docker.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
 
 ## 📋 Pré-requisitos
 
-- Node 20+
+Para executar o projeto, você precisa ter instalado:
 
-## ⚙️ Instalação e Execução
+- [Node.js 20+](https://nodejs.org/)
+- [Git](https://git-scm.com/)
 
-1. Clone o repositório e navegue até o diretório do projeto:
+## ⚙️ Instalação
+
+Siga estes passos para configurar o ambiente:
+
+1. Clone o repositório
 
    ```bash
    git clone git@github.com:henrique013/tpl-fastify.git
+   ```
+
+2. Navegue até o diretório do projeto
+
+   ```bash
    cd tpl-fastify
    ```
 
-2. Configure as variáveis de ambiente:
-
-   ```bash
-   cp .env.example .env
-   nano .env
-   ```
-
-3. Instale as dependências:
-
+3. Instale as dependências
    ```bash
    npm install
    ```
 
-4. Execute as migrações do banco de dados:
+## 🔐 Configuração de Ambiente
 
-   ```bash
-   npm run migrate
-   ```
+Para que a aplicação funcione corretamente, configure as variáveis de ambiente:
 
-5. Inicie a aplicação:
+```bash
+cp .env.example .env
+```
 
-   ```bash
-   npm run dev
-   ```
+## ▶️ Executando o Projeto
 
-6. Acesse a aplicação:
-   - A API estará disponível em `http://localhost:${API_PORT}`
-   - Você pode testar os endpoints usando a documentação abaixo
+Para iniciar o servidor de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+O projeto estará disponível em [http://localhost:3000](http://localhost:3000)
 
 ## 🔌 Endpoints
 
-Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo `.env`.
-
-### Endpoints do Sistema
+Endpoints disponíveis na API:
 
 - `GET /`: Endpoint raiz
 
@@ -111,8 +146,6 @@ Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo
     "uptime": 123
   }
   ```
-
-### Gerenciamento de Usuários
 
 - `GET /users`: Lista todos os usuários
 
@@ -196,47 +229,51 @@ Nos endpoints abaixo, substitua a porta `3000` pela porta configurada no arquivo
 
 Dentro do `package.json` você encontra os seguintes comandos:
 
-- `npm run dev`: Inicia a aplicação em modo de desenvolvimento
-- `npm start`: Inicia a aplicação em modo de produção
-  - Importante: Em produção, a aplicação espera que as variáveis de ambiente já existam no sistema operacional, portanto, não é necessário configurar o arquivo `.env`
+- `npm run dev`: Inicia o servidor de desenvolvimento
+- `npm start`: Inicia o servidor em modo de produção _(requer variáveis de ambiente configuradas no sistema operacional)_
 - `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
-  - Exemplo: `npm run tag -- patch` (para incrementar a versão de patch)
-  - Exemplo: `npm run tag -- minor` (para incrementar a versão minor)
-  - Exemplo: `npm run tag -- major` (para incrementar a versão major)
-  - Dica: Se quiser resetar a versão para 1.0.0, você pode editar manualmente o campo "version" no package.json
+  - Dica: Para resetar a versão para 1.0.0, edite manualmente o campo "version" no package.json
 - `npm run migrate:gen -- <nome>`: Gera um novo arquivo de migração do banco de dados
   - Exemplo: `npm run migrate:gen -- create-users-table`
 - `npm run migrate`: Executa todas as migrações pendentes do banco de dados
-- `npm test`: Executa todos os testes uma vez
-- `npm run test:watch`: Executa os testes em modo de observação (watch mode)
-- `npm run coverage`: Executa os testes e gera um relatório de cobertura de código
-- `npm run compile`: Verifica se há erros de compilação TypeScript sem gerar arquivos
-- `npm run lint`: Executa o ESLint para verificar a qualidade do código
+- `npm run compile`: Verifica se o código compila sem erros
+- `npm run lint`: Executa a verificação de linting no código
 - `npm run format`: Formata o código usando o Prettier
-- `npm postinstall`: Configura o lefthook para executar os hooks de commit e push
-  - Este comando é executado automaticamente após a instalação das dependências do projeto
+- `npm test`: Executa todos os testes uma vez
+- `npm run coverage`: Executa os testes e gera relatório de cobertura
+- `npm run postinstall`: Executa scripts de pós-instalação
 
 ## 📁 Estrutura do Projeto
 
+Principais diretórios e arquivos:
+
 ```
-src/
-├── domain/           # Regras de negócio e entidades
-│   ├── entities/     # Entidades (City)
-│   ├── errors/       # Erros personalizados
-│   ├── repos/        # Interfaces dos repositórios
-│   ├── services/     # Serviços de domínio
-│   ├── tests/        # Testes
-│   └── values/       # Value Objects (DDD, State, etc)
-└── infra/            # Infraestrutura
-    ├── container/    # Injeção de dependências
-    ├── orm/          # Configuração do ORM
-    ├── repos/        # Implementações dos repositórios
-    ├── scripts/      # Scripts de inicialização e configuração
-    ├── services/     # Serviços de infraestrutura
-    └── web-server/   # Configuração do servidor web
+ddd-api/
+├── src/                  # Código fonte
+│   ├── domain/           # Regras de negócio e entidades
+│   │   ├── entities/     # Entidades
+│   │   ├── errors/       # Erros personalizados
+│   │   ├── repos/        # Interfaces dos repositórios
+│   │   ├── services/     # Serviços de domínio
+│   │   ├── tests/        # Testes
+│   │   ├── values/       # Value Objects
+│   │   ├── errors.ts     # Componentes comuns entre os erros personalizados
+│   │   └── values.ts     # Componentes comuns entre os value objects
+│   └── infra/            # Infraestrutura
+│       ├── container/    # Injeção de dependências
+│       ├── orm/          # Configuração do ORM
+│       ├── repos/        # Implementações dos repositórios
+│       ├── scripts/      # Scripts de inicialização e configuração
+│       ├── services/     # Serviços de infraestrutura
+│       ├── web-server/   # Configuração do servidor web
+│       ├── env.ts        # Configuração do ambiente
+│       └── main.ts       # Ponto de entrada principal
+└── ...                   # Arquivos de configuração
 ```
 
 ## 📧 Contato
+
+Entre em contato através das redes sociais:
 
 - LinkedIn: [Henrique Alves](https://www.linkedin.com/in/henrique-alves-a44b99135)
 - GitHub: [henrique013](https://github.com/henrique013)
