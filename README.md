@@ -8,7 +8,7 @@ Acesse a versão online do projeto [aqui](https://fastify.solidsistemas.com/).
 
 ## 🔎 Sobre o Projeto
 
-Template bootstrap para desenvolvimento de APIs RESTful utilizando Fastify e TypeScript. O projeto oferece uma estrutura inicial com gerenciamento de usuários, sistema de migrações com Drizzle ORM, testes automatizados com Vitest, versionamento semântico, suporte a Docker e integração com lefthook para garantir qualidade do código.
+Template bootstrap para desenvolvimento de APIs RESTful utilizando Fastify e TypeScript. O projeto oferece uma estrutura inicial com gerenciamento de usuários, sistema de migrações com Drizzle ORM, testes automatizados com Vitest, versionamento semântico, suporte a Docker e integração com lefthook para garantir qualidade e padronização do código.
 
 ## ✨ Recursos e Diferenciais
 
