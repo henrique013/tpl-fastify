@@ -4,7 +4,7 @@ Template bootstrap para uma API Fastify com TypeScript.
 
 ## 🌐 Acesso Online
 
-Acesse a versão online do projeto [aqui](https://fastify.solidsistemas.com/).
+Acesse a versão online do projeto [aqui](http://localhost:3000).
 
 ## 🔎 Sobre o Projeto
 
