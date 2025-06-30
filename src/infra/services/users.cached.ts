@@ -2,14 +2,15 @@ import { Redis } from 'ioredis'
 import { User, UserRaw } from '@domain/entities/user.js'
 import { IUserService } from '@domain/services/users.js'
 import { Id } from '@domain/values/id.js'
+import { APP_NAME } from '@infra/env.js'
 
 export interface CachedUserServiceOptions {
   ttl_sec?: number
 }
 
 export class CachedUserService implements IUserService {
-  private readonly ENTITY_KEY_PREFIX = 'users:entity:'
-  private readonly ALL_ENTITIES_KEY = 'users:all_entities'
+  private readonly ENTITY_KEY_PREFIX = `${APP_NAME}:users:entity:`
+  private readonly ALL_ENTITIES_KEY = `${APP_NAME}:users:all_entities`
 
   private readonly service: IUserService
   private readonly redis: Redis
