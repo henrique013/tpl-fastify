@@ -19,6 +19,7 @@ Principais recursos e diferenciais do projeto:
 - Drizzle ORM para gerenciamento de banco de dados
 - Testes automatizados com Vitest
 - Versionamento semântico automatizado
+- Rate limiting para proteção contra abusos
 
 ## 🛠️ Tecnologias e Bibliotecas
 

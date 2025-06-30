@@ -2,6 +2,7 @@ import Fastify, { FastifyInstance } from 'fastify'
 import { BaseError } from '@domain/errors.js'
 import * as Sentry from '@sentry/node'
 import cors from '@fastify/cors'
+import rateLimit from '@fastify/rate-limit'
 import { env } from '@infra/env.js'
 
 export type ServerOptions = {
@@ -17,7 +18,7 @@ export class Server {
   ) {}
 
   static async create(options: ServerOptions): Promise<Server> {
-    const fastify = this.createFastifyInstance(options.debug)
+    const fastify = await this.createFastifyInstance(options.debug)
 
     this.setupCustomErrorHandler(fastify, options.debug, options.sentry_dsn)
 
@@ -26,7 +27,7 @@ export class Server {
     return new Server(fastify, options)
   }
 
-  private static createFastifyInstance(debug: boolean): FastifyInstance {
+  private static async createFastifyInstance(debug: boolean): Promise<FastifyInstance> {
     // Create Fastify instance with logger
     const fastify: FastifyInstance = Fastify({
       logger: {
@@ -45,12 +46,18 @@ export class Server {
 
     // Register CORS plugin with secure defaults
     const origin = env.API_CORS_ORIGINS === '*' ? true : env.API_CORS_ORIGINS.split(',')
-    fastify.register(cors, {
+    await fastify.register(cors, {
       origin,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
       credentials: true,
       maxAge: 86400, // 24 hours
+    })
+
+    // Register Rate Limit plugin
+    await fastify.register(rateLimit, {
+      max: 10,
+      timeWindow: '10 seconds',
     })
 
     return fastify
@@ -71,13 +78,17 @@ export class Server {
         statusCode: 500,
       }
 
+      // Special errors
       if (error instanceof BaseError) {
         const status = error.toHttpStatus()
-
         json.error = status.name
         json.statusCode = status.code
+      } else if (error?.statusCode === 429) {
+        json.error = 'Too Many Requests'
+        json.statusCode = 429
       }
 
+      // Send to Sentry
       if (sentry_dsn && json.statusCode >= 500) {
         Sentry.captureException(error)
       }
