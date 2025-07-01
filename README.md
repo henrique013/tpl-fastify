@@ -236,8 +236,10 @@ Comandos principais do projeto:
 - `npm start`: Inicia o servidor em modo de produção _(requer variáveis de ambiente configuradas no sistema operacional)_
 - `npm run tag -- <patch|minor|major>`: Cria uma tag para o projeto seguindo o padrão SemVer (MAJOR.MINOR.PATCH)
   - Dica: Para resetar a versão para 1.0.0, edite manualmente o campo "version" no package.json
-- `npm run migrate:gen -- <nome>`: Gera um novo arquivo de migração do banco de dados
-  - Exemplo: `npm run migrate:gen -- create-users-table`
+- `npm run migrate:gen <nome>`: Gera um novo arquivo de migração do banco de dados
+  - Exemplo: `npm run migrate:gen add-users-table`
+- `npm run migrate:gen:custom <nome>`: Gera um novo arquivo de migração do banco de dados com SQL customizado
+  - Exemplo: `npm run migrate:gen:custom seed-users-table`
 - `npm run migrate`: Executa todas as migrações pendentes do banco de dados
 - `npm run compile`: Verifica se o código compila sem erros
 - `npm run lint`: Executa a verificação de linting no código
