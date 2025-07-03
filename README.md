@@ -240,6 +240,7 @@ Comandos principais do projeto:
   - Exemplo: `npm run migrate:gen add-users-table`
 - `npm run migrate:gen:custom <nome>`: Gera um novo arquivo de migração do banco de dados com SQL customizado
   - Exemplo: `npm run migrate:gen:custom seed-users-table`
+- `npm run migrate:drop`: Desfaz uma migração do banco de dados
 - `npm run migrate`: Executa todas as migrações pendentes do banco de dados
 - `npm run compile`: Verifica se o código compila sem erros
 - `npm run lint`: Executa a verificação de linting no código

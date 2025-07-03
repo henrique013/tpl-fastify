@@ -16,6 +16,7 @@
     "migrate": "tsx --env-file=.env node_modules/.bin/drizzle-kit migrate",
     "migrate:gen": "tsx src/infra/scripts/migrate.gen.ts",
     "migrate:gen:custom": "tsx src/infra/scripts/migrate.gen.ts",
+    "migrate:drop": "tsx src/infra/scripts/migrate.drop.ts",
     "tag": "tsx src/infra/scripts/tag.ts",
     "compile": "tsc --noEmit",
     "lint": "eslint .",
