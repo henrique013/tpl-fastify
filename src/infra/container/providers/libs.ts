@@ -7,7 +7,7 @@ import * as schema from '@infra/orm/schema.js'
 import { env } from '@infra/env.js'
 import { DrizzlePg } from '@infra/orm/types.js'
 
-const MAX_TIMEOUT_MS = 10_000
+const MAX_TIMEOUT_MS = 5_000
 
 export function registerLibs(container: DependencyContainer) {
   const pgPool = new Pool({
