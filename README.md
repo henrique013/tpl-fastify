@@ -259,21 +259,22 @@ ddd-api/
 │   ├── domain/           # Regras de negócio e entidades
 │   │   ├── entities/     # Entidades
 │   │   ├── errors/       # Erros personalizados
+│   │   ├── providers/    # Interfaces dos provedores
 │   │   ├── repos/        # Interfaces dos repositórios
 │   │   ├── services/     # Serviços de domínio
-│   │   ├── tests/        # Testes
 │   │   ├── values/       # Value Objects
 │   │   ├── errors.ts     # Componentes comuns entre os erros personalizados
 │   │   └── values.ts     # Componentes comuns entre os value objects
 │   └── infra/            # Infraestrutura
 │       ├── container/    # Injeção de dependências
 │       ├── orm/          # Configuração do ORM
+│       ├── providers/    # Implementações dos provedores
 │       ├── repos/        # Implementações dos repositórios
 │       ├── scripts/      # Scripts de inicialização e configuração
-│       ├── services/     # Serviços de infraestrutura
 │       ├── web-server/   # Configuração do servidor web
 │       ├── env.ts        # Configuração do ambiente
 │       └── main.ts       # Ponto de entrada principal
+├── tests/                # Testes
 └── ...                   # Arquivos de configuração
 ```
 
