@@ -5,19 +5,7 @@ import { ConflictError } from '@domain/errors/conflict.js'
 import { BadArgumentError } from '@domain/errors/bad-argument.js'
 import { ICacheProvider } from '@domain/providers/cache.js'
 
-export interface IUserService {
-  create(user: User): Promise<User>
-
-  update(user: User): Promise<User>
-
-  delete(id: Id): Promise<User>
-
-  findOneOrFail(id: Id): Promise<User>
-
-  findAll(): Promise<User[]>
-}
-
-export class UserService implements IUserService {
+export class UserService {
   private readonly CACHE_TTL_SEC = 60 * 60 * 24 // 1 day
 
   constructor(

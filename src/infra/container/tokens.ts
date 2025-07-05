@@ -11,7 +11,7 @@ const TOKENS = {
     IUsersRepo: Symbol.for('IUsersRepo'),
   },
   services: {
-    IUserService: Symbol.for('IUserService'),
+    UserService: Symbol.for('UserService'),
   },
 }
 
