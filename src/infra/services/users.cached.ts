@@ -2,16 +2,13 @@ import { Redis } from 'ioredis'
 import { User, UserRaw } from '@domain/entities/user.js'
 import { IUserService } from '@domain/services/users.js'
 import { Id } from '@domain/values/id.js'
-import { APP_NAME } from '@infra/env.js'
+import { env } from '@infra/env.js'
 
 export interface CachedUserServiceOptions {
   ttl_sec?: number
 }
 
 export class CachedUserService implements IUserService {
-  private readonly ENTITY_KEY_PREFIX = `${APP_NAME}:users:entity:`
-  private readonly ALL_ENTITIES_KEY = `${APP_NAME}:users:all_entities`
-
   private readonly service: IUserService
   private readonly redis: Redis
   private readonly ttl_sec: number
@@ -66,7 +63,8 @@ export class CachedUserService implements IUserService {
   }
 
   async findAll(): Promise<User[]> {
-    const cached = await this.redis.get(this.ALL_ENTITIES_KEY)
+    const key = this.getAllEntitiesKey()
+    const cached = await this.redis.get(key)
 
     if (cached) {
       const raws = JSON.parse(cached) as UserRaw[]
@@ -81,7 +79,11 @@ export class CachedUserService implements IUserService {
   }
 
   private getEntityKey(id: number): string {
-    return `${this.ENTITY_KEY_PREFIX}${id}`
+    return `${env.APP_NAME}:users:entity:${id}`
+  }
+
+  private getAllEntitiesKey(): string {
+    return `${env.APP_NAME}:users:all_entities`
   }
 
   private async cacheUser(user: User): Promise<void> {
@@ -96,8 +98,9 @@ export class CachedUserService implements IUserService {
   private async cacheUsers(users: User[]): Promise<void> {
     const raws = users.map((user) => user.toRaw())
     const value = JSON.stringify(raws)
+    const key = this.getAllEntitiesKey()
 
-    await this.redis.set(this.ALL_ENTITIES_KEY, value, 'EX', this.ttl_sec)
+    await this.redis.set(key, value, 'EX', this.ttl_sec)
   }
 
   private async invalidateCache(id?: number): Promise<void> {
@@ -106,6 +109,7 @@ export class CachedUserService implements IUserService {
       await this.redis.del(key)
     }
 
-    await this.redis.del(this.ALL_ENTITIES_KEY)
+    const key = this.getAllEntitiesKey()
+    await this.redis.del(key)
   }
 }
