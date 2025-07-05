@@ -4,6 +4,9 @@ const TOKENS = {
     PgPool: Symbol.for('PgPool'),
     DrizzlePg: Symbol.for('DrizzlePg'),
   },
+  providers: {
+    ICacheProvider: Symbol.for('ICacheProvider'),
+  },
   repos: {
     IUsersRepo: Symbol.for('IUsersRepo'),
   },

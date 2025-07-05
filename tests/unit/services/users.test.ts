@@ -4,6 +4,7 @@ import { UserService } from '@domain/services/users.js'
 import { ConflictError } from '@domain/errors/conflict.js'
 import { Id } from '@domain/values/id.js'
 import { NotFoundError } from '@domain/errors/not-found.js'
+import { CacheFakeProvider } from '@infra/providers/cache.fake.js'
 import { describe, expect, it, beforeEach, vi, Mock } from 'vitest'
 
 describe('UserService', () => {
@@ -17,6 +18,7 @@ describe('UserService', () => {
     findIdByEmail: Mock
     findAll: Mock
   }
+  let cache: CacheFakeProvider
 
   beforeEach(() => {
     repo = {
@@ -29,7 +31,9 @@ describe('UserService', () => {
       findAll: vi.fn(),
     }
 
-    service = new UserService(repo as IUsersRepo)
+    cache = new CacheFakeProvider()
+
+    service = new UserService(repo as IUsersRepo, cache)
   })
 
   describe('create', () => {
@@ -180,6 +184,26 @@ describe('UserService', () => {
       expect(result).toBe(user)
     })
 
+    it('should return cached user when available', async () => {
+      const user = User.fromRaw({
+        id: 1,
+        name: 'John Doe',
+        email: 'john@example.com',
+      })
+
+      const cachedUserRaw = user.toRaw()
+      const id = user.idOrFail()
+
+      // Mock cache to return cached data
+      vi.spyOn(cache, 'get').mockResolvedValue(cachedUserRaw)
+
+      const result = await service.findOneOrFail(id)
+
+      expect(cache.get).toHaveBeenCalledWith(`users:entity:${id.toNumber()}`)
+      expect(repo.findByIdOrFail).not.toHaveBeenCalled()
+      expect(result).toEqual(user)
+    })
+
     it('should throw NotFoundError when user not found', async () => {
       const id = Id.from(1)
 
@@ -213,6 +237,32 @@ describe('UserService', () => {
       expect(result).toBe(users)
     })
 
+    it('should return cached users when available', async () => {
+      const users = [
+        User.fromRaw({
+          id: 1,
+          name: 'John Doe',
+          email: 'john@example.com',
+        }),
+        User.fromRaw({
+          id: 2,
+          name: 'Jane Doe',
+          email: 'jane@example.com',
+        }),
+      ]
+
+      const cachedUsersRaw = users.map((user) => user.toRaw())
+
+      // Mock cache to return cached data
+      vi.spyOn(cache, 'get').mockResolvedValue(cachedUsersRaw)
+
+      const result = await service.findAll()
+
+      expect(cache.get).toHaveBeenCalledWith('users:all_entities')
+      expect(repo.findAll).not.toHaveBeenCalled()
+      expect(result).toEqual(users)
+    })
+
     it('should return empty array when no users found', async () => {
       repo.findAll.mockResolvedValue([])
 
@@ -220,6 +270,61 @@ describe('UserService', () => {
 
       expect(repo.findAll).toHaveBeenCalled()
       expect(result).toEqual([])
+    })
+  })
+
+  describe('cache invalidation', () => {
+    it('should invalidate cache when creating user', async () => {
+      const user = User.fromRaw({
+        name: 'John Doe',
+        email: 'john@example.com',
+      })
+
+      repo.findIdByEmail.mockResolvedValue(null)
+      repo.create.mockResolvedValue(user)
+
+      const delSpy = vi.spyOn(cache, 'del')
+
+      await service.create(user)
+
+      expect(delSpy).toHaveBeenCalledWith('users:all_entities')
+    })
+
+    it('should invalidate specific and general cache when updating user', async () => {
+      const user = User.fromRaw({
+        id: 1,
+        name: 'John Doe Updated',
+        email: 'john@example.com',
+      })
+
+      repo.findByIdOrFail.mockResolvedValue(user)
+      repo.findIdByEmail.mockResolvedValue(user.idOrFail())
+      repo.update.mockResolvedValue(user)
+
+      const delSpy = vi.spyOn(cache, 'del')
+
+      await service.update(user)
+
+      expect(delSpy).toHaveBeenCalledWith('users:entity:1')
+      expect(delSpy).toHaveBeenCalledWith('users:all_entities')
+    })
+
+    it('should invalidate specific and general cache when deleting user', async () => {
+      const user = User.fromRaw({
+        id: 1,
+        name: 'John Doe',
+        email: 'john@example.com',
+      })
+
+      repo.findByIdOrFail.mockResolvedValue(user)
+      repo.delete.mockResolvedValue(user)
+
+      const delSpy = vi.spyOn(cache, 'del')
+
+      await service.delete(user.idOrFail())
+
+      expect(delSpy).toHaveBeenCalledWith('users:entity:1')
+      expect(delSpy).toHaveBeenCalledWith('users:all_entities')
     })
   })
 })
