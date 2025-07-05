@@ -21,8 +21,8 @@
     "compile": "tsc --noEmit",
     "lint": "eslint .",
     "format": "prettier --write --cache .",
-    "test": "vitest run",
-    "coverage": "vitest run --coverage",
+    "test": "tsx --env-file=.env node_modules/.bin/vitest run",
+    "coverage": "tsx --env-file=.env node_modules/.bin/vitest run --coverage",
     "postinstall": "tsx src/infra/scripts/postinstall.ts"
   },
   "dependencies": {
