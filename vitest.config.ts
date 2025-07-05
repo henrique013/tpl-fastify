@@ -7,14 +7,14 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
-      exclude: ['node_modules/**', 'src/domain/tests/**', 'src/infra/**', './*.{ts,js}'],
+      exclude: ['node_modules/**', './*.{ts,js}', 'src/infra/**'],
     },
     workspace: [
       {
         test: {
-          name: 'domain:unit',
+          name: 'unit',
           environment: 'node',
-          include: ['src/domain/tests/unit/**/*.test.ts'],
+          include: ['tests/unit/**/*.test.ts'],
           globals: true,
           testTimeout: 10000,
           alias: {
