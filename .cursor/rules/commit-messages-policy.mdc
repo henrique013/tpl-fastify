@@ -1,0 +1,81 @@
+---
+description: 'Defines the policy for commit messages using Conventional Commits specification'
+---
+
+# Conventional Commits Policy
+
+This ruleset enforces the Conventional Commits specification for all commit messages in the project.
+
+## Commit Message Format
+
+**MUST** follow the exact format: `type(scope): description`
+
+- **type**: MUST be one of the valid types from the specification
+- **scope**: MUST be provided and describe the target/area of the change
+- **description**: MUST be a concise summary of the change
+
+## Valid Commit Types
+
+### Required Types
+
+- **feat**: introduces a new feature (correlates with MINOR in SemVer)
+- **fix**: patches a bug (correlates with PATCH in SemVer)
+
+### Additional Allowed Types
+
+- **build**: changes that affect the build system or external dependencies
+- **chore**: maintenance tasks that don't modify src or test files
+- **ci**: changes to CI configuration files and scripts
+- **docs**: documentation only changes
+- **perf**: performance improvements
+- **refactor**: code changes that neither fix a bug nor add a feature
+- **revert**: reverts a previous commit
+- **style**: changes that don't affect the meaning of the code (formatting, etc.)
+- **test**: adding missing tests or correcting existing tests
+
+## Rules
+
+- **MUST** use lowercase for the type
+- **MUST** include a scope in parentheses after the type
+- **MUST** use a colon and space after the scope: `type(scope): `
+- **MUST** write the description in English
+- **MUST NOT** capitalize the first letter of the description
+- **MUST NOT** end the description with a period
+- **SHOULD** keep the description under 50 characters when possible
+
+## Breaking Changes
+
+- **MUST** indicate breaking changes with `!` after the type/scope: `feat(api)!: description`
+- **MAY** also include `BREAKING CHANGE:` in the footer for additional context
+
+## Examples
+
+### Correct commit messages
+
+✅ `feat(auth): add JWT token validation`
+✅ `fix(database): resolve connection timeout issue`
+✅ `docs(readme): update installation instructions`
+✅ `refactor(utils): simplify date formatting function`
+✅ `feat(api)!: remove deprecated user endpoints`
+
+### Incorrect commit messages
+
+❌ `Add new feature` (missing type and scope)
+❌ `feat: add authentication` (missing scope)
+❌ `FEAT(auth): add login` (uppercase type)
+❌ `feat(auth): Add login functionality.` (capitalized description with period)
+❌ `feat(auth): adds login functionality` (wrong verb tense)
+
+## Scope Guidelines
+
+- **SHOULD** use existing scope names when applicable
+- **SHOULD** use kebab-case for multi-word scopes: `feat(user-auth): description`
+- **SHOULD** be specific but not overly detailed
+- **MAY** use wildcards for broad changes: `feat(*): description`
+
+## Additional Requirements
+
+- **MUST** use present tense, imperative mood in the description
+- **MUST** describe what the commit does, not what you did
+- **SHOULD** reference issue numbers in the footer when applicable
+- **SHOULD** keep the entire first line under 72 characters
