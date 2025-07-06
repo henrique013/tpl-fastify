@@ -6,6 +6,10 @@ description: 'Defines the policy for commit messages using Conventional Commits 
 
 This ruleset enforces the Conventional Commits specification for all commit messages in the project.
 
+## Language
+
+All commit messages **MUST** be written entirely in **English**, including type, scope, description.
+
 ## Commit Message Format
 
 **MUST** follow the exact format: `type(scope): description`
