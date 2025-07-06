@@ -1,0 +1,10 @@
+---
+description: 'Language guidelines for chat responses and file editing.'
+alwaysApply: true
+---
+
+# Language Guidelines
+
+- All responses and interactions in the chat must be in Portuguese (pt-br), unless explicitly requested otherwise.
+- Do not translate variable names, function names, class names, English terms, comments, etc. Translate only conversations and plain texts.
+- When editing files, preserve the original language of the file.
