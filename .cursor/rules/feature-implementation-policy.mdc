@@ -1,0 +1,12 @@
+---
+description: 'Defines the policy for implementing features in the project.'
+---
+
+# Rule: Feature Implementation
+
+Always implement **one feature at a time**. If the prompt is large or involves multiple features, **break it into smaller parts** and confirm the scope of each one before generating code.
+
+- Before starting, question and clarify the scope if there is ambiguity.
+- Do not mix multiple features in a single delivery.
+- If necessary, ask for user confirmation about which feature to prioritize.
+- Document each delivery clearly and objectively.
