@@ -2,7 +2,11 @@
 alwaysApply: true
 ---
 
-# Dependency Policy: @types/node
+# Dependency Policy
+
+This ruleset defines the policy for managing dependencies in the package.json.
+
+## Package: @types/node
 
 - Never upgrade `@types/node` beyond the current Node.js major version installed in the system.
 - Always check the Node.js version in the `engines` field before updating `@types/node`.
