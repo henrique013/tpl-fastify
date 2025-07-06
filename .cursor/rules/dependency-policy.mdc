@@ -6,6 +6,13 @@ description: 'Defines the policy for managing dependencies in package.json'
 
 This ruleset defines the policy for managing dependencies in the package.json.
 
+## General Guidelines
+
+- **Never upgrade major versions** of any package without explicit user consent.
+- Always ask for confirmation before performing major version updates that could introduce breaking changes.
+- When suggesting dependency updates, clearly distinguish between patch, minor, and major version changes.
+- Prioritize stability over having the latest versions unless specifically requested by the user.
+
 ## Package: @types/node
 
 - Never upgrade `@types/node` beyond the current Node.js major version installed in the system.

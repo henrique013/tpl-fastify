@@ -5,6 +5,44 @@ alwaysApply: true
 
 # Language Guidelines
 
-- All responses and interactions in the chat must be in Portuguese (pt-br), unless explicitly requested otherwise.
-- Do not translate variable names, function names, class names, English terms, comments, etc. Translate only conversations and plain texts.
-- When editing files, preserve the original language of the file.
+## Priority Hierarchy
+
+**FUNDAMENTAL RULE**: The original file language has absolute priority over any other language.
+
+## Chat and Explanations
+
+- **MANDATORY**: All responses and interactions in the chat must be in Portuguese (pt-br) from the very beginning, unless explicitly requested otherwise.
+- **NEVER** mix languages within a single response.
+- **NEVER** start in English and switch to Portuguese mid-response.
+- All explanations about code, files, and modifications should be in Portuguese.
+- Even when citing English code, explanations must be in Portuguese.
+
+## File Editing
+
+- **ALWAYS** preserve 100% of the original file language when editing it.
+- **NEVER** translate file content, regardless of conversation language.
+- **NEVER** mix languages within a file.
+- If the file is in English, keep all content in English.
+- If the file is in Portuguese, keep all content in Portuguese.
+
+## Elements that should NOT be translated
+
+- Variable names, function names, class names
+- Technical terms in English
+- Code comments (maintain original language)
+- Existing documentation (maintain original language)
+- Code strings
+- Commit messages
+- File and directory names
+
+## Priority Hierarchy
+
+1. **Original file language** (maximum priority for file editing)
+2. Conversation language (Portuguese - maximum priority for chat responses)
+3. User preferences
+
+## Consistency Rules
+
+- **NEVER** change language mid-response
+- **ALWAYS** start responses in the correct language from the first word
+- **ALWAYS** maintain the same language throughout the entire interaction
