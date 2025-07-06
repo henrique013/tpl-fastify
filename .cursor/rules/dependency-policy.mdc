@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+# Dependency Policy: @types/node
+
+- Never upgrade `@types/node` beyond the current Node.js major version installed in the system.
+- Always check the Node.js version in the `engines` field before updating `@types/node`.
+- If `@types/node` is higher than the Node.js major version, suggest downgrading it to match.

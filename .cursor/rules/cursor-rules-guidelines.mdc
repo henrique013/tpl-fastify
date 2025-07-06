@@ -1,0 +1,34 @@
+---
+alwaysApply: true
+---
+
+# Cursor Rules Guidelines
+
+- Write all rules in English (EN-US).
+- Store rules in `.cursor/rules/` with `.mdc` extension.
+- Use clear, direct, and actionable language.
+- Every rule must start with valid frontmatter (see project instructions).
+- Reference `.mdc` files as `[filename](mdc:filename)`.
+- Reference other files as `[filename](full-path-to-file)` (e.g. `[package.json](./package.json)`).
+- Keep rules short and focused.
+
+## Example of Ideal Rules
+
+Here's an example of well-structured rules following these guidelines:
+
+```markdown
+# Dependency Policy: @types/node
+
+- Never upgrade `@types/node` beyond the current Node.js major version installed in the system.
+- Always check the Node.js version in the `engines` field before updating `@types/node`.
+- If `@types/node` is higher than the Node.js major version, suggest downgrading it to match.
+```
+
+> Atention: the frontmatter is ommited in the example above, but it is required for all rules.
+
+This example demonstrates:
+
+- Clear, specific scope in the title
+- Concise, actionable rules
+- Direct language without ambiguity
+- Focused on a single concern
