@@ -9,7 +9,7 @@ export default defineConfig({
       reporter: ['text', 'json', 'html'],
       include: ['src/domain/**/*.ts', 'src/infra/**/*.fake.ts'],
     },
-    workspace: [
+    projects: [
       {
         test: {
           name: 'unit',
