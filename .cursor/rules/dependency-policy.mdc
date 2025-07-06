@@ -1,5 +1,5 @@
 ---
-alwaysApply: true
+description: 'Defines the policy for managing dependencies in package.json'
 ---
 
 # Dependency Policy
