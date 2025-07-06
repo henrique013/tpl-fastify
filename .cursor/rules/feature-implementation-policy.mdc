@@ -1,5 +1,6 @@
 ---
 description: 'Defines the policy for implementing features in the project.'
+alwaysApply: true
 ---
 
 # Rule: Feature Implementation
