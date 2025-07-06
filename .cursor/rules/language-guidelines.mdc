@@ -1,48 +1,64 @@
 ---
-description: 'Language guidelines for chat responses and file editing.'
+description: 'Language-consistency rules for the Cursor AI-assistant.'
 alwaysApply: true
 ---
 
 # Language Guidelines
 
-## Priority Hierarchy
-
-**FUNDAMENTAL RULE**: The original file language has absolute priority over any other language.
-
-## Chat and Explanations
-
-- **MANDATORY**: All responses and interactions in the chat must be in Portuguese (pt-br) from the very beginning, unless explicitly requested otherwise.
-- **NEVER** mix languages within a single response.
-- **NEVER** start in English and switch to Portuguese mid-response.
-- All explanations about code, files, and modifications should be in Portuguese.
-- Even when citing English code, explanations must be in Portuguese.
-
-## File Editing
-
-- **ALWAYS** preserve 100% of the original file language when editing it.
-- **NEVER** translate file content, regardless of conversation language.
-- **NEVER** mix languages within a file.
-- If the file is in English, keep all content in English.
-- If the file is in Portuguese, keep all content in Portuguese.
-
-## Elements that should NOT be translated
-
-- Variable names, function names, class names
-- Technical terms in English
-- Code comments (maintain original language)
-- Existing documentation (maintain original language)
-- Code strings
-- Commit messages
-- File and directory names
+You are an expert in enforcing language-consistency rules for the Cursor AI-assistant.
 
 ## Priority Hierarchy
 
-1. **Original file language** (maximum priority for file editing)
-2. Conversation language (Portuguese - maximum priority for chat responses)
-3. User preferences
+1. Chat language – Portuguese (pt-BR)
+2. Technical content (code, documentation, commits, filenames, comments) – English
+3. Explicit user overrides
 
-## Consistency Rules
+## Legend
 
-- **NEVER** change language mid-response
-- **ALWAYS** start responses in the correct language from the first word
-- **ALWAYS** maintain the same language throughout the entire interaction
+- MUST → required
+- MUST NOT → prohibited
+- SHOULD → recommended
+
+## Chat Interaction
+
+- MUST start and keep every response in Portuguese (pt-BR).
+- MUST NOT switch languages within a single message.
+- SHOULD provide all explanations in Portuguese outside code blocks.
+
+## Technical Content
+
+- MUST write all source code, documentation files, commit messages, comments inside code, filenames, and any other project material exclusively in English.
+- MUST NOT translate existing English technical content into Portuguese.
+- MUST preserve legacy technical content that is already in English; if legacy technical content is in another language, convert it to English unless explicitly told not to.
+
+## Code Blocks
+
+- MUST use English for identifiers, inline comments, string literals, and any inline documentation.
+- MUST NOT embed Portuguese (or any non-English text) inside code blocks.
+- SHOULD place any necessary explanations outside the code block, in Portuguese.
+
+## Elements That Must Never Be Translated
+
+- Variable, function, class, file, and directory names
+- Existing code comments written in English
+- String literals in source code
+- Commit messages and branch names
+
+## Examples
+
+### Correct chat response
+
+✅ A message entirely in Portuguese, e.g., “Segue o trecho solicitado: …”
+
+### Incorrect chat response
+
+❌ A message that mixes languages, e.g., “Here is the code: … Agora em português…”
+
+### Correct code block
+
+```js
+// Returns current timestamp
+function now() {
+  return Date.now()
+}
+```
