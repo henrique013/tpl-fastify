@@ -91,7 +91,6 @@ O projeto estará disponível em [http://localhost:3000](http://localhost:3000)
 Endpoints disponíveis na API:
 
 - `GET /`: Endpoint raiz
-
   - Resposta: Lista todos os endpoints disponíveis na API
 
   ```json
@@ -138,7 +137,6 @@ Endpoints disponíveis na API:
   ```
 
 - `GET /health`: Verificação de saúde da aplicação
-
   - Parâmetro opcional: `?uptime=true` para incluir informações de uptime
   - Resposta:
 
@@ -151,7 +149,6 @@ Endpoints disponíveis na API:
   ```
 
 - `GET /users`: Lista todos os usuários
-
   - Resposta:
 
   ```json
@@ -165,7 +162,6 @@ Endpoints disponíveis na API:
   ```
 
 - `GET /users/:id`: Obtém um usuário específico
-
   - Resposta:
 
   ```json
@@ -177,7 +173,6 @@ Endpoints disponíveis na API:
   ```
 
 - `POST /users`: Cria um novo usuário
-
   - Corpo da requisição:
 
   ```json
@@ -198,7 +193,6 @@ Endpoints disponíveis na API:
   ```
 
 - `PUT /users/:id`: Atualiza um usuário existente
-
   - Corpo da requisição:
 
   ```json
