@@ -6,8 +6,8 @@ const MAX_LENGTH = 50
 
 const schema = z
   .string()
-  .min(MIN_LENGTH, `Nome deve ter no mínimo ${MIN_LENGTH} caracteres`)
-  .max(MAX_LENGTH, `Nome deve ter no máximo ${MAX_LENGTH} caracteres`)
+  .min(MIN_LENGTH, { error: `Nome deve ter no mínimo ${MIN_LENGTH} caracteres` })
+  .max(MAX_LENGTH, { error: `Nome deve ter no máximo ${MAX_LENGTH} caracteres` })
   .transform((value) =>
     value
       .split(/\s+/)

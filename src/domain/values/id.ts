@@ -10,10 +10,10 @@ const MIN_VALUE = 1
 
 const schema = z
   .number()
-  .int('ID deve ser um número inteiro')
-  .nonnegative('ID não pode ser negativo')
-  .min(MIN_VALUE, `ID deve ser maior ou igual a ${MIN_VALUE}`)
-  .max(MAX_VALUE, `ID deve ser menor ou igual a ${MAX_VALUE}`)
+  .int({ error: 'ID deve ser um número inteiro' })
+  .nonnegative({ error: 'ID não pode ser negativo' })
+  .min(MIN_VALUE, { error: `ID deve ser maior ou igual a ${MIN_VALUE}` })
+  .max(MAX_VALUE, { error: `ID deve ser menor ou igual a ${MAX_VALUE}` })
 
 export class Id extends BaseValue<number> {
   static readonly MIN_VALUE = MIN_VALUE

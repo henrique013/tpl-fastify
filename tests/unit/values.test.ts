@@ -6,7 +6,7 @@ import { BadArgumentError } from '@domain/errors/bad-argument.js'
 // Concrete implementation for testing
 class TestValue extends BaseValue<string> {
   constructor(value: string) {
-    super(value, z.string().min(3, 'Value must have at least 3 characters'))
+    super(value, z.string().min(3, { error: 'Value must have at least 3 characters' }))
   }
 
   toString(): string {
@@ -55,7 +55,7 @@ describe('BaseValue', () => {
     it('should throw BadArgumentError with first ZodError message', () => {
       class TestValueWithMultipleErrors extends BaseValue<string> {
         constructor(value: string) {
-          super(value, z.string().min(3, 'Too short').max(5, 'Too long'))
+          super(value, z.string().min(3, { error: 'Too short' }).max(5, { error: 'Too long' }))
         }
 
         toString(): string {

@@ -10,10 +10,10 @@ const envSchema = z.object({
   API_PORT: z.coerce.number().min(1024).max(49151),
   API_DEBUG: z.enum(['true', 'false']).transform((val) => val === 'true'),
   API_CORS_ORIGINS: z.string().min(1),
-  REDIS_URL: z.string().url(),
-  PG_API_URL: z.string().url(),
-  PG_MIGRATIONS_URL: z.string().url(),
-  SENTRY_DSN: z.string().url().optional(),
+  REDIS_URL: z.url(),
+  PG_API_URL: z.url(),
+  PG_MIGRATIONS_URL: z.url(),
+  SENTRY_DSN: z.url().optional(),
 })
 
 /**
