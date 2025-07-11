@@ -73,7 +73,7 @@ export class Server {
 
     fastify.setErrorHandler(function (error, _request, reply) {
       const json = {
-        message: error.message,
+        message: 'Unexpected error',
         error: 'Internal Server Error',
         statusCode: 500,
       }
@@ -81,9 +81,11 @@ export class Server {
       // Special errors
       if (error instanceof BaseError) {
         const status = error.toHttpStatus()
+        json.message = error.message
         json.error = status.name
         json.statusCode = status.code
       } else if (error?.statusCode === 429) {
+        json.message = error.message
         json.error = 'Too Many Requests'
         json.statusCode = 429
       }
